@@ -1,0 +1,3049 @@
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- DOCUMENTACIÓN -->
+<!-- Dashboard view -->
+<!-- Ultima Modificación: 31/05/2026 -->
+<!-- Autor: Magallanes López Carlos Gabriel -->
+<!-- Email: cgmagallanes23@gmail.com -->
+<!-- Versión del Proyecto: 1.0 -->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+	<html lang="es">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>ConstructSys — Dashboard</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+		<link rel="stylesheet" href="../styles/dashboard.css"/>
+		<link rel="icon" href="../assets/icons/constructsys.ico">
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+		<aside class="sidebar" id="sidebar">
+			
+			<!-- Logo del Sidebar-->
+			<div class="sidebar-logo">
+				<div class="logo-icon"><span>CS</span></div>
+				<div class="company-name">Industria<br>Constructora</div>
+				<div class="company-sub">Sistema de Administración</div>
+			</div>
+
+			<!-- Título de la Barra de Navegación -->
+			<nav>
+
+				<!-- Título de la Barra de Navegación -->
+				<div class="nav-section-title">Principal</div>
+				
+				<!-- Icono de Navegación-->
+				<a class="nav-item active" data-page="dashboard" onclick="navigate('dashboard',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<rect x="3" y="3" width="7" height="7" rx="1" stroke-width="1.8"/>
+						<rect x="14" y="3" width="7" height="7" rx="1" stroke-width="1.8"/>
+						<rect x="3" y="14" width="7" height="7" rx="1" stroke-width="1.8"/>
+						<rect x="14" y="14" width="7" height="7" rx="1" stroke-width="1.8"/>
+					</svg>
+					Panel General
+				</a>
+
+				<!-- Sección de Proyectos -->
+				<div class="nav-section-title">Proyectos</div>
+
+				<!-- Tabla Proyectos -->
+				<a class="nav-item" data-page="proyectos" onclick="navigate('proyectos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M8 11h.01M16 11h.01M12 11h.01"/>
+					</svg>
+					Proyectos <span class="nav-badge" id="badge-proyectos">0</span>
+				</a>
+
+				<!-- Tabla Contratos -->
+				<a class="nav-item" data-page="contratos" onclick="navigate('contratos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+					</svg>
+					Contratos <span class="nav-badge" id="badge-contratos">0</span>
+				</a>
+
+				<!-- Tabla Licitaciones -->
+				<a class="nav-item" data-page="licitaciones" onclick="navigate('licitaciones',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+					</svg>
+					Licitaciones <span class="nav-badge" id="badge-licitaciones">0</span>
+				</a>
+
+				<!-- Tabla Hitos -->
+				<a class="nav-item" data-page="hitos" onclick="navigate('hitos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+					</svg>
+					Hitos <span class="nav-badge" id="badge-hitos">0</span>
+				</a>
+
+				<!-- Tabla Bitácora de Obra -->
+				<a class="nav-item" data-page="bitacora" onclick="navigate('bitacora',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+					</svg>
+					Bitácora de Obra <span class="nav-badge" id="badge-bitacora">0</span>
+				</a>
+				
+				<!-- Tabla Documentos -->
+				<a class="nav-item" data-page="documentos" onclick="navigate('documentos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+					</svg>
+					Documentos <span class="nav-badge" id="badge-documentos">0</span>
+				</a>
+
+				<!-- Tabla Riesgos -->
+				<a class="nav-item" data-page="riesgos" onclick="navigate('riesgos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+					</svg>
+					Riesgos <span class="nav-badge" id="badge-riesgos">0</span>
+				</a>
+				
+				<!-- Tabla Permisos / Licencias -->
+				<a class="nav-item" data-page="permisos" onclick="navigate('permisos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+					</svg>
+					Permisos / Licencias <span class="nav-badge" id="badge-permisos">0</span>
+				</a>
+
+				<!-- Sección de Recursos Humanos -->
+				<div class="nav-section-title">Recursos Humanos</div>
+
+				<!-- Tabla Empleados -->
+				<a class="nav-item" data-page="empleados" onclick="navigate('empleados',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+						<circle cx="9" cy="7" r="4" stroke-width="1.8"/>
+						<path stroke-width="1.8" d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+					</svg>
+					Empleados <span class="nav-badge" id="badge-empleados">0</span>
+				</a>
+
+				<!-- Tabla Departamentos -->
+				<a class="nav-item" data-page="departamentos" onclick="navigate('departamentos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+					</svg>
+					Departamentos <span class="nav-badge" id="badge-departamentos">0</span>
+				</a>
+
+				<!-- Tabla Asignaciones -->
+				<a class="nav-item" data-page="asignaciones" onclick="navigate('asignaciones',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+					</svg>
+					Asignaciones <span class="nav-badge" id="badge-asignaciones">0</span>
+				</a>
+				
+				<!-- Tabla Ausencias -->
+				<a class="nav-item" data-page="ausencias" onclick="navigate('ausencias',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+					</svg>
+					Ausencias <span class="nav-badge" id="badge-ausencias">0</span>
+				</a>
+				
+				<!-- Tabla Capacitaciones-->
+				<a class="nav-item" data-page="capacitaciones" onclick="navigate('capacitaciones',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5z"/>
+						<path stroke-width="1.8" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+					</svg>
+					Capacitaciones <span class="nav-badge" id="badge-capacitaciones">0</span>
+				</a>
+
+				<!-- Tabla Registro Capacitación -->
+				<a class="nav-item" data-page="emp_cap" onclick="navigate('emp_cap',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 12l2 2 4-4M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+					</svg>
+					Registro Capacitación <span class="nav-badge" id="badge-emp_cap">0</span>
+				</a>
+				
+				<!-- Tabla Accidentes Laborales -->
+				<a class="nav-item" data-page="accidentes" onclick="navigate('accidentes',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+					</svg>
+					Accidentes Laborales <span class="nav-badge" id="badge-accidentes">0</span>
+				</a>
+				
+				<!-- Tabla Nómina -->
+				<a class="nav-item" data-page="nomina" onclick="navigate('nomina',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+					</svg>
+					Nómina <span class="nav-badge" id="badge-nomina">0</span>
+				</a>
+				
+				<!-- Tabla Detalle Nómina -->
+				<a class="nav-item" data-page="detalle_nomina" onclick="navigate('detalle_nomina',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 14l2 2 4-4M7 4H4a1 1 0 00-1 1v16l3-2 3 2 3-2 3 2 3-2 3 2V5a1 1 0 00-1-1h-3m-6 0V2m6 2V2M7 4h10"/>
+					</svg>
+					Detalle de Nómina <span class="nav-badge" id="badge-detalle_nomina">0</span>
+				</a>
+				
+				<!-- Tabla Préstamos -->
+				<a class="nav-item" data-page="prestamos" onclick="navigate('prestamos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+					</svg>
+					Préstamos <span class="nav-badge" id="badge-prestamos">0</span>
+				</a>
+
+				<!-- Sección Finanzas -->
+				<div class="nav-section-title">Finanzas</div>
+
+				<!-- Tabla Facturas -->
+				<a class="nav-item" data-page="facturas" onclick="navigate('facturas',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 14l2 2 4-4M7 4H4a1 1 0 00-1 1v16l3-2 3 2 3-2 3 2 3-2 3 2V5a1 1 0 00-1-1h-3m-6 0V2m6 2V2M7 4h10"/>
+					</svg>
+					Facturas <span class="nav-badge" id="badge-facturas">0</span>
+				</a>
+
+				<!-- Tabla Pagos -->
+				<a class="nav-item" data-page="pagos" onclick="navigate('pagos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+					</svg>
+					Pagos <span class="nav-badge" id="badge-pagos">0</span>
+				</a>
+				
+				<!-- Tabla Retenciones -->
+				<a class="nav-item" data-page="retenciones" onclick="navigate('retenciones',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M15 13l-3 3-3-3"/>
+					</svg>
+					Retenciones <span class="nav-badge" id="badge-retenciones">0</span>
+				</a>
+				
+				<!-- Tabla Cotizaciones -->
+				<a class="nav-item" data-page="cotizaciones" onclick="navigate('cotizaciones',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+					</svg>
+					Cotizaciones <span class="nav-badge" id="badge-cotizaciones">0</span>
+				</a>
+
+				<!-- Tabla Garantías -->
+				<a class="nav-item" data-page="garantias" onclick="navigate('garantias',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+					</svg>
+					Garantías <span class="nav-badge" id="badge-garantias">0</span>
+				</a>
+
+				<!-- Sección Logística -->
+				<div class="nav-section-title">Logística</div>
+		
+				<!-- Tabla Proveedores -->
+				<a class="nav-item" data-page="proveedores" onclick="navigate('proveedores',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM2 12h20M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/>
+					</svg>
+					Proveedores <span class="nav-badge" id="badge-proveedores">0</span>
+				</a>
+
+				<!-- Tabla Contactos Proveedor o Subcontratista -->
+				<a class="nav-item" data-page="contactos" onclick="navigate('contactos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+					</svg>
+					Contactos Prov./Sub. <span class="nav-badge" id="badge-contactos">0</span>
+				</a>
+				
+				<!-- Tabla Subcontratitas -->
+				<a class="nav-item" data-page="subcontratistas" onclick="navigate('subcontratistas',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+						<path stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+					</svg>
+					Subcontratistas <span class="nav-badge" id="badge-subcontratistas">0</span>
+				</a>
+
+				<!-- Tabla Contratos con Subcontratistas -->
+				<a class="nav-item" data-page="contratos_sub" onclick="navigate('contratos_sub',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+					</svg>
+					Contratos Sub. <span class="nav-badge" id="badge-contratos_sub">0</span>
+				</a>
+
+				<!-- Tabla Equipos -->
+				<a class="nav-item" data-page="equipos" onclick="navigate('equipos',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<rect x="2" y="7" width="20" height="14" rx="2" stroke-width="1.8"/>
+						<path stroke-width="1.8" d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v4M10 14h4"/>
+					</svg>
+					Equipos <span class="nav-badge" id="badge-equipos">0</span>
+				</a>
+				
+				<!-- Tabla Mantenimiento -->
+				<a class="nav-item" data-page="mantenimiento" onclick="navigate('mantenimiento',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+					</svg>
+					Mantenimiento <span class="nav-badge" id="badge-mantenimiento">0</span>
+				</a>
+
+				<!-- Tabla Almacenes -->
+				<a class="nav-item" data-page="almacenes" onclick="navigate('almacenes',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+					</svg>
+					Almacenes <span class="nav-badge" id="badge-almacenes">0</span>
+				</a>
+
+				<!-- Sección de Gestión de Relación con el Cliente -->
+				<div class="nav-section-title">CRM</div>
+
+				<!-- Tabla Clientes -->
+				<a class="nav-item" data-page="clientes" onclick="navigate('clientes',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+						<circle cx="12" cy="7" r="4" stroke-width="1.8"/>
+					</svg>
+					Clientes <span class="nav-badge" id="badge-clientes">0</span>
+				</a>
+
+				<!-- Tabla Seguridad -->
+				<div class="nav-section-title">Seguridad</div>
+					<a class="nav-item" data-page="seguridad" onclick="navigate('seguridad',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					</svg>
+					Incidentes <span class="nav-badge" id="badge-seguridad">0</span>
+				</a>
+
+				<!-- Sección Comercial -->
+				<div class="nav-section-title">Comercial</div>
+				
+				<!-- Tienda -->
+				<a class="nav-item" data-page="tienda" onclick="navigate('tienda',this)">
+					<svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-width="1.8" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+					</svg>
+					Tienda
+				</a>
+			
+			</nav>
+			
+			<!-- Footer del Sidebar-->
+			<div class="sidebar-footer">&copy; 2026 Industria Constructora<br>Sistema Interno</div>
+			
+		</aside>
+
+		<!-- Overlay -->
+		<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+		<!-- Sección Principal -->
+		<div class="main">
+
+			
+			<div class="topbar">
+				<button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+				<div>
+					<div class="topbar-title" id="topbar-title">
+						Panel General
+					</div>
+					<div class="topbar-breadcrumb" id="topbar-bc">
+						Inicio / Panel General
+					</div>
+				</div>
+				<div class="topbar-date" id="topbar-date"></div>
+			</div>
+
+			<!-- ====== DASHBOARD ====== -->
+			<div class="page active" id="page-dashboard">
+				<div class="page-header fade-in">
+					<h1>
+						Panel General
+					</h1>
+					<div class="gold-line"></div>
+					<p>
+						Resumen ejecutivo del sistema de administración — Industria Constructora.
+					</p>
+					<div class="dashboard-search-wrap">
+						<input type="text" id="search-dashboard" class="dashboard-search-input" placeholder="🔍  Filtrar módulo…" oninput="filtrarDashboard(this.value)"/>
+					</div>
+				</div>
+				<div class="stats-grid" id="stats-grid">
+					<div class="stat-card fade-in" data-label="proyectos" style="transition-delay:.04s">
+						<div class="stat-label">
+							Proyectos
+						</div>
+						<div class="stat-value" id="dash-proy">
+							0
+						</div>
+						<div class="stat-icon">
+							🏗️
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="contratos" style="transition-delay:.06s">
+						<div class="stat-label">
+							Contratos
+						</div>
+						<div class="stat-value" id="dash-cont">
+							0
+						</div>
+						<div class="stat-icon">
+							📄
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="licitaciones" style="transition-delay:.08s">
+						<div class="stat-label">
+							Licitaciones
+						</div>
+						<div class="stat-value" id="dash-lic">
+							0
+						</div>
+						<div class="stat-icon">
+							📋
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="hitos" style="transition-delay:.10s">
+						<div class="stat-label">
+							Hitos
+						</div>
+						<div class="stat-value" id="dash-hitos">
+							0
+						</div>
+						<div class="stat-icon">
+							🚩
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="bitacora bitácora" style="transition-delay:.12s">
+						<div class="stat-label">
+							Bitácora
+						</div>
+						<div class="stat-value" id="dash-bit">
+							0
+						</div>
+						<div class="stat-icon">
+							📒
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="documentos" style="transition-delay:.14s">
+						<div class="stat-label">
+							Documentos
+						</div>
+						<div class="stat-value" id="dash-doc">
+							0
+						</div>
+						<div class="stat-icon">
+							📁
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="riesgos" style="transition-delay:.16s">
+						<div class="stat-label">
+							Riesgos
+						</div>
+						<div class="stat-value" id="dash-riesgos">
+							0
+						</div>
+						<div class="stat-icon">
+							⚠️
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="permisos licencias" style="transition-delay:.18s">
+						<div class="stat-label">
+							Permisos
+						</div>
+						<div class="stat-value" id="dash-perm">
+							0
+						</div>
+						<div class="stat-icon">
+							🛂
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="empleados" style="transition-delay:.20s">
+						<div class="stat-label">
+							Empleados
+						</div>
+						<div class="stat-value" id="dash-emp">
+							0
+						</div>
+						<div class="stat-icon">
+							👷
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="departamentos" style="transition-delay:.22s">
+						<div class="stat-label">
+							Departamentos
+						</div>
+						<div class="stat-value" id="dash-dept">
+							0
+						</div>
+						<div class="stat-icon">
+							🏢
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="asignaciones" style="transition-delay:.24s">
+						<div class="stat-label">
+							Asignaciones
+						</div>
+						<div class="stat-value" id="dash-asig">
+							0
+						</div>
+						<div class="stat-icon">
+							📅
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="ausencias" style="transition-delay:.26s">
+						<div class="stat-label">
+							Ausencias
+						</div>
+						<div class="stat-value" id="dash-aus">
+							0
+						</div>
+						<div class="stat-icon">
+							🗓️
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="capacitaciones" style="transition-delay:.28s">
+						<div class="stat-label">
+							Capacitaciones
+						</div>
+						<div class="stat-value" id="dash-cap">
+							0
+						</div>
+						<div class="stat-icon">
+							🎓
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="registro capacitacion emp_cap" style="transition-delay:.30s">
+						<div class="stat-label">
+							Reg. Capacitación
+						</div>
+						<div class="stat-value" id="dash-empcap">
+							0
+						</div>
+						<div class="stat-icon">
+							✅
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="accidentes" style="transition-delay:.32s">
+						<div class="stat-label">
+							Accidentes
+						</div>
+						<div class="stat-value" id="dash-acc">
+							0
+						</div>
+						<div class="stat-icon">
+							🚑
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="nomina nómina" style="transition-delay:.34s">
+						<div class="stat-label">
+							Nómina
+						</div>
+						<div class="stat-value" id="dash-nom">
+							0
+						</div>
+						<div class="stat-icon">
+							💰
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="detalle nomina" style="transition-delay:.36s">
+						<div class="stat-label">
+							Det. Nómina
+						</div>
+						<div class="stat-value" id="dash-detnom">
+							0
+						</div>
+						<div class="stat-icon">
+							📊
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="prestamos préstamos" style="transition-delay:.38s">
+						<div class="stat-label">
+							Préstamos
+						</div>
+						<div class="stat-value" id="dash-prest">
+							0
+						</div>
+						<div class="stat-icon">
+							💵
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="facturas" style="transition-delay:.40s">
+						<div class="stat-label">
+							Facturas
+						</div>
+						<div class="stat-value" id="dash-fac">
+							0
+						</div>
+						<div class="stat-icon">
+							🧾
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="pagos" style="transition-delay:.42s">
+						<div class="stat-label">
+							Pagos
+						</div>
+						<div class="stat-value" id="dash-pag">
+							0
+						</div>
+						<div class="stat-icon">
+							💳
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="retenciones" style="transition-delay:.44s">
+						<div class="stat-label">
+							Retenciones
+						</div>
+						<div class="stat-value" id="dash-ret">
+							0
+						</div>
+						<div class="stat-icon">
+							📌
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="cotizaciones" style="transition-delay:.46s">
+						<div class="stat-label">
+							Cotizaciones
+						</div>
+						<div class="stat-value" id="dash-cot">
+							0
+						</div>
+						<div class="stat-icon">
+							🗒️
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="garantias garantías" style="transition-delay:.48s">
+						<div class="stat-label">
+							Garantías
+						</div>
+						<div class="stat-value" id="dash-gar">
+							0
+						</div>
+						<div class="stat-icon">
+							🛡️
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="clientes" style="transition-delay:.50s">
+						<div class="stat-label">
+							Clientes
+						</div>
+						<div class="stat-value" id="dash-cli">
+							0
+						</div>
+						<div class="stat-icon">
+							🤝
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="proveedores" style="transition-delay:.52s">
+						<div class="stat-label">
+							Proveedores
+						</div>
+						<div class="stat-value" id="dash-prov">
+							0
+						</div>
+						<div class="stat-icon">
+							📦
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="contactos" style="transition-delay:.54s">
+						<div class="stat-label">
+							Contactos
+						</div>
+						<div class="stat-value" id="dash-cont2">
+							0
+						</div>
+						<div class="stat-icon">
+							📇
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="subcontratistas" style="transition-delay:.56s">
+						<div class="stat-label">
+							Subcontratistas
+						</div>
+						<div class="stat-value" id="dash-sub">
+							0
+						</div>
+						<div class="stat-icon">
+							🔧
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="contratos subcontratista" style="transition-delay:.58s">
+						<div class="stat-label">
+							Contratos Sub.
+						</div>
+						<div class="stat-value" id="dash-csub">
+							0
+						</div>
+						<div class="stat-icon">
+							📑
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="equipos" style="transition-delay:.60s">
+						<div class="stat-label">
+							Equipos
+						</div>
+						<div class="stat-value" id="dash-eq">
+							0
+						</div>
+						<div class="stat-icon">
+							🚜
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="mantenimiento" style="transition-delay:.62s">
+						<div class="stat-label">
+							Mantenimiento
+						</div>
+						<div class="stat-value" id="dash-mant">
+							0
+						</div>
+						<div class="stat-icon">
+							🔩
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="almacenes" style="transition-delay:.64s">
+						<div class="stat-label">
+							Almacenes
+						</div>
+						<div class="stat-value" id="dash-alm">
+							0
+						</div>
+						<div class="stat-icon">
+							🏠
+						</div>
+					</div>
+					<div class="stat-card fade-in" data-label="incidentes seguridad" style="transition-delay:.66s">
+						<div class="stat-label">
+							Incidentes Seg.
+						</div>
+						<div class="stat-value" id="dash-seg">
+							0
+						</div>
+						<div class="stat-icon">
+							🔒
+						</div>
+					</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.28s">
+					<div class="card-header">
+						<div>
+							<h2>
+								ACCESOS RÁPIDOS
+							</h2>
+							<div class="card-subtitle">
+								Navegación directa a los módulos del sistema
+							</div>
+						</div>
+						<div class="search-bar">
+							<input type="text" id="search-accesos" placeholder="Buscar módulo…" oninput="filtrarAccesos(this.value)"/>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="quick-grid" id="quick-grid">
+							<button class="btn btn-outline" data-label="proyectos" onclick="navigate('proyectos',null)">
+								🏗️ Proyectos
+							</button>
+							<button class="btn btn-outline" data-label="contratos" onclick="navigate('contratos',null)">
+								📄 Contratos
+							</button>
+							<button class="btn btn-outline" data-label="licitaciones" onclick="navigate('licitaciones',null)">
+								📋 Licitaciones
+							</button>
+							<button class="btn btn-outline" data-label="hitos" onclick="navigate('hitos',null)">
+								🚩 Hitos
+							</button>
+							<button class="btn btn-outline" data-label="bitacora" onclick="navigate('bitacora',null)">
+								📒 Bitácora
+							</button>
+							<button class="btn btn-outline" data-label="documentos" onclick="navigate('documentos',null)">
+								📁 Documentos
+							</button>
+							<button class="btn btn-outline" data-label="riesgos" onclick="navigate('riesgos',null)">
+								⚠️ Riesgos
+							</button>
+							<button class="btn btn-outline" data-label="permisos" onclick="navigate('permisos',null)">
+								🛂 Permisos
+							</button>
+							<button class="btn btn-outline" data-label="empleados" onclick="navigate('empleados',null)">
+								👷 Empleados
+							</button>
+							<button class="btn btn-outline" data-label="departamentos" onclick="navigate('departamentos',null)">
+								🏢 Departamentos
+							</button>
+							<button class="btn btn-outline" data-label="asignaciones" onclick="navigate('asignaciones',null)">
+								📅 Asignaciones
+							</button>
+							<button class="btn btn-outline" data-label="ausencias" onclick="navigate('ausencias',null)">
+								🗓️ Ausencias
+							</button>
+							<button class="btn btn-outline" data-label="capacitaciones" onclick="navigate('capacitaciones',null)">
+								🎓 Capacitaciones
+							</button>
+							<button class="btn btn-outline" data-label="registro capacitacion emp_cap" onclick="navigate('emp_cap',null)">
+								✅ Reg. Capac.
+							</button>
+							<button class="btn btn-outline" data-label="accidentes" onclick="navigate('accidentes',null)">
+								🚑 Accidentes
+							</button>
+							<button class="btn btn-outline" data-label="nomina" onclick="navigate('nomina',null)">
+								💰 Nómina
+							</button>
+							<button class="btn btn-outline" data-label="detalle nomina det_nomina" onclick="navigate('detalle_nomina',null)">
+								📊 Det. Nómina
+							</button>
+							<button class="btn btn-outline" data-label="prestamos" onclick="navigate('prestamos',null)">
+								💵 Préstamos
+							</button>
+							<button class="btn btn-outline" data-label="facturas" onclick="navigate('facturas',null)">
+								🧾 Facturas
+							</button>
+							<button class="btn btn-outline" data-label="pagos" onclick="navigate('pagos',null)">
+								💳 Pagos
+							</button>
+							<button class="btn btn-outline" data-label="retenciones" onclick="navigate('retenciones',null)">
+								📌 Retenciones
+							</button>
+							<button class="btn btn-outline" data-label="cotizaciones" onclick="navigate('cotizaciones',null)">
+								🗒️ Cotizaciones
+							</button>
+							<button class="btn btn-outline" data-label="garantias garantías" onclick="navigate('garantias',null)">
+								🛡️ Garantías
+							</button>
+							<button class="btn btn-outline" data-label="clientes" onclick="navigate('clientes',null)">
+								🤝 Clientes
+							</button>
+							<button class="btn btn-outline" data-label="proveedores" onclick="navigate('proveedores',null)">
+								📦 Proveedores
+							</button>
+							<button class="btn btn-outline" data-label="contactos" onclick="navigate('contactos',null)">
+								📇 Contactos
+							</button>
+							<button class="btn btn-outline" data-label="subcontratistas subcontrat" onclick="navigate('subcontratistas',null)">
+								🔧 Subcontrat.
+							</button>
+							<button class="btn btn-outline" data-label="contratos subcontratista cont sub" onclick="navigate('contratos_sub',null)">
+								📑 Cont. Sub.
+							</button>
+							<button class="btn btn-outline" data-label="equipos" onclick="navigate('equipos',null)">
+								🚜 Equipos
+							</button>
+							<button class="btn btn-outline" data-label="mantenimiento" onclick="navigate('mantenimiento',null)">
+								🔩 Mantenimiento
+							</button>
+							<button class="btn btn-outline" data-label="almacenes" onclick="navigate('almacenes',null)">
+								🏠 Almacenes
+							</button>
+							<button class="btn btn-outline" data-label="incidentes seguridad" onclick="navigate('seguridad',null)">
+								🔒 Incidentes Seg.
+							</button>
+							<button class="btn btn-store-outline" data-label="tienda store" onclick="navigate('tienda',null)">
+								🛒 Tienda
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====== PROYECTOS ====== -->
+			<div class="page" id="page-proyectos">
+				<div class="page-header fade-in">
+					<h1>
+						Gestión de Proyectos
+					</h1>
+					<div class="gold-line"></div>
+					<p>
+						Registro y administración de proyectos de construcción.
+					</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+					<div class="card-header">
+						<div>
+							<h2>NUEVO PROYECTO</h2>
+							<div class="card-subtitle">Complete todos los campos requeridos</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<form id="form-proyectos" onsubmit="return submitForm('proyectos')">
+							<div class="form-grid">
+								<div class="form-group">
+									<label>Código del Proyecto *</label>
+									<input type="text" name="codigo_proyecto" placeholder="Ej. PRY-2026-001" required/>
+								</div>
+								<div class="form-group full">
+									<label>Nombre del Proyecto *</label>
+									<input type="text" name="nombre_proyecto" placeholder="Ej. Torre Ejecutiva Centro Norte" required/>
+								</div>
+								<div class="form-group full">
+									<label>Descripción</label>
+									<textarea name="descripcion" placeholder="Descripción general del proyecto…"></textarea>
+								</div>
+								<div class="form-group">
+									<label>Tipo de Proyecto *</label>
+									<input type="text" name="tipo_proyecto" placeholder="Residencial / Comercial / Industrial" required/>
+								</div>
+								<div class="form-group">
+									<label>Estado *</label>
+									<select name="estado" required>
+										<option value="">— Seleccionar —</option>
+										<option>Licitacion</option>
+										<option>Planificacion</option>
+										<option>En_Ejecucion</option>
+										<option>Pausado</option>
+										<option>Completado</option>
+										<option>Cancelado</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Cliente *</label>
+									<select name="id_cliente" id="proy-cliente" required>
+										<option value="">— Seleccionar cliente —</option>
+									</select>
+								</div>
+								<div class="form-group full">
+									<label>Ubicación *</label>
+									<input type="text" name="ubicacion" placeholder="Dirección completa" required/>
+								</div>
+								<div class="form-group">
+									<label>Ciudad *</label>
+									<input type="text" name="ciudad" placeholder="Ciudad" required/>
+								</div>
+								<div class="form-group">
+									<label>Estado / República *</label>
+									<input type="text" name="estado_republica" placeholder="Chihuahua" required/>
+								</div>
+								<div class="form-group">
+									<label>País *</label>
+									<input type="text" name="pais" placeholder="México" required/>
+								</div>
+								<div class="form-group">
+									<label>Fecha Inicio Estimada</label>
+									<input type="date" name="fecha_inicio_estimada"/>
+								</div>
+						<div class="form-group"><label>Fecha Fin Estimada</label><input type="date" name="fecha_fin_estimada"/></div>
+						<div class="form-group"><label>Fecha Inicio Real</label><input type="date" name="fecha_inicio_real"/></div>
+						<div class="form-group"><label>Fecha Fin Real</label><input type="date" name="fecha_fin_real"/></div>
+						<div class="form-group"><label>Presupuesto Estimado (MXN)</label><input type="number" name="presupuesto_estimado" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group"><label>Porcentaje de Avance *</label><input type="number" name="porcentaje_avance" placeholder="0.00" step="0.01" min="0" max="100" required/></div>
+			<div class="form-group"><label>Costo Actual (MXN)</label><input type="number" name="costo_actual" placeholder="0.00" step="0.01" min="0"/></div>
+			<div class="form-group"><label>Director de Proyecto (Empleado)</label><select name="id_director" id="proy-director"><option value="">— Sin asignar —</option></select></div>
+			<div class="form-group"><label>Licitación Origen</label><select name="id_licitacion" id="proy-licitacion"><option value="">— Sin licitación —</option></select></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Proyecto</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>PROYECTOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-proyectos" placeholder="Buscar…" oninput="buscarEnTabla('proyectos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Código</th><th>Nombre</th><th>Tipo</th><th>Estado</th><th>Ciudad</th><th>Avance</th><th>Inicio Est.</th><th>Fin Est.</th><th>Acciones</th></tr></thead><tbody id="tbody-proyectos"><tr><td colspan="10"><div class="empty-state"><p>No hay proyectos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+			<!-- ====== CONTRATOS ====== -->
+			<div class="page" id="page-contratos">
+				<div class="page-header fade-in"><h1>Gestión de Contratos</h1><div class="gold-line"></div><p>Administración de contratos con clientes y proyectos.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO CONTRATO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-contratos" onsubmit="return submitForm('contratos')">
+					<div class="form-grid">
+						<div class="form-group">
+						<label>
+							Número de Contrato *
+						</label>
+						<input
+							type="text"
+							name="numero_contrato"
+							placeholder="Ej. CONT-2026-001"
+							required
+						/>
+						</div>
+						<div class="form-group">
+						<label>
+							Proyecto *
+						</label>
+						<select
+							name="id_proyecto"
+							id="cont-proyecto"
+							required
+						>
+							<option value="">
+							— Seleccionar proyecto —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Cliente *
+						</label>
+						<select
+							name="id_cliente"
+							id="cont-cliente"
+							required
+						>
+							<option value="">
+							— Seleccionar cliente —
+							</option>
+						</select>
+						</div>
+						<div class="form-group"><label>Licitación Origen</label><select name="id_licitacion" id="cont-licitacion"><option value="">— Sin licitación —</option></select></div>
+						<div class="form-group"><label>Tipo de Contrato *</label><select name="tipo_contrato" required><option value="">— Seleccionar —</option><option>Precio_Alzado</option><option>Precios_Unitarios</option><option>Mixto</option><option>Administracion</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Borrador</option><option>Firmado</option><option>En_Ejecucion</option><option>Finalizado</option><option>Cancelado</option></select></div>
+						<div class="form-group"><label>Fecha de Firma *</label><input type="date" name="fecha_firma" required/></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha Fin Estimada</label><input type="date" name="fecha_fin_estimada"/></div>
+						<div class="form-group"><label>Fecha Fin Real</label><input type="date" name="fecha_fin_real"/></div>
+						<div class="form-group"><label>Monto Total (MXN) *</label><input type="number" name="monto_total" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Moneda</label><select name="moneda"><option value="MXN">MXN</option><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
+						<div class="form-group"><label>% Anticipo</label><input type="number" name="anticipo_pct" placeholder="0.00" step="0.01" min="0" max="100"/></div>
+						<div class="form-group"><label>Penalización por Día (MXN)</label><input type="number" name="penalizacion_dia" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Descripción / Alcance</label><textarea name="descripcion_alcance" placeholder="Descripción del alcance del contrato…"></textarea></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones adicionales…"></textarea></div>
+					</div>
+					<div class="form-actions">
+						<button
+						type="submit"
+						class="btn btn-gold"
+						>
+						✚ Registrar Contrato
+						</button>
+						<button
+						type="reset"
+						class="btn btn-outline"
+						>
+						Limpiar
+						</button>
+					</div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						CONTRATOS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input
+						type="text"
+						id="search-contratos"
+						placeholder="Buscar…"
+						oninput="buscarEnTabla('contratos')"
+					/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>
+							#
+						</th>
+						<th>
+							N° Contrato
+						</th>
+						<th>
+							Tipo
+						</th>
+						<th>
+							Estado
+						</th>
+						<th>
+							Monto Total
+						</th>
+						<th>
+							Moneda
+						</th>
+						<th>
+							Firma
+						</th>
+						<th>
+							Inicio
+						</th>
+						<th>
+							Fin Est.
+						</th>
+						<th>
+							Acciones
+						</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-contratos">
+						<tr>
+						<td colspan="10">
+							<div class="empty-state">
+							<p>
+								No hay contratos registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== LICITACIONES ====== -->
+			<div class="page" id="page-licitaciones">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Licitaciones
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Seguimiento de procesos de licitación pública y privada.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA LICITACIÓN
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-licitaciones" onsubmit="return submitForm('licitaciones')">
+					<div class="form-grid">
+						<div class="form-group"><label>Número de Licitación *</label><input type="text" name="numero_licitacion" placeholder="Ej. LIC-2026-001" required/></div>
+						<div class="form-group full"><label>Nombre *</label><input type="text" name="nombre" placeholder="Nombre de la licitación" required/></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Publica</option><option>Privada</option><option>Invitacion</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>En_Preparacion</option><option>Presentada</option><option>Ganada</option><option>Perdida</option><option>Cancelada</option><option>Desierta</option></select></div>
+						<div class="form-group"><label>Cliente *</label><select name="id_cliente" id="lic-cliente" required><option value="">— Seleccionar cliente —</option></select></div>
+						<div class="form-group"><label>Responsable (Empleado) *</label><select name="id_responsable" id="lic-responsable" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Proyecto Asociado</label><select name="id_proyecto" id="lic-proyecto"><option value="">— Sin proyecto —</option></select></div>
+						<div class="form-group"><label>Fecha de Publicación</label><input type="date" name="fecha_publicacion"/></div>
+						<div class="form-group"><label>Fecha de Cierre *</label><input type="date" name="fecha_cierre" required/></div>
+						<div class="form-group"><label>Fecha de Fallo</label><input type="date" name="fecha_fallo"/></div>
+						<div class="form-group"><label>Monto Estimado (MXN)</label><input type="number" name="monto_estimado" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group"><label>Monto Ofertado (MXN)</label><input type="number" name="monto_ofertado" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Descripción</label><textarea name="descripcion" placeholder="Descripción del proceso licitatorio…"></textarea></div>
+						<div class="form-group full"><label>Observaciones</label><textarea name="observaciones" placeholder="Observaciones y notas relevantes…"></textarea></div>
+					</div>
+					<div class="form-actions">
+						<button
+						type="submit"
+						class="btn btn-gold"
+						>
+						✚ Registrar Licitación
+						</button>
+						<button
+						type="reset"
+						class="btn btn-outline"
+						>
+						Limpiar
+						</button>
+					</div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						LICITACIONES REGISTRADAS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input
+						type="text"
+						id="search-licitaciones"
+						placeholder="Buscar…"
+						oninput="buscarEnTabla('licitaciones')"
+					/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>N° Licitación</th>
+						<th>Nombre</th>
+						<th>Tipo</th>
+						<th>Estado</th>
+						<th>Cierre</th>
+						<th>Monto Estimado</th>
+						<th>Monto Ofertado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-licitaciones">
+						<tr>
+						<td colspan="9">
+							<div class="empty-state">
+							<p>
+								No hay licitaciones registradas aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== HITOS ====== -->
+			<div class="page" id="page-hitos">
+				<div class="page-header fade-in">
+				<h1>
+					Hitos de Proyecto
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Control de entregables y puntos clave de cada proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO HITO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-hitos" onsubmit="return submitForm('hitos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="hito-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Responsable (Empleado)</label><select name="id_responsable" id="hito-responsable"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group full"><label>Nombre del Hito *</label><input type="text" name="nombre" placeholder="Ej. Entrega de cimentación" required/></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Inicio</option><option>Entrega_Parcial</option><option>Entrega_Final</option><option>Cobro</option><option>Permiso</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Pendiente</option><option>En_Riesgo</option><option>Cumplido</option><option>Cancelado</option></select></div>
+						<div class="form-group"><label>Fecha Estimada *</label><input type="date" name="fecha_estimada" required/></div>
+						<div class="form-group"><label>Fecha Real</label><input type="date" name="fecha_real"/></div>
+						<div class="form-group"><label>% Avance Esperado *</label><input type="number" name="porcentaje_avance" placeholder="0.00" step="0.01" min="0" max="100" required/></div>
+						<div class="form-group"><label>Monto de Cobro (MXN)</label><input type="number" name="monto_cobro" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Descripción</label><textarea name="descripcion" placeholder="Descripción del hito…"></textarea></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones adicionales…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Hito</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>HITOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-hitos" placeholder="Buscar…" oninput="buscarEnTabla('hitos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre</th><th>Tipo</th><th>Estado</th><th>Fecha Est.</th><th>Fecha Real</th><th>% Avance</th><th>Monto Cobro</th><th>Acciones</th></tr></thead><tbody id="tbody-hitos"><tr><td colspan="9"><div class="empty-state"><p>No hay hitos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== BITÁCORA ====== -->
+			<div class="page" id="page-bitacora">
+				<div class="page-header fade-in">
+				<h1>
+					Bitácora de Obra
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro de notas, instrucciones y avances diarios en obra.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA NOTA DE BITÁCORA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-bitacora" onsubmit="return submitForm('bitacora')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="bit-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Emitido por (Empleado)</label><select name="id_emitido_por" id="bit-emitido"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Número de Nota *</label><input type="number" name="numero_nota" placeholder="Consecutivo" min="1" required/></div>
+						<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required/></div>
+						<div class="form-group"><label>Tipo de Nota *</label><select name="tipo_nota" required><option value="">— Seleccionar —</option><option>Instruccion</option><option>Confirmacion</option><option>Solicitud</option><option>Observacion</option><option>Avance</option><option>Incidente</option></select></div>
+						<div class="form-group"><label>Condiciones Climáticas</label><input type="text" name="condiciones_clima" placeholder="Ej. Soleado, 28°C"/></div>
+						<div class="form-group"><label>Personal Presente</label><input type="number" name="personal_presente" placeholder="0" min="0"/></div>
+						<div class="form-group"><label>Equipos Activos</label><input type="text" name="equipos_activos" placeholder="Lista de equipos en operación"/></div>
+						<div class="form-group"><label>Folio / Foto</label><input type="text" name="foto" placeholder="Folio o nombre del archivo"/></div>
+						<div class="form-group full"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa detalladamente la nota de bitácora…" required></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Nota</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>NOTAS REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-bitacora" placeholder="Buscar…" oninput="buscarEnTabla('bitacora')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>N° Nota</th><th>Fecha</th><th>Tipo</th><th>Personal</th><th>Clima</th><th>Descripción</th><th>Acciones</th></tr></thead><tbody id="tbody-bitacora"><tr><td colspan="8"><div class="empty-state"><p>No hay notas de bitácora registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== DOCUMENTOS ====== -->
+			<div class="page" id="page-documentos">
+				<div class="page-header fade-in">
+				<h1>
+					Documentos de Proyecto
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Repositorio de planos, permisos, memorias y archivos técnicos.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO DOCUMENTO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-documentos" onsubmit="return submitForm('documentos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="doc-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Subido por (Empleado)</label><select name="subido_por" id="doc-empleado"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group full"><label>Nombre del Documento *</label><input type="text" name="nombre" placeholder="Ej. Plano arquitectónico planta baja" required/></div>
+						<div class="form-group"><label>Tipo de Documento *</label><input type="text" name="tipo_documento" placeholder="Plano / Permiso / Memoria / Acta…" required/></div>
+						<div class="form-group"><label>Versión</label><input type="text" name="version" placeholder="1.0" value="1.0"/></div>
+						<div class="form-group"><label>Fecha de Subida *</label><input type="datetime-local" name="fecha_subida" required/></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+						<div class="form-group full"><label>Descripción</label><textarea name="descripcion" placeholder="Descripción del documento…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Documento</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>DOCUMENTOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-documentos" placeholder="Buscar…" oninput="buscarEnTabla('documentos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre</th><th>Tipo</th><th>Versión</th><th>Fecha Subida</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-documentos"><tr><td colspan="7"><div class="empty-state"><p>No hay documentos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== RIESGOS ====== -->
+			<div class="page" id="page-riesgos">
+				<div class="page-header fade-in">
+				<h1>
+					Riesgos de Proyecto
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Identificación, evaluación y seguimiento de riesgos en cada proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO RIESGO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-riesgos" onsubmit="return submitForm('riesgos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="riesgo-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Responsable (Empleado)</label><select name="responsable" id="riesgo-responsable"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Categoría *</label><select name="categoria" required><option value="">— Seleccionar —</option><option>Tecnico</option><option>Financiero</option><option>Legal</option><option>Ambiental</option><option>Seguridad</option><option>Clima</option><option>Proveedor</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Probabilidad *</label><select name="probabilidad" required><option value="">— Seleccionar —</option><option>Baja</option><option>Media</option><option>Alta</option></select></div>
+						<div class="form-group"><label>Impacto *</label><select name="impacto" required><option value="">— Seleccionar —</option><option>Bajo</option><option>Medio</option><option>Alto</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Activo</option><option>Mitigado</option><option>Materializado</option><option>Cerrado</option></select></div>
+						<div class="form-group"><label>Fecha de Identificación *</label><input type="date" name="fecha_identificacion" required/></div>
+						<div class="form-group full"><label>Descripción del Riesgo *</label><textarea name="descripcion" placeholder="Describa el riesgo identificado…" required></textarea></div>
+						<div class="form-group full"><label>Plan de Mitigación</label><textarea name="plan_mitigacion" placeholder="Acciones para mitigar o responder al riesgo…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Riesgo</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>RIESGOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-riesgos" placeholder="Buscar…" oninput="buscarEnTabla('riesgos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Categoría</th><th>Probabilidad</th><th>Impacto</th><th>Nivel</th><th>Estado</th><th>Fecha Ident.</th><th>Descripción</th><th>Acciones</th></tr></thead><tbody id="tbody-riesgos"><tr><td colspan="9"><div class="empty-state"><p>No hay riesgos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== PERMISOS / LICENCIAS ====== -->
+			<div class="page" id="page-permisos">
+				<div class="page-header fade-in">
+				<h1>
+					Permisos y Licencias
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Control de permisos gubernamentales y licencias de construcción.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO PERMISO / LICENCIA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-permisos" onsubmit="return submitForm('permisos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="perm-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Tipo de Permiso *</label><input type="text" name="tipo_permiso" placeholder="Licencia de Construcción / Uso de Suelo…" required/></div>
+						<div class="form-group"><label>Número de Permiso *</label><input type="text" name="numero_permiso" placeholder="Folio o número oficial" required/></div>
+						<div class="form-group"><label>Autoridad Emisora *</label><input type="text" name="autoridad_emisora" placeholder="Municipio / SEMARNAT / IMSS…" required/></div>
+						<div class="form-group"><label>Fecha de Emisión *</label><input type="date" name="fecha_emision" required/></div>
+						<div class="form-group"><label>Fecha de Vencimiento</label><input type="date" name="fecha_vencimiento"/></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Vigente</option><option>Por_Vencer</option><option>Vencido</option><option>Revocado</option></select></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre el permiso…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Permiso</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>PERMISOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-permisos" placeholder="Buscar…" oninput="buscarEnTabla('permisos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Tipo</th><th>N° Permiso</th><th>Autoridad</th><th>Emisión</th><th>Vencimiento</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-permisos"><tr><td colspan="8"><div class="empty-state"><p>No hay permisos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+			<!-- ====== EMPLEADOS ====== -->
+			<div class="page" id="page-empleados">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Empleados
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro y control de personal de la empresa.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO EMPLEADO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-empleados" onsubmit="return submitForm('empleados')">
+					<div class="form-grid">
+						<div class="form-group"><label>N° Empleado *</label><input type="text" name="numero_empleado" placeholder="EMP-001" required/></div>
+						<div class="form-group"><label>Nombre(s) *</label><input type="text" name="nombre" placeholder="Nombre(s)" required/></div>
+						<div class="form-group"><label>Apellido Paterno *</label><input type="text" name="apellido_paterno" placeholder="Apellido Paterno" required/></div>
+						<div class="form-group"><label>Apellido Materno</label><input type="text" name="apellido_materno" placeholder="Apellido Materno"/></div>
+						<div class="form-group"><label>RFC *</label><input type="text" name="rfc" placeholder="13 caracteres" maxlength="13" required/></div>
+						<div class="form-group"><label>CURP *</label><input type="text" name="curp" placeholder="18 caracteres" maxlength="18" required/></div>
+						<div class="form-group"><label>NSS *</label><input type="text" name="nss" placeholder="11 dígitos IMSS" maxlength="11" required/></div>
+						<div class="form-group"><label>Fecha de Nacimiento *</label><input type="date" name="fecha_nacimiento" required/></div>
+						<div class="form-group"><label>Género</label><select name="genero"><option value="">— Seleccionar —</option><option value="M">Masculino</option><option value="F">Femenino</option><option value="Otro">Otro</option></select></div>
+						<div class="form-group"><label>Teléfono *</label><input type="tel" name="telefono" placeholder="+52 614 000 0000" required/></div>
+						<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="empleado@empresa.com"/></div>
+						<div class="form-group"><label>Puesto / Cargo *</label><input type="text" name="puesto_cargo" placeholder="Ej. Ingeniero Civil" required/></div>
+						<div class="form-group"><label>Departamento</label><select name="id_departamento" id="emp-departamento"><option value="">— Sin departamento —</option></select></div>
+						<div class="form-group"><label>Supervisor</label><select name="id_supervisor" id="emp-supervisor"><option value="">— Sin supervisor —</option></select></div>
+						<div class="form-group"><label>Tipo de Contrato *</label><select name="tipo_contrato" required><option value="">— Seleccionar —</option><option>Planta</option><option>Temporal</option><option>Honorarios</option><option>Practicante</option><option>Subcontratado</option><option>Confianza</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Fecha de Contratación *</label><input type="date" name="fecha_contratacion" required/></div>
+						<div class="form-group"><label>Fecha Fin de Contrato</label><input type="date" name="fecha_fin_contrato"/></div>
+						<div class="form-group"><label>Salario Base (MXN) *</label><input type="number" name="salario_base" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Banco</label><input type="text" name="banco" placeholder="Nombre del banco"/></div>
+						<div class="form-group"><label>CLABE Interbancaria</label><input type="text" name="clabe_interbancaria" placeholder="18 dígitos" maxlength="18"/></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Baja</option></select></div>
+						<div class="form-group full"><label>Dirección</label><input type="text" name="direccion" placeholder="Calle, número, colonia, municipio, estado"/></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Empleado</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>EMPLEADOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-empleados" placeholder="Buscar…" oninput="buscarEnTabla('empleados')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>N° Emp.</th><th>Nombre Completo</th><th>Puesto</th><th>Contrato</th><th>Salario Base</th><th>Contratación</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-empleados"><tr><td colspan="9"><div class="empty-state"><p>No hay empleados registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== DEPARTAMENTOS ====== -->
+			<div class="page" id="page-departamentos">
+				<div class="page-header fade-in">
+				<h1>
+					Departamentos
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Estructura organizacional de la empresa.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO DEPARTAMENTO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-departamentos" onsubmit="return submitForm('departamentos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Nombre del Departamento *</label><input type="text" name="nombre" placeholder="Ej. Ingeniería Civil" required/></div>
+						<div class="form-group"><label>Responsable (Empleado)</label><select name="id_responsable" id="dept-responsable"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+						<div class="form-group full"><label>Descripción</label><textarea name="descripcion" placeholder="Descripción del departamento y sus funciones…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Departamento</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>DEPARTAMENTOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-departamentos" placeholder="Buscar…" oninput="buscarEnTabla('departamentos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre</th><th>Estado</th><th>Descripción</th><th>Acciones</th></tr></thead><tbody id="tbody-departamentos"><tr><td colspan="5"><div class="empty-state"><p>No hay departamentos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== ASIGNACIONES ====== -->
+			<div class="page" id="page-asignaciones">
+				<div class="page-header fade-in">
+				<h1>
+					Asignaciones de Personal
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Control de empleados asignados a cada proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA ASIGNACIÓN
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-asignaciones" onsubmit="return submitForm('asignaciones')">
+					<div class="form-grid">
+						<div class="form-group"><label>Empleado *</label><select name="id_empleado" id="asig-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="asig-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Rol en el Proyecto *</label><input type="text" name="rol_en_proyecto" placeholder="Ej. Director de Obra" required/></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha de Fin</label><input type="date" name="fecha_fin"/></div>
+						<div class="form-group"><label>Horas Semanales *</label><input type="number" name="horas_semanales" placeholder="40" min="1" max="84" required/></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Asignación</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>ASIGNACIONES REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-asignaciones" placeholder="Buscar…" oninput="buscarEnTabla('asignaciones')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Empleado ID</th><th>Proyecto ID</th><th>Rol</th><th>Horas / Sem.</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-asignaciones"><tr><td colspan="9"><div class="empty-state"><p>No hay asignaciones registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== AUSENCIAS ====== -->
+			<div class="page" id="page-ausencias">
+				<div class="page-header fade-in">
+				<h1>
+					Ausencias de Personal
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro de vacaciones, permisos e incapacidades.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA AUSENCIA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-ausencias" onsubmit="return submitForm('ausencias')">
+					<div class="form-grid">
+						<div class="form-group"><label>Empleado *</label><select name="id_empleado" id="aus-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Tipo de Ausencia *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Vacaciones</option><option>Falta_Justificada</option><option>Falta_Injustificada</option><option>Incapacidad_IMSS</option><option>Incapacidad_Empresa</option><option>Permiso_Con_Goce</option><option>Permiso_Sin_Goce</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Solicitada</option><option>Aprobada</option><option>Rechazada</option></select></div>
+						<div class="form-group"><label>Aprobada por (Empleado)</label><select name="aprobada_por" id="aus-aprobada"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha de Fin *</label><input type="date" name="fecha_fin" required/></div>
+						<div class="form-group"><label>Días Hábiles *</label><input type="number" name="dias_habiles" placeholder="0" min="0" required/></div>
+						<div class="form-group"><label>Folio IMSS</label><input type="text" name="folio_imss" placeholder="Solo para incapacidad IMSS"/></div>
+						<div class="form-group"><label>Proyecto Afectado</label><select name="id_proyecto" id="aus-proyecto"><option value="">— Sin proyecto específico —</option></select></div>
+						<div class="form-group full"><label>Observaciones</label><textarea name="observaciones" placeholder="Observaciones sobre la ausencia…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Ausencia</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>AUSENCIAS REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-ausencias" placeholder="Buscar…" oninput="buscarEnTabla('ausencias')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Empleado ID</th><th>Tipo</th><th>Estado</th><th>Inicio</th><th>Fin</th><th>Días Hábiles</th><th>Folio IMSS</th><th>Acciones</th></tr></thead><tbody id="tbody-ausencias"><tr><td colspan="9"><div class="empty-state"><p>No hay ausencias registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== CAPACITACIONES ====== -->
+			<div class="page" id="page-capacitaciones">
+				<div class="page-header fade-in">
+				<h1>
+					Capacitaciones
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Gestión de cursos, certificaciones y formación del personal.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA CAPACITACIÓN
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-capacitaciones" onsubmit="return submitForm('capacitaciones')">
+					<div class="form-grid">
+						<div class="form-group full"><label>Nombre de la Capacitación *</label><input type="text" name="nombre" placeholder="Ej. Seguridad en alturas — NOM-009" required/></div>
+						<div class="form-group"><label>Tipo *</label><input type="text" name="tipo" placeholder="Seguridad / Técnico / Normativo…" required/></div>
+						<div class="form-group"><label>Instructor *</label><input type="text" name="instructor" placeholder="Nombre del instructor" required/></div>
+						<div class="form-group"><label>Duración (horas) *</label><input type="number" name="duracion_horas" placeholder="0.0" step="0.5" min="0" required/></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha de Fin *</label><input type="date" name="fecha_fin" required/></div>
+						<div class="form-group"><label>Costo (MXN)</label><input type="number" name="costo" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group"><label>Proyecto Relacionado</label><select name="id_proyecto" id="cap-proyecto"><option value="">— Sin proyecto específico —</option></select></div>
+						<div class="form-group"><label>¿Obligatoria? *</label><select name="obligatoria" required><option value="1">Sí</option><option value="0">No</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activa</option><option value="0">Inactiva</option></select></div>
+						<div class="form-group full"><label>Descripción</label><textarea name="descripcion" placeholder="Objetivos y contenido de la capacitación…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Capacitación</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>CAPACITACIONES REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-capacitaciones" placeholder="Buscar…" oninput="buscarEnTabla('capacitaciones')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre</th><th>Tipo</th><th>Instructor</th><th>Duración (h)</th><th>Inicio</th><th>Fin</th><th>Costo</th><th>Obligatoria</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-capacitaciones"><tr><td colspan="11"><div class="empty-state"><p>No hay capacitaciones registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== REGISTRO CAPACITACIÓN (empleado_capacitacion) ====== -->
+			<div class="page" id="page-emp_cap">
+				<div class="page-header fade-in">
+				<h1>
+					Registro de Asistencia a Capacitación
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Control de participación y calificaciones de empleados en cada capacitación.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO REGISTRO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-emp_cap" onsubmit="return submitForm('emp_cap')">
+					<div class="form-grid">
+						<div class="form-group"><label>Empleado *</label><select name="id_empleado" id="empcap-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Capacitación *</label><select name="id_capacitacion" id="empcap-capacitacion" required><option value="">— Seleccionar capacitación —</option></select></div>
+						<div class="form-group"><label>Fecha de Asistencia *</label><input type="date" name="fecha_asistencia" required/></div>
+						<div class="form-group"><label>Calificación (1-10)</label><input type="number" name="calificacion" placeholder="0" min="0" max="10"/></div>
+						<div class="form-group"><label>¿Aprobado?</label><select name="aprobado"><option value="">— Sin definir —</option><option value="1">Sí</option><option value="0">No</option></select></div>
+						<div class="form-group"><label>Folio / Certificado</label><input type="text" name="certificado" placeholder="Nombre o ruta del certificado"/></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Asistencia</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>REGISTROS DE ASISTENCIA</h2></div><div class="search-bar"><input type="text" id="search-emp_cap" placeholder="Buscar…" oninput="buscarEnTabla('emp_cap')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Empleado ID</th><th>Capacitación ID</th><th>Fecha Asistencia</th><th>Calificación</th><th>Aprobado</th><th>Certificado</th><th>Acciones</th></tr></thead><tbody id="tbody-emp_cap"><tr><td colspan="8"><div class="empty-state"><p>No hay registros de asistencia aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== ACCIDENTES LABORALES ====== -->
+			<div class="page" id="page-accidentes">
+				<div class="page-header fade-in">
+				<h1>
+					Accidentes Laborales
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro y seguimiento de accidentes e incidentes de trabajo.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO ACCIDENTE / INCIDENTE
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-accidentes" onsubmit="return submitForm('accidentes')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="acc-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Empleado Involucrado *</label><select name="id_empleado" id="acc-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo_accidente" required><option value="">— Seleccionar —</option><option>Incidente</option><option>Accidente</option><option>Cuasi_Accidente</option><option>Enfermedad_Trabajo</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Reportado</option><option>En_Investigacion</option><option>Cerrado</option></select></div>
+						<div class="form-group"><label>Fecha y Hora *</label><input type="datetime-local" name="fecha_accidente" required/></div>
+						<div class="form-group"><label>Parte del Cuerpo Afectada</label><input type="text" name="parte_cuerpo" placeholder="Ej. Mano derecha"/></div>
+						<div class="form-group"><label>Días de Incapacidad *</label><input type="number" name="dias_incapacidad" placeholder="0" min="0" required/></div>
+						<div class="form-group"><label>¿Requirió Hospitalización? *</label><select name="requirio_hospitalizacion" required><option value="0">No</option><option value="1">Sí</option></select></div>
+						<div class="form-group"><label>Folio IMSS</label><input type="text" name="folio_imss" placeholder="Número de incapacidad IMSS"/></div>
+						<div class="form-group"><label>Costo Estimado (MXN)</label><input type="number" name="costo_estimado" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa detalladamente cómo ocurrió el accidente…" required></textarea></div>
+						<div class="form-group full"><label>Acciones Correctivas *</label><textarea name="acciones_correctivas" placeholder="Medidas adoptadas para evitar recurrencia…" required></textarea></div>
+						<div class="form-group full"><label>Testigos</label><textarea name="testigos" placeholder="Nombre y datos de los testigos presentes…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Accidente</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>ACCIDENTES REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-accidentes" placeholder="Buscar…" oninput="buscarEnTabla('accidentes')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Tipo</th><th>Estado</th><th>Fecha</th><th>Parte Cuerpo</th><th>Días Incap.</th><th>Hospitaliz.</th><th>Folio IMSS</th><th>Costo Est.</th><th>Acciones</th></tr></thead><tbody id="tbody-accidentes"><tr><td colspan="10"><div class="empty-state"><p>No hay accidentes registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== NÓMINA ====== -->
+			<div class="page" id="page-nomina">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Nómina
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Administración de períodos de pago y dispersión de salarios.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO PERÍODO DE NÓMINA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-nomina" onsubmit="return submitForm('nomina')">
+					<div class="form-grid">
+						<div class="form-group"><label>Período *</label><input type="text" name="periodo" placeholder="Ej. 2026-05-Q1" required/></div>
+						<div class="form-group"><label>Tipo de Nómina *</label><select name="tipo_nomina" required><option value="">— Seleccionar —</option><option>Ordinaria</option><option>Extraordinaria</option><option>Finiquito</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Borrador</option><option>Aprobada</option><option>Pagada</option></select></div>
+						<div class="form-group"><label>Fecha Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha Fin *</label><input type="date" name="fecha_fin" required/></div>
+						<div class="form-group"><label>Fecha de Pago *</label><input type="date" name="fecha_pago" required/></div>
+						<div class="form-group"><label>Total Percepciones (MXN) *</label><input type="number" name="total_percepciones" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Total Deducciones (MXN) *</label><input type="number" name="total_deducciones" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Total Neto (MXN) *</label><input type="number" name="total_neto" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>¿Aprobada? *</label><select name="aprobada" required><option value="0">Pendiente</option><option value="1">Aprobada</option></select></div>
+						<div class="form-group"><label>Aprobada por (Empleado)</label><select name="aprobada_por" id="nom-aprobada"><option value="">— Sin asignar —</option></select></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Período</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>PERÍODOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-nomina" placeholder="Buscar…" oninput="buscarEnTabla('nomina')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Período</th><th>Tipo</th><th>Estado</th><th>Pago</th><th>Percepciones</th><th>Deducciones</th><th>Neto</th><th>Aprobada</th><th>Acciones</th></tr></thead><tbody id="tbody-nomina"><tr><td colspan="10"><div class="empty-state"><p>No hay períodos de nómina registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== DETALLE NÓMINA (detalle_nomina) ====== -->
+			<div class="page" id="page-detalle_nomina">
+				<div class="page-header fade-in"><h1>Detalle de Nómina</h1><div class="gold-line"></div><p>Percepciones y deducciones individuales por empleado en cada período.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO DETALLE</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-detalle_nomina" onsubmit="return submitForm('detalle_nomina')">
+					<div class="form-grid">
+						<div class="form-group"><label>Período de Nómina *</label><select name="id_nomina" id="det-nomina" required><option value="">— Seleccionar período —</option></select></div>
+						<div class="form-group"><label>Empleado *</label><select name="id_empleado" id="det-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Salario Base (MXN) *</label><input type="number" name="salario_base" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Horas Extra</label><input type="number" name="horas_extra" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>Monto Horas Extra (MXN)</label><input type="number" name="monto_horas_extra" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>Bonos (MXN)</label><input type="number" name="bonos" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>Total Percepciones (MXN) *</label><input type="number" name="total_percepciones" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>ISR (MXN)</label><input type="number" name="isr" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>IMSS (MXN)</label><input type="number" name="imss" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>INFONAVIT (MXN)</label><input type="number" name="infonavit" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>Otras Deducciones (MXN)</label><input type="number" name="otras_deducciones" placeholder="0.00" step="0.01" min="0" value="0"/></div>
+						<div class="form-group"><label>Total Deducciones (MXN) *</label><input type="number" name="total_deducciones" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Neto a Pagar (MXN) *</label><input type="number" name="neto_pagar" placeholder="0.00" step="0.01" min="0" required/></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Detalle</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>DETALLES REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-detalle_nomina" placeholder="Buscar…" oninput="buscarEnTabla('detalle_nomina')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nómina ID</th><th>Empleado ID</th><th>Salario Base</th><th>H. Extra</th><th>Bonos</th><th>Total Percepciones</th><th>Total Deducciones</th><th>Neto a Pagar</th><th>Acciones</th></tr></thead><tbody id="tbody-detalle_nomina"><tr><td colspan="10"><div class="empty-state"><p>No hay detalles de nómina registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== PRÉSTAMOS ====== -->
+			<div class="page" id="page-prestamos">
+				<div class="page-header fade-in"><h1>Préstamos a Empleados</h1><div class="gold-line"></div><p>Control de anticipos, préstamos personales y fondo de ahorro.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO PRÉSTAMO</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-prestamos" onsubmit="return submitForm('prestamos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Empleado *</label><select name="id_empleado" id="prest-empleado" required><option value="">— Seleccionar empleado —</option></select></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Prestamo_Personal</option><option>Anticipo_Nomina</option><option>Fondo_Ahorro</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Activo</option><option>Liquidado</option><option>Cancelado</option></select></div>
+						<div class="form-group"><label>Autorizado por (Empleado)</label><select name="autorizado_por" id="prest-autorizado"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Monto Total (MXN) *</label><input type="number" name="monto_total" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Monto Pendiente (MXN) *</label><input type="number" name="monto_pendiente" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Número de Pagos *</label><input type="number" name="numero_pagos" placeholder="1" min="1" required/></div>
+						<div class="form-group"><label>Descuento Quincenal (MXN) *</label><input type="number" name="monto_descuento_quincenal" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Fecha de Otorgamiento *</label><input type="date" name="fecha_otorgamiento" required/></div>
+						<div class="form-group"><label>Fecha Liquidación Estimada</label><input type="date" name="fecha_liquidacion_est"/></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre el préstamo…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Préstamo</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>PRÉSTAMOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-prestamos" placeholder="Buscar…" oninput="buscarEnTabla('prestamos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Empleado ID</th><th>Tipo</th><th>Estado</th><th>Monto Total</th><th>Pendiente</th><th>Pagos</th><th>Desc. Quincenal</th><th>Otorgamiento</th><th>Acciones</th></tr></thead><tbody id="tbody-prestamos"><tr><td colspan="10"><div class="empty-state"><p>No hay préstamos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+			<!-- ====== FACTURAS ====== -->
+			<div class="page" id="page-facturas">
+				<div class="page-header fade-in"><h1>Gestión de Facturas</h1><div class="gold-line"></div><p>Registro de facturas de proveedores y clientes (CFDI).</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVA FACTURA</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-facturas" onsubmit="return submitForm('facturas')">
+					<div class="form-grid">
+						<div class="form-group"><label>N° de Factura *</label><input type="text" name="numero_factura" placeholder="Ej. FAC-2026-001" required/></div>
+						<div class="form-group"><label>Tipo de Factura *</label><select name="tipo_factura" required><option value="">— Seleccionar —</option><option>Proveedor</option><option>Cliente</option></select></div>
+						<div class="form-group"><label>Proveedor</label><select name="id_proveedor" id="fac-proveedor"><option value="">— Sin proveedor —</option></select></div>
+						<div class="form-group"><label>Cliente</label><select name="id_cliente" id="fac-cliente"><option value="">— Sin cliente —</option></select></div>
+						<div class="form-group"><label>Proyecto</label><select name="id_proyecto" id="fac-proyecto"><option value="">— Sin proyecto —</option></select></div>
+						<div class="form-group"><label>Contrato</label><select name="id_contrato" id="fac-contrato"><option value="">— Sin contrato —</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Pendiente</option><option>Pagada_Parcial</option><option>Pagada</option><option>Cancelada</option><option>Vencida</option></select></div>
+						<div class="form-group"><label>Fecha de Emisión *</label><input type="date" name="fecha_emision" required/></div>
+						<div class="form-group"><label>Fecha de Vencimiento *</label><input type="date" name="fecha_vencimiento" required/></div>
+						<div class="form-group"><label>Subtotal (MXN) *</label><input type="number" name="subtotal" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>IVA (MXN) *</label><input type="number" name="iva" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Total (MXN) *</label><input type="number" name="total" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Moneda</label><select name="moneda"><option value="MXN">MXN</option><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
+						<div class="form-group"><label>UUID SAT (CFDI)</label><input type="text" name="uuid_sat" placeholder="UUID del timbre fiscal"/></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre la factura…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Factura</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>FACTURAS REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-facturas" placeholder="Buscar…" oninput="buscarEnTabla('facturas')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>N° Factura</th><th>Tipo</th><th>Estado</th><th>Emisión</th><th>Vencimiento</th><th>Subtotal</th><th>IVA</th><th>Total</th><th>Moneda</th><th>Acciones</th></tr></thead><tbody id="tbody-facturas"><tr><td colspan="11"><div class="empty-state"><p>No hay facturas registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== PAGOS ====== -->
+			<div class="page" id="page-pagos">
+				<div class="page-header fade-in"><h1>Gestión de Pagos</h1><div class="gold-line"></div><p>Registro de pagos realizados contra facturas.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO PAGO</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-pagos" onsubmit="return submitForm('pagos')">
+					<div class="form-grid">
+						<div class="form-group"><label>Factura *</label><select name="id_factura" id="pago-factura" required><option value="">— Seleccionar factura —</option></select></div>
+						<div class="form-group"><label>Método de Pago *</label><select name="metodo_pago" required><option value="">— Seleccionar —</option><option>Transferencia</option><option>Cheque</option><option>Efectivo</option><option>Tarjeta</option></select></div>
+						<div class="form-group"><label>Fecha de Pago *</label><input type="date" name="fecha_pago" required/></div>
+						<div class="form-group"><label>Monto (MXN) *</label><input type="number" name="monto" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Referencia Bancaria</label><input type="text" name="referencia_banco" placeholder="Folio o referencia de transferencia"/></div>
+						<div class="form-group"><label>Comprobante / Folio</label><input type="text" name="comprobante" placeholder="Nombre o ruta del archivo"/></div>
+						<div class="form-group"><label>Registrado por (Empleado)</label><select name="registrado_por" id="pago-empleado"><option value="">— Sin asignar —</option></select></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Pago</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>PAGOS REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-pagos" placeholder="Buscar…" oninput="buscarEnTabla('pagos')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Factura ID</th><th>Método</th><th>Fecha de Pago</th><th>Monto</th><th>Referencia</th><th>Comprobante</th><th>Acciones</th></tr></thead><tbody id="tbody-pagos"><tr><td colspan="8"><div class="empty-state"><p>No hay pagos registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== RETENCIONES ====== -->
+			<div class="page" id="page-retenciones">
+				<div class="page-header fade-in"><h1>Retenciones</h1><div class="gold-line"></div><p>Control de fondos de garantía, amortizaciones y penalizaciones.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVA RETENCIÓN</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-retenciones" onsubmit="return submitForm('retenciones')">
+					<div class="form-grid">
+						<div class="form-group"><label>Contrato *</label><select name="id_contrato" id="ret-contrato" required><option value="">— Seleccionar contrato —</option></select></div>
+						<div class="form-group"><label>Factura Origen</label><select name="id_factura" id="ret-factura"><option value="">— Sin factura específica —</option></select></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Fondo_Garantia</option><option>Amortizacion_Anticipo</option><option>Defectos</option><option>Penalizacion</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Retenido</option><option>Liberado_Parcial</option><option>Liberado</option></select></div>
+						<div class="form-group"><label>Porcentaje (%)</label><input type="number" name="porcentaje" placeholder="0.00" step="0.01" min="0" max="100"/></div>
+						<div class="form-group"><label>Monto (MXN) *</label><input type="number" name="monto" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Monto Liberado (MXN) *</label><input type="number" name="monto_liberado" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>Fecha de Retención *</label><input type="date" name="fecha_retencion" required/></div>
+						<div class="form-group"><label>Fecha de Liberación</label><input type="date" name="fecha_liberacion"/></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre la retención…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Retención</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>RETENCIONES REGISTRADAS</h2></div><div class="search-bar"><input type="text" id="search-retenciones" placeholder="Buscar…" oninput="buscarEnTabla('retenciones')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Contrato ID</th><th>Tipo</th><th>Estado</th><th>Monto</th><th>Monto Liberado</th><th>% Retención</th><th>Fecha Reten.</th><th>Fecha Liber.</th><th>Acciones</th></tr></thead><tbody id="tbody-retenciones"><tr><td colspan="10"><div class="empty-state"><p>No hay retenciones registradas aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== COTIZACIONES ====== -->
+			<div class="page" id="page-cotizaciones">
+				<div class="page-header fade-in">
+				<h1>
+					Cotizaciones de Proveedor
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Seguimiento de solicitudes y cotizaciones a proveedores.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA COTIZACIÓN
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-cotizaciones" onsubmit="return submitForm('cotizaciones')">
+					<div class="form-grid">
+						<div class="form-group"><label>N° de Cotización *</label><input type="text" name="numero_cotizacion" placeholder="COT-2026-001" required/></div>
+						<div class="form-group"><label>Proveedor *</label><select name="id_proveedor" id="cot-proveedor" required><option value="">— Seleccionar proveedor —</option></select></div>
+						<div class="form-group"><label>Proyecto</label><select name="id_proyecto" id="cot-proyecto"><option value="">— Sin proyecto específico —</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Solicitada</option><option>Recibida</option><option>Aceptada</option><option>Rechazada</option><option>Vencida</option></select></div>
+						<div class="form-group"><label>Fecha de Solicitud *</label><input type="date" name="fecha_solicitud" required/></div>
+						<div class="form-group"><label>Fecha de Vencimiento</label><input type="date" name="fecha_vencimiento"/></div>
+						<div class="form-group"><label>Total Cotizado (MXN)</label><input type="number" name="total_cotizado" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre la cotización…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Cotización</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						COTIZACIONES REGISTRADAS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-cotizaciones" placeholder="Buscar…" oninput="buscarEnTabla('cotizaciones')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>N° Cotización</th>
+						<th>Proveedor ID</th>
+						<th>Estado</th>
+						<th>Solicitud</th>
+						<th>Vencimiento</th>
+						<th>Total Cotizado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-cotizaciones">
+						<tr>
+						<td colspan="8">
+							<div class="empty-state">
+							<p>
+								No hay cotizaciones registradas aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== GARANTÍAS ====== -->
+			<div class="page" id="page-garantias">
+				<div class="page-header fade-in">
+				<h1>
+					Garantías
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Control de pólizas de garantía por contrato y proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVA GARANTÍA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-garantias" onsubmit="return submitForm('garantias')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="gar-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Contrato *</label><select name="id_contrato" id="gar-contrato" required><option value="">— Seleccionar contrato —</option></select></div>
+						<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="">— Seleccionar —</option><option>Cumplimiento</option><option>Anticipo</option><option>Vicios_Ocultos</option><option>Buena_Ejecucion</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Vigente</option><option>Por_Vencer</option><option>Vencida</option><option>Liberada</option><option>Ejecutada</option></select></div>
+						<div class="form-group"><label>N° de Póliza *</label><input type="text" name="numero_poliza" placeholder="Número de póliza" required/></div>
+						<div class="form-group"><label>Aseguradora *</label><input type="text" name="aseguradora" placeholder="Nombre de la aseguradora" required/></div>
+						<div class="form-group"><label>Monto (MXN) *</label><input type="number" name="monto" placeholder="0.00" step="0.01" min="0" required/></div>
+						<div class="form-group"><label>% del Contrato</label><input type="number" name="porcentaje" placeholder="0.00" step="0.01" min="0" max="100"/></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha de Vencimiento *</label><input type="date" name="fecha_vencimiento" required/></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre la garantía…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Garantía</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						GARANTÍAS REGISTRADAS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-garantias" placeholder="Buscar…" oninput="buscarEnTabla('garantias')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Tipo</th>
+						<th>N° Póliza</th>
+						<th>Aseguradora</th>
+						<th>Monto</th>
+						<th>Inicio</th>
+						<th>Vencimiento</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-garantias">
+						<tr>
+						<td colspan="9">
+							<div class="empty-state">
+							<p>
+								No hay garantías registradas aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+			<!-- ====== PROVEEDORES ====== -->
+			<div class="page" id="page-proveedores">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Proveedores
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Administración de proveedores de materiales, equipos y servicios.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO PROVEEDOR
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-proveedores" onsubmit="return submitForm('proveedores')">
+					<div class="form-grid">
+						<div class="form-group full"><label>Razón Social *</label><input type="text" name="razon_social" placeholder="Razón social del proveedor" required/></div>
+						<div class="form-group"><label>RFC *</label><input type="text" name="rfc" placeholder="13 caracteres" maxlength="13" required/></div>
+						<div class="form-group"><label>Tipo de Proveedor *</label><select name="tipo_proveedor" required><option value="">— Seleccionar —</option><option>Material</option><option>Equipos</option><option>Servicios</option><option>Logística</option><option>Tecnología</option><option>Otro</option></select></div>
+						<div class="form-group"><label>Teléfono *</label><input type="tel" name="telefono" placeholder="+52 614 000 0000" required/></div>
+						<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="contacto@proveedor.com"/></div>
+						<div class="form-group full"><label>Dirección *</label><input type="text" name="direccion" placeholder="Calle, número, colonia" required/></div>
+						<div class="form-group"><label>Ciudad *</label><input type="text" name="ciudad" placeholder="Ciudad" required/></div>
+						<div class="form-group"><label>Estado *</label><input type="text" name="estado" placeholder="Estado / Provincia" required/></div>
+						<div class="form-group"><label>País *</label><input type="text" name="pais" placeholder="México" required/></div>
+						<div class="form-group"><label>Calificación (1–5)</label><input type="number" name="calificacion" placeholder="1" min="1" max="5"/></div>
+						<div class="form-group"><label>Banco *</label><input type="text" name="banco" placeholder="Nombre del banco" required/></div>
+						<div class="form-group"><label>Cuenta Bancaria *</label><input type="text" name="cuenta_bancaria" placeholder="Número de cuenta" required/></div>
+						<div class="form-group"><label>CLABE Interbancaria *</label><input type="text" name="clabe" placeholder="18 dígitos" maxlength="18" required/></div>
+						<div class="form-group"><label>Fecha de Alta *</label><input type="date" name="fecha_alta" required/></div>
+						<div class="form-group"><label>Estado del Registro *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Notas u observaciones del proveedor…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Proveedor</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						PROVEEDORES REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-proveedores" placeholder="Buscar…" oninput="buscarEnTabla('proveedores')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Razón Social</th>
+						<th>RFC</th>
+						<th>Tipo</th>
+						<th>Ciudad</th>
+						<th>Email</th>
+						<th>Calif.</th>
+						<th>Estado</th>
+						<th>Alta</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-proveedores">
+						<tr>
+						<td colspan="10">
+							<div class="empty-state">
+							<p>
+								No hay proveedores registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== CONTACTOS PROVEEDOR / SUBCONTRATISTA ====== -->
+			<div class="page" id="page-contactos">
+				<div class="page-header fade-in"><h1>Contactos de Proveedor / Subcontratista</h1><div class="gold-line"></div><p>Directorio de personas de contacto por proveedor o subcontratista.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO CONTACTO</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-contactos" onsubmit="return submitForm('contactos')">
+					<div class="form-grid">
+						<div class="form-group">
+						<label>
+							Proveedor
+						</label>
+						<select name="id_proveedor" id="cont2-proveedor">
+							<option value="">
+							— Sin proveedor —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Subcontratista
+						</label>
+						<select name="id_subcontratista" id="cont2-sub">
+							<option value="">
+							— Sin subcontratista —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Nombre *
+						</label>
+						<input type="text" name="nombre" placeholder="Nombre del contacto" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Cargo *
+						</label>
+						<input type="text" name="cargo" placeholder="Director Comercial / Gerente…" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Teléfono *
+						</label>
+						<input type="tel" name="telefono" placeholder="+52 614 000 0000" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Email *
+						</label>
+						<input type="email" name="email" placeholder="contacto@empresa.com" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							¿Contacto Principal?
+						</label>
+						<select name="es_principal">
+							<option value="0">
+							No
+							</option>
+							<option value="1">
+							Sí
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Estado *
+						</label>
+						<select name="activo" required>
+							<option value="1">
+							Activo
+							</option>
+							<option value="0">
+							Inactivo
+							</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Contacto</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						CONTACTOS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-contactos" placeholder="Buscar…" oninput="buscarEnTabla('contactos')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Cargo</th>
+						<th>Teléfono</th>
+						<th>Email</th>
+						<th>Principal</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-contactos">
+						<tr>
+						<td colspan="8">
+							<div class="empty-state">
+							<p>
+								No hay contactos registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== SUBCONTRATISTAS ====== -->
+			<div class="page" id="page-subcontratistas">
+				<div class="page-header fade-in"><h1>Subcontratistas</h1><div class="gold-line"></div><p>Directorio de subcontratistas especializados.</p></div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO SUBCONTRATISTA</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-subcontratistas" onsubmit="return submitForm('subcontratistas')">
+					<div class="form-grid">
+						<div class="form-group full"><label>Razón Social *</label><input type="text" name="razon_social" placeholder="Razón social" required/></div>
+						<div class="form-group"><label>RFC *</label><input type="text" name="rfc" placeholder="13 caracteres" maxlength="13" required/></div>
+						<div class="form-group"><label>Especialidad *</label><input type="text" name="especialidad" placeholder="Ej. Instalaciones Eléctricas" required/></div>
+						<div class="form-group"><label>Contacto Principal</label><input type="text" name="contacto_principal" placeholder="Nombre del contacto"/></div>
+						<div class="form-group"><label>Teléfono *</label><input type="tel" name="telefono" placeholder="+52 614 000 0000" required/></div>
+						<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="contacto@subcontratista.com"/></div>
+						<div class="form-group"><label>Calificación (1–5)</label><input type="number" name="calificacion" placeholder="1" min="1" max="5"/></div>
+						<div class="form-group"><label>Banco *</label><input type="text" name="banco" placeholder="Nombre del banco" required/></div>
+						<div class="form-group"><label>Cuenta Bancaria *</label><input type="text" name="cuenta_bancaria" placeholder="Número de cuenta" required/></div>
+						<div class="form-group"><label>CLABE *</label><input type="text" name="clabe" placeholder="18 dígitos" maxlength="18" required/></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre el subcontratista…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Subcontratista</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						SUBCONTRATISTAS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-subcontratistas" placeholder="Buscar…" oninput="buscarEnTabla('subcontratistas')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Razón Social</th>
+						<th>RFC</th>
+						<th>Especialidad</th>
+						<th>Contacto</th>
+						<th>Teléfono</th>
+						<th>Calif.</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-subcontratistas">
+						<tr>
+						<td colspan="9">
+							<div class="empty-state">
+							<p>
+								No hay subcontratistas registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== CONTRATOS SUBCONTRATISTAS ====== -->
+			<div class="page" id="page-contratos_sub">
+				<div class="page-header fade-in">
+				<h1>
+					Contratos con Subcontratistas
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Gestión de contratos celebrados con subcontratistas por proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO CONTRATO SUBCONTRATISTA
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-contratos_sub" onsubmit="return submitForm('contratos_sub')">
+					<div class="form-grid">
+						<div class="form-group">
+						<label>
+							Subcontratista *
+						</label>
+						<select name="id_subcontratista" id="csub-sub" required>
+							<option value="">
+							— Seleccionar —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Proyecto *
+						</label>
+						<select name="id_proyecto" id="csub-proyecto" required>
+							<option value="">
+							— Seleccionar proyecto —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							N° Contrato *
+						</label>
+						<input type="text" name="numero_contrato" placeholder="Ej. SUB-2026-001" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Estado *
+						</label>
+						<select name="estado" required>
+							<option value="">
+							— Seleccionar —
+							</option>
+							<option>
+							Borrador
+							</option>
+							<option>
+							Firmado
+							</option>
+							<option>
+							En_Ejecucion
+							</option>
+							<option>
+							Finalizado
+							</option>
+							<option>
+							Cancelado
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Fecha de Inicio *
+						</label>
+						<input type="date" name="fecha_inicio" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Fecha Fin Estimada
+						</label>
+						<input type="date" name="fecha_fin_est"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Monto Contratado (MXN) *
+						</label>
+						<input type="number" name="monto_contratado" placeholder="0.00" step="0.01" min="0" required/>
+						</div>
+						<div class="form-group full">
+						<label>
+							Descripción del Trabajo *
+						</label>
+						<textarea name="descripcion_trabajo" placeholder="Alcance y descripción del trabajo subcontratado…" required></textarea>
+						</div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Contrato Sub.</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						CONTRATOS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-contratos_sub" placeholder="Buscar…" oninput="buscarEnTabla('contratos_sub')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Sub. ID</th>
+						<th>N° Contrato</th>
+						<th>Estado</th>
+						<th>Monto Contratado</th>
+						<th>Inicio</th>
+						<th>Fin Est.</th>
+						<th>Descripción</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-contratos_sub">
+						<tr>
+						<td colspan="10">
+							<div class="empty-state">
+							<p>
+								No hay contratos de subcontratistas aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== EQUIPOS ====== -->
+			<div class="page" id="page-equipos">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Equipos
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Inventario de maquinaria y equipo de construcción.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header">
+					<div>
+					<h2>
+						NUEVO EQUIPO
+					</h2>
+					<div class="card-subtitle">
+						Complete todos los campos requeridos
+					</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form id="form-equipos" onsubmit="return submitForm('equipos')">
+					<div class="form-grid">
+						<div class="form-group">
+						<label>
+							Código *
+						</label>
+						<input type="text" name="codigo" placeholder="EQ-001" required/>
+						</div>
+						<div class="form-group full">
+						<label>
+							Nombre del Equipo *
+						</label>
+						<input type="text" name="nombre" placeholder="Ej. Excavadora Hidráulica" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Tipo *
+						</label>
+						<input type="text" name="tipo" placeholder="Excavadora / Grúa / Vibrador…" required/>
+						</div>
+						<div class="form-group">
+						<label>
+							Marca
+						</label>
+						<input type="text" name="marca" placeholder="Caterpillar / Volvo / Liebherr…"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Modelo
+						</label>
+						<input type="text" name="modelo" placeholder="Modelo del equipo"/>
+						</div>
+						<div class="form-group">
+						<label>
+							N° de Serie
+						</label>
+						<input type="text" name="numero_serie" placeholder="Número de serie"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Año de Fabricación
+						</label>
+						<input type="number" name="anio_fabricacion" placeholder="2020" min="1980" max="2026"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Estado *
+						</label>
+						<select name="estado" required>
+							<option value="">
+							— Seleccionar —
+							</option>
+							<option>
+							Disponible
+							</option>
+							<option>
+							En_Uso
+							</option>
+							<option>
+							Mantenimiento
+							</option>
+							<option>
+							Baja
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Propio / Rentado *
+						</label>
+						<select name="propio_rentado" required>
+							<option value="Propio">
+							Propio
+							</option>
+							<option value="Rentado">
+							Rentado
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Costo por Hora (MXN)
+						</label>
+						<input type="number" name="costo_hora" placeholder="0.00" step="0.01" min="0"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Fecha de Adquisición
+						</label>
+						<input type="date" name="fecha_adquisicion"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Valor de Adquisición (MXN)
+						</label>
+						<input type="number" name="valor_adquisicion" placeholder="0.00" step="0.01" min="0"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Próxima Revisión
+						</label>
+						<input type="date" name="proxima_revision"/>
+						</div>
+						<div class="form-group">
+						<label>
+							Proyecto Asignado
+						</label>
+						<select name="id_proyecto" id="eq-proyecto">
+							<option value="">
+							— Sin asignar —
+							</option>
+						</select>
+						</div>
+						<div class="form-group">
+						<label>
+							Estado del Registro *
+						</label>
+						<select name="activo" required>
+							<option value="1">
+							Activo
+							</option>
+							<option value="0">
+							Inactivo
+							</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Equipo</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						EQUIPOS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-equipos" placeholder="Buscar…" oninput="buscarEnTabla('equipos')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Código</th>
+						<th>Nombre</th>
+						<th>Tipo</th>
+						<th>Marca</th>
+						<th>Año</th>
+						<th>Estado</th>
+						<th>Origen</th>
+						<th>Próx. Revisión</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-equipos">
+						<tr>
+						<td colspan="10">
+							<div class="empty-state">
+							<p>
+								No hay equipos registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== MANTENIMIENTO ====== -->
+			<div class="page" id="page-mantenimiento">
+				<div class="page-header fade-in">
+				<h1>
+					Mantenimiento de Equipos
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Programación y seguimiento de mantenimientos preventivos y correctivos.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO MANTENIMIENTO</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-mantenimiento" onsubmit="return submitForm('mantenimiento')">
+					<div class="form-grid">
+						<div class="form-group"><label>Equipo *</label><select name="id_equipo" id="mant-equipo" required><option value="">— Seleccionar equipo —</option></select></div>
+			<div class="form-group"><label>Técnico Responsable (Empleado)</label><select name="id_tecnico" id="mant-tecnico"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Tipo de Mantenimiento *</label><select name="tipo_mant" required><option value="">— Seleccionar —</option><option>Preventivo</option><option>Correctivo</option><option>Predictivo</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Programado</option><option>En_Proceso</option><option>Completado</option><option>Cancelado</option></select></div>
+						<div class="form-group"><label>Fecha de Inicio *</label><input type="date" name="fecha_inicio" required/></div>
+						<div class="form-group"><label>Fecha de Fin</label><input type="date" name="fecha_fin"/></div>
+						<div class="form-group"><label>Costo (MXN)</label><input type="number" name="costo" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group"><label>Proveedor del Servicio</label><input type="text" name="proveedor_serv" placeholder="Empresa o técnico responsable"/></div>
+						<div class="form-group full"><label>Descripción *</label><textarea name="descripcion" placeholder="Describe el trabajo de mantenimiento realizado…" required></textarea></div>
+						<div class="form-group full"><label>Observaciones</label><textarea name="observaciones" placeholder="Observaciones y recomendaciones adicionales…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Mantenimiento</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						MANTENIMIENTOS REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-mantenimiento" placeholder="Buscar…" oninput="buscarEnTabla('mantenimiento')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Equipo ID</th>
+						<th>Tipo</th>
+						<th>Estado</th>
+						<th>Inicio</th>
+						<th>Fin</th>
+						<th>Costo</th>
+						<th>Proveedor Serv.</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-mantenimiento">
+						<tr>
+						<td colspan="9">
+							<div class="empty-state">
+							<p>
+								No hay mantenimientos registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== ALMACENES ====== -->
+			<div class="page" id="page-almacenes">
+				<div class="page-header fade-in">
+				<h1>
+					Almacenes
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Gestión de almacenes generales y de proyecto.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO ALMACÉN</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-almacenes" onsubmit="return submitForm('almacenes')">
+					<div class="form-grid">
+						<div class="form-group"><label>Nombre del Almacén *</label><input type="text" name="nombre" placeholder="Ej. Almacén General Norte" required/></div>
+						<div class="form-group full"><label>Ubicación *</label><input type="text" name="ubicacion" placeholder="Dirección o descripción de la ubicación" required/></div>
+						<div class="form-group"><label>Responsable (Empleado)</label><select name="responsable" id="alm-responsable"><option value="">— Sin responsable —</option></select></div>
+						<div class="form-group"><label>Proyecto Asociado</label><select name="id_proyecto" id="alm-proyecto"><option value="">— Almacén General (sin proyecto) —</option></select></div>
+						<div class="form-group"><label>Estado *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Almacén</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header"><div><h2>ALMACENES REGISTRADOS</h2></div><div class="search-bar"><input type="text" id="search-almacenes" placeholder="Buscar…" oninput="buscarEnTabla('almacenes')"/></div></div>
+				<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre</th><th>Ubicación</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tbody-almacenes"><tr><td colspan="5"><div class="empty-state"><p>No hay almacenes registrados aún.</p></div></td></tr></tbody></table></div>
+				</div>
+			</div>
+
+			<!-- ====== CLIENTES ====== -->
+			<div class="page" id="page-clientes">
+				<div class="page-header fade-in">
+				<h1>
+					Gestión de Clientes
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro y administración de la cartera de clientes.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO CLIENTE</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-clientes" onsubmit="return submitForm('clientes')">
+					<div class="form-grid">
+						<div class="form-group"><label>Tipo de Persona *</label><select name="tipo_persona" required><option value="">— Seleccionar —</option><option>Fisica</option><option>Moral</option></select></div>
+						<div class="form-group full"><label>Nombre / Razón Social *</label><input type="text" name="nombre_razon_social" placeholder="Nombre completo o razón social" required/></div>
+						<div class="form-group"><label>RFC *</label><input type="text" name="rfc" placeholder="13 caracteres" maxlength="13" required/></div>
+						<div class="form-group"><label>CURP</label><input type="text" name="curp" placeholder="18 caracteres (persona física)" maxlength="18"/></div>
+						<div class="form-group"><label>Nombre del Contacto</label><input type="text" name="nombre_contacto" placeholder="Persona de contacto"/></div>
+						<div class="form-group"><label>Teléfono *</label><input type="tel" name="telefono" placeholder="+52 614 000 0000" required/></div>
+						<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="cliente@email.com"/></div>
+						<div class="form-group full"><label>Dirección</label><input type="text" name="direccion" placeholder="Calle, número, colonia, municipio, estado"/></div>
+						<div class="form-group"><label>Ciudad</label><input type="text" name="ciudad" placeholder="Ciudad"/></div>
+						<div class="form-group"><label>Estado</label><input type="text" name="estado" placeholder="Estado"/></div>
+						<div class="form-group"><label>País</label><input type="text" name="pais" placeholder="México"/></div>
+						<div class="form-group"><label>Código Postal</label><input type="text" name="codigo_postal" placeholder="00000"/></div>
+						<div class="form-group"><label>Comprobante de Domicilio</label><input type="text" name="comprobante_domicilio" placeholder="Referencia o folio"/></div>
+						<div class="form-group"><label>Calificación (1–5)</label><input type="number" name="calificacion" placeholder="1" min="1" max="5"/></div>
+						<div class="form-group"><label>Fecha de Alta *</label><input type="date" name="fecha_alta" required/></div>
+						<div class="form-group"><label>Estado del Registro *</label><select name="activo" required><option value="1">Activo</option><option value="0">Inactivo</option></select></div>
+						<div class="form-group full"><label>Notas</label><textarea name="notas" placeholder="Observaciones sobre el cliente…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Cliente</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						CLIENTES REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-clientes" placeholder="Buscar…" oninput="buscarEnTabla('clientes')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Tipo</th>
+						<th>Nombre / Razón Social</th>
+						<th>RFC</th>
+						<th>Teléfono</th>
+						<th>Ciudad</th>
+						<th>Calif.</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-clientes">
+						<tr>
+						<td colspan="9">
+							<div class="empty-state">
+							<p>
+								No hay clientes registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+			<!-- ====== INCIDENTES SEGURIDAD ====== -->
+			<div class="page" id="page-seguridad">
+				<div class="page-header fade-in">
+				<h1>
+					Incidentes de Seguridad
+				</h1>
+				<div class="gold-line"></div>
+				<p>
+					Registro y seguimiento de incidentes de seguridad en obra.
+				</p>
+				</div>
+				<div class="card fade-in" style="transition-delay:.05s">
+				<div class="card-header"><div><h2>NUEVO INCIDENTE</h2><div class="card-subtitle">Complete todos los campos requeridos</div></div></div>
+				<div class="card-body">
+					<form id="form-seguridad" onsubmit="return submitForm('seguridad')">
+					<div class="form-grid">
+						<div class="form-group"><label>Proyecto *</label><select name="id_proyecto" id="seg-proyecto" required><option value="">— Seleccionar proyecto —</option></select></div>
+						<div class="form-group"><label>Reportado por (Empleado)</label><select name="id_empleado" id="seg-empleado"><option value="">— Sin asignar —</option></select></div>
+						<div class="form-group"><label>Tipo de Incidente *</label><input type="text" name="tipo_incidente" placeholder="Robo / Intrusión / Vandalismo / Ronda…" required/></div>
+						<div class="form-group"><label>Estado *</label><select name="estado" required><option value="">— Seleccionar —</option><option>Reportado</option><option>En_Proceso</option><option>Cerrado</option></select></div>
+						<div class="form-group"><label>Fecha y Hora *</label><input type="datetime-local" name="fecha_hora" required/></div>
+						<div class="form-group"><label>Costo del Incidente (MXN)</label><input type="number" name="costo_incidente" placeholder="0.00" step="0.01" min="0"/></div>
+						<div class="form-group full"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa detalladamente el incidente ocurrido…" required></textarea></div>
+						<div class="form-group full"><label>Acciones Tomadas</label><textarea name="acciones_tomadas" placeholder="Medidas adoptadas ante el incidente…"></textarea></div>
+					</div>
+					<div class="form-actions"><button type="submit" class="btn btn-gold">✚ Registrar Incidente</button><button type="reset" class="btn btn-outline">Limpiar</button></div>
+					</form>
+				</div>
+				</div>
+				<div class="card fade-in" style="transition-delay:.10s">
+				<div class="card-header">
+					<div>
+					<h2>
+						INCIDENTES REGISTRADOS
+					</h2>
+					</div>
+					<div class="search-bar">
+					<input type="text" id="search-seguridad" placeholder="Buscar…" oninput="buscarEnTabla('seguridad')"/>
+					</div>
+				</div>
+				<div class="table-wrap">
+					<table>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Tipo de Incidente</th>
+						<th>Estado</th>
+						<th>Fecha y Hora</th>
+						<th>Costo Est.</th>
+						<th>Archivo</th>
+						<th>Descripción</th>
+						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="tbody-seguridad">
+						<tr>
+						<td colspan="8">
+							<div class="empty-state">
+							<p>
+								No hay incidentes registrados aún.
+							</p>
+							</div>
+						</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+			<!-- ====== TIENDA ====== -->
+			<div class="page" id="page-tienda">
+				<div class="store-hero fade-in">
+				<div class="store-hero-bg"></div>
+				<div class="store-hero-content">
+					<div class="store-eyebrow">ConstructStore — Plataforma Comercial</div>
+					<h1 class="store-hero-title">Materiales de<br><span class="store-hero-accent">Construcción</span></h1>
+					<p class="store-hero-desc">Cemento, block, ladrillo, arena y todo lo que tu obra necesita — en un solo lugar. Calidad de proveedor directo, precios de industria.</p>
+					<a href="../views/store.html" target="_blank" class="btn-constructstore">
+					<span class="btn-constructstore-icon"><svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span>
+					Ir a ConstructStore <span class="btn-constructstore-arrow">→</span>
+					</a>
+				</div>
+				<div class="store-hero-badge"><span>10</span><small>Productos</small></div>
+				</div>
+				<div class="store-section-label fade-in" style="transition-delay:.08s"><div class="store-section-line"></div><span>Catálogo de Productos</span><div class="store-section-line"></div></div>
+				<div class="products-grid">
+				<div class="product-card fade-in" style="transition-delay:.10s"><div class="product-icon-wrap" style="--pc:#c9a84c"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect x="8" y="28" width="48" height="28" rx="3" fill="currentColor" opacity=".15"/><rect x="8" y="28" width="48" height="28" rx="3" stroke="currentColor" stroke-width="2.5"/><path d="M16 28V20a16 16 0 0132 0v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="34" x2="32" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg></div><div class="product-category">Ligante</div><h3 class="product-name">Cemento</h3><p class="product-desc">Portland gris y blanco en presentaciones de 25 kg y 50 kg. Resistencia garantizada para cimentaciones, losas y firmes industriales.</p><div class="product-tags"><span class="ptag">25 kg</span><span class="ptag">50 kg</span><span class="ptag">Portland</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.13s"><div class="product-icon-wrap" style="--pc:#8a9ba8"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect x="4" y="14" width="56" height="16" rx="2" fill="currentColor" opacity=".15"/><rect x="4" y="14" width="56" height="16" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="4" y="34" width="56" height="16" rx="2" fill="currentColor" opacity=".15"/><rect x="4" y="34" width="56" height="16" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div><div class="product-category">Mampostería</div><h3 class="product-name">Blocks</h3><p class="product-desc">Blocks de concreto huecos y sólidos en medidas 10×20×40 y 15×20×40 cm. Ideales para muros de carga y divisorios.</p><div class="product-tags"><span class="ptag">10×20×40</span><span class="ptag">15×20×40</span><span class="ptag">Huecos</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.16s"><div class="product-icon-wrap" style="--pc:#c0573a"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect x="4" y="18" width="26" height="12" rx="2" fill="currentColor" opacity=".2"/><rect x="4" y="18" width="26" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="34" y="18" width="26" height="12" rx="2" fill="currentColor" opacity=".2"/><rect x="34" y="18" width="26" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="18" y="34" width="28" height="12" rx="2" fill="currentColor" opacity=".2"/><rect x="18" y="34" width="28" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div><div class="product-category">Mampostería</div><h3 class="product-name">Ladrillos</h3><p class="product-desc">Ladrillo rojo recocido y de tabique en distintos calibres. Alta resistencia a la compresión y excelente aislamiento térmico.</p><div class="product-tags"><span class="ptag">Recocido</span><span class="ptag">Tabique</span><span class="ptag">Rojo</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.19s"><div class="product-icon-wrap" style="--pc:#d4a844"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><path d="M8 52 Q32 18 56 52Z" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="22" cy="40" r="2" fill="currentColor" opacity=".5"/><circle cx="36" cy="44" r="1.5" fill="currentColor" opacity=".5"/><circle cx="44" cy="38" r="2" fill="currentColor" opacity=".5"/></svg></div><div class="product-category">Árido</div><h3 class="product-name">Arena</h3><p class="product-desc">Arena de río fina y arena gruesa de trituración. Granulometría controlada para morteros y mezclas de concreto.</p><div class="product-tags"><span class="ptag">Arena fina</span><span class="ptag">Arena gruesa</span><span class="ptag">Lavada</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.22s"><div class="product-icon-wrap" style="--pc:#7a8c96"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><ellipse cx="20" cy="30" rx="10" ry="8" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2.5"/><ellipse cx="44" cy="26" rx="10" ry="8" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2.5"/><ellipse cx="32" cy="44" rx="10" ry="7" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2.5"/></svg></div><div class="product-category">Árido</div><h3 class="product-name">Grava</h3><p class="product-desc">Grava triturada y media en calibres ¾" y 1½". Para concreto estructural, drenaje perimetral y subbases.</p><div class="product-tags"><span class="ptag">¾"</span><span class="ptag">1½"</span><span class="ptag">Triturada</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.25s"><div class="product-icon-wrap" style="--pc:#a0a0b0"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><line x1="8" y1="20" x2="56" y2="20" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><line x1="8" y1="32" x2="56" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><line x1="8" y1="44" x2="56" y2="44" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div><div class="product-category">Acero</div><h3 class="product-name">Varilla</h3><p class="product-desc">Varilla corrugada del Nº 2 al Nº 8 en longitudes de 6 y 12 metros. Acero grado 42 y 60 para refuerzo estructural.</p><div class="product-tags"><span class="ptag">Nº 2–8</span><span class="ptag">Grado 42/60</span><span class="ptag">Corrugada</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.28s"><div class="product-icon-wrap" style="--pc:#e8e0cc"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect x="6" y="12" width="52" height="40" rx="2" fill="currentColor" opacity=".1" stroke="currentColor" stroke-width="2.5"/><line x1="6" y1="22" x2="58" y2="22" stroke="currentColor" stroke-width="1.5" opacity=".4"/><line x1="6" y1="42" x2="58" y2="42" stroke="currentColor" stroke-width="1.5" opacity=".4"/></svg></div><div class="product-category">Acabados</div><h3 class="product-name">Tablaroca</h3><p class="product-desc">Panel de yeso de ½" y 5/8" en hojas 1.22×2.44 m. Regular, resistente a humedad (RH) y cortafuego (RF).</p><div class="product-tags"><span class="ptag">½"</span><span class="ptag">5/8"</span><span class="ptag">RH / RF</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.31s"><div class="product-icon-wrap" style="--pc:#f0ede8"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><path d="M12 52 L12 24 Q12 12 32 12 Q52 12 52 24 L52 52" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity=".1" stroke-linejoin="round"/></svg></div><div class="product-category">Acabados</div><h3 class="product-name">Yeso</h3><p class="product-desc">Yeso en polvo para obra gruesa y fino para acabado interior. Fraguado rápido y excelente adherencia en muros.</p><div class="product-tags"><span class="ptag">Obra gruesa</span><span class="ptag">Fino</span><span class="ptag">25 kg</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.34s"><div class="product-icon-wrap" style="--pc:#b8a890"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect x="10" y="32" width="44" height="20" rx="2" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2.5"/><path d="M10 36 Q32 26 54 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div><div class="product-category">Ligante</div><h3 class="product-name">Mortero</h3><p class="product-desc">Mortero premezclado tipo M, S y N en sacos de 20 kg. Para pegar mampostería y aplanados exteriores.</p><div class="product-tags"><span class="ptag">Tipo M/S/N</span><span class="ptag">20 kg</span><span class="ptag">Premezclado</span></div></div>
+				<div class="product-card fade-in" style="transition-delay:.37s"><div class="product-icon-wrap" style="--pc:#78a090"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><line x1="12" y1="12" x2="12" y2="52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="12" x2="24" y2="52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="36" y1="12" x2="36" y2="52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="48" y1="12" x2="48" y2="52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="20" x2="52" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="32" x2="52" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="44" x2="52" y2="44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="product-category">Refuerzo</div><h3 class="product-name">Malla</h3><p class="product-desc">Malla electrosoldada 6×6 y 10×10 en calibres 8, 10 y 12. Para losas, firmes, estuco y cerramiento perimetral.</p><div class="product-tags"><span class="ptag">6×6 / 10×10</span><span class="ptag">Electrosoldada</span><span class="ptag">Cal. 8–12</span></div></div>
+				</div>
+				<div class="store-cta-wrap fade-in" style="transition-delay:.42s">
+				<div class="store-cta-text"><h2>¿Listo para equipar tu obra?</h2><p>Accede a ConstructStore y realiza tu pedido con precios de proveedor directo, envío a obra y crédito disponible para empresas registradas.</p></div>
+				<a href="../views/store.html" target="_blank" class="btn-constructstore btn-constructstore-lg">
+					<span class="btn-constructstore-icon"><svg width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span>
+					Ir a ConstructStore <span class="btn-constructstore-arrow">→</span>
+				</a>
+				</div>
+			</div>
+
+		</div><!-- /main -->
+		<!-- ====== MODAL EDICIÓN ====== -->
+		<div class="modal-overlay" id="edit-modal">
+		<div class="modal-box">
+			<div class="modal-header">
+			<h2>🔧 EDITAR REGISTRO</h2>
+			<button class="modal-close" onclick="closeEditModal()">✕</button>
+			</div>
+			<div class="modal-body">
+			<div id="edit-form-container"></div>
+			<div class="modal-actions">
+				<button class="btn btn-gold" onclick="submitEdit()">💾 Guardar Cambios</button>
+				<button class="btn btn-outline" onclick="closeEditModal()">Cancelar</button>
+			</div>
+			</div>
+		</div>
+		</div>
+		<div id="toast-container"></div>
+		<script src="../scripts/dashboard.js"></script>
+	</body>
+</html>
