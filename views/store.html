@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ConstructSys — ConstructStore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../styles/store.css"/>
+<link rel="icon" href="../assets/icons/constructsys.ico"/>
+</head>
+<body>
+
+<!-- ─── TOPBAR ─────────────────────────────────────────── -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">
+    <div class="icon"><span>CS</span></div>
+    <div class="brand-text">
+      <span class="brand-name">ConstructStore</span>
+      <span class="brand-sub">Industria Constructora</span>
+    </div>
+  </a>
+  <div class="cart-btn" onclick="openCart()">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+      <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+    <span id="cart-label">Carrito</span>
+    <div class="cart-badge" id="cart-badge" style="display:none">0</div>
+  </div>
+
+  <button class="admin-btn" onclick="openAdmin()">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="width:16px;height:16px">
+      <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    </svg>
+    Admin
+  </button>
+</header>
+
+<!-- ─── HERO ───────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">ConstructStore — Plataforma Comercial</div>
+    <h1 class="hero-title">TODO LO QUE<br><em>TU OBRA</em><br>NECESITA</h1>
+    <p class="hero-desc">
+      Materiales, herramientas y maquinaria con precios de proveedor directo.
+      Crédito disponible para empresas registradas.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n" id="stat-total">—</div><div class="l">Productos</div></div>
+      <div class="hero-stat"><div class="n" id="stat-cats">—</div><div class="l">Categorías</div></div>
+      <div class="hero-stat"><div class="n">30<span style="font-size:20px">días</span></div><div class="l">Crédito</div></div>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <div class="big" id="badge-total">—</div>
+    <div class="sm">Productos</div>
+  </div>
+</section>
+
+<!-- ─── STOCK OVERVIEW ─────────────────────────────────── -->
+<section class="stock-overview" id="stock-overview">
+  <div class="stock-overview-header">
+    <div>
+      <h2 class="stock-ov-title">Inventario Disponible</h2>
+      <p class="stock-ov-sub">Resumen de catálogo por categoría — haz clic para explorar</p>
+    </div>
+    <div class="stock-total-chip" id="stock-total-chip">
+      <span id="stock-chip-num">—</span> productos en total
+    </div>
+  </div>
+  <div class="stock-cats-grid" id="stock-cats-grid">
+    <div class="stock-skeleton skeleton"></div>
+    <div class="stock-skeleton skeleton"></div>
+    <div class="stock-skeleton skeleton"></div>
+  </div>
+</section>
+
+<!-- ─── TOOLBAR ────────────────────────────────────────── -->
+<div class="toolbar">
+  <div class="filter-tabs">
+    <button class="ftab active" data-cat="Todos"              onclick="setCategoria('Todos')">Todos</button>
+    <button class="ftab"        data-cat="Cementantes"        onclick="setCategoria('Cementantes')">Cementantes</button>
+    <button class="ftab"        data-cat="Bloques y Tabiques" onclick="setCategoria('Bloques y Tabiques')">Bloques</button>
+    <button class="ftab"        data-cat="Áridos y Gravas"    onclick="setCategoria('Áridos y Gravas')">Áridos</button>
+    <button class="ftab"        data-cat="Acero y Varilla"    onclick="setCategoria('Acero y Varilla')">Acero</button>
+    <button class="ftab"        data-cat="Muros Secos"        onclick="setCategoria('Muros Secos')">Muros Secos</button>
+    <button class="ftab"        data-cat="Materiales"         onclick="setCategoria('Materiales')">Otros Mat.</button>
+    <button class="ftab"        data-cat="Herramientas"       onclick="setCategoria('Herramientas')">Herramientas</button>
+    <button class="ftab"        data-cat="Maquinaria"         onclick="setCategoria('Maquinaria')">Maquinaria</button>
+  </div>
+  <select class="sort-select" id="sort-sel" onchange="renderGrid()">
+    <option value="default">Ordenar: Destacados</option>
+    <option value="price-asc">Precio: Menor a Mayor</option>
+    <option value="price-desc">Precio: Mayor a Menor</option>
+    <option value="name-asc">Nombre A–Z</option>
+  </select>
+</div>
+
+<!-- ─── PRODUCTS GRID ─────────────────────────────────── -->
+<section class="products-section">
+  <div class="products-grid" id="grid"></div>
+</section>
+
+<!-- ─── CART SIDEBAR ──────────────────────────────────── -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<aside class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head">
+    <h2>Carrito</h2>
+    <div class="cart-close" onclick="closeCart()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </div>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-total-row">
+      <span class="lbl">Total</span>
+      <span class="val" id="cart-total">$0.00</span>
+    </div>
+    <div class="cart-actions">
+      <button class="btn-checkout" onclick="checkout()">Proceder al Pago</button>
+      <button class="btn-cotizar"  onclick="cotizar()">Solicitar Cotización</button>
+      <button class="btn-clear"    onclick="clearCart()">Vaciar carrito</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── TOASTS ─────────────────────────────────────────── -->
+<div id="toasts"></div>
+
+<!-- ─── ADMIN PANEL ─────────────────────────────────────── -->
+<div class="admin-overlay" id="admin-overlay" onclick="closeAdmin()"></div>
+<aside class="admin-sidebar" id="admin-sidebar">
+
+  <div class="admin-head">
+    <div class="admin-head-left">
+      <span class="admin-head-title">Administración</span>
+      <span class="admin-head-sub">Registro interno</span>
+    </div>
+    <div class="admin-tabs">
+      <button class="atab active" data-form="materiales"   onclick="switchAdminForm(this)">Materiales</button>
+      <button class="atab"        data-form="herramientas" onclick="switchAdminForm(this)">Herramientas</button>
+      <button class="atab"        data-form="maquinaria"   onclick="switchAdminForm(this)">Maquinaria</button>
+      <button class="atab"        data-form="proveedores"  onclick="switchAdminForm(this)">Proveedores</button>
+    </div>
+    <div class="admin-close" onclick="closeAdmin()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="admin-body" id="admin-body">
+
+    <!-- ── FORM: MATERIALES ─────────────────────────── -->
+    <form class="aform active" id="aform-materiales"
+          onsubmit="adminSubmit(event,'materiales'); return false;">
+
+      <div class="afield span2">
+        <label>Nombre <em>*</em></label>
+        <input type="text" name="nombre" minlength="3" maxlength="150" required
+               placeholder="Ej: Cemento Portland Gris 50 kg · CEMEX"/>
+      </div>
+      <div class="afield">
+        <label>Tipo <em>*</em></label>
+        <select name="tipo" required>
+          <option value="">— Seleccionar —</option>
+          <optgroup label="Cementantes">
+            <option>Cemento Portland gris</option>
+            <option>Cemento blanco</option>
+            <option>Cal hidratada</option>
+            <option>Yeso en polvo</option>
+          </optgroup>
+          <optgroup label="Áridos y Gravas">
+            <option>Arena fina</option>
+            <option>Arena gruesa</option>
+            <option>Grava</option>
+            <option>Tepetate</option>
+          </optgroup>
+          <optgroup label="Bloques y Tabiques">
+            <option>Tabique rojo recocido</option>
+            <option>Block de concreto</option>
+            <option>Block pómex</option>
+            <option>Ladrillo de barro</option>
+          </optgroup>
+          <optgroup label="Muros Secos">
+            <option>Tablaroca</option>
+            <option>Panel W</option>
+            <option>Placa de fibrocemento</option>
+          </optgroup>
+          <optgroup label="Acero y Varilla">
+            <option>Varilla 3/8"</option>
+            <option>Varilla 1/2"</option>
+            <option>Varilla 3/4"</option>
+            <option>Alambre recocido</option>
+            <option>Malla electrosoldada</option>
+            <option>Perfil de acero en L</option>
+            <option>Canal de acero en U</option>
+            <option>Tubo estructural cuadrado</option>
+            <option>Tubo estructural redondo</option>
+            <option>Placa de acero</option>
+          </optgroup>
+          <optgroup label="Otros Materiales">
+            <option>Triplay marino</option>
+            <option>MDF</option>
+            <option>Tabla de cedro</option>
+            <option>Impermeabilizante elastomérico</option>
+            <option>Impermeabilizante acrílico</option>
+            <option>Pintura vinílica</option>
+            <option>Pintura esmalte</option>
+            <option>Sellador acrílico</option>
+            <option>Pegamento para azulejo</option>
+            <option>Tubo PVC hidráulico</option>
+            <option>Tubo PVC sanitario</option>
+            <option>Codo PVC</option>
+            <option>Tee de PVC</option>
+            <option>Reducción PVC</option>
+            <option>Cable eléctrico THW</option>
+            <option>Conduit metálico</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Unidad de medida <em>*</em></label>
+        <select name="unidad_medida" required>
+          <option value="">— Seleccionar —</option>
+          <option>pieza</option><option>par</option><option>juego</option><option>caja</option>
+          <option>rollo</option><option>bolsa</option><option>kg</option><option>ton</option>
+          <option>lt</option><option>galon</option><option>m</option><option>m2</option><option>m3</option>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Precio unitario MXN <em>*</em></label>
+        <input type="number" name="precio_unitario" min="0" step="0.01" required placeholder="0.00"/>
+      </div>
+      <div class="afield">
+        <label>Proveedor <em>*</em></label>
+        <select name="proveedor_nombre" required>
+          <option value="">— Seleccionar —</option>
+          <option>Ferremax del Norte</option>
+          <option>Aceros y Perfiles Juárez</option>
+          <option>Distribuidora Montoya S.A.</option>
+          <option>Materiales Frontera</option>
+        </select>
+      </div>
+      <div class="afield span2">
+        <label>Descripción</label>
+        <textarea name="descripcion" maxlength="1000" rows="3"
+                  placeholder="Especificaciones técnicas (máx. 1000 caracteres)"></textarea>
+      </div>
+      <div class="afield span2 afield-toggle-row">
+        <label>Estado</label>
+        <div class="atoggle active" onclick="adminToggle(this)">
+          <div class="atoggle-dot"></div>
+          <span>Activo</span>
+          <input type="hidden" name="activo" value="true"/>
+        </div>
+      </div>
+      <div class="aform-actions">
+        <button type="submit" class="abtn-primary">Registrar material</button>
+        <button type="button" class="abtn-secondary" onclick="adminReset(this.closest('form'))">Limpiar</button>
+        <button type="button" class="abtn-copy"      onclick="adminCopyJSON(this.closest('form'))">Copiar JSON</button>
+      </div>
+    </form>
+
+    <!-- ── FORM: HERRAMIENTAS ───────────────────────── -->
+    <form class="aform" id="aform-herramientas"
+          onsubmit="adminSubmit(event,'herramientas'); return false;">
+
+      <div class="afield span2">
+        <label>Nombre <em>*</em></label>
+        <input type="text" name="nombre" minlength="3" maxlength="150" required
+               placeholder="Ej: Martillo de uña 16 oz · Stanley"/>
+      </div>
+      <div class="afield">
+        <label>Tipo <em>*</em></label>
+        <select name="tipo" required>
+          <option value="">— Seleccionar —</option>
+          <optgroup label="Martillos">
+            <option>Martillo de uña</option>
+            <option>Martillo de bola</option>
+            <option>Martillo de goma</option>
+          </optgroup>
+          <optgroup label="Llaves">
+            <option>Llave inglesa ajustable</option>
+            <option>Llave de tubo</option>
+            <option>Llave de dados</option>
+            <option>Llave Allen</option>
+            <option>Llave de boca fija</option>
+            <option>Llave Torx</option>
+          </optgroup>
+          <optgroup label="Desarmadores">
+            <option>Desarmador plano</option>
+            <option>Desarmador Phillips</option>
+            <option>Desarmador de impacto</option>
+          </optgroup>
+          <optgroup label="Pinzas">
+            <option>Pinza de presión</option>
+            <option>Pinza de corte diagonal</option>
+            <option>Pinza de punta</option>
+            <option>Pinza multiusos</option>
+          </optgroup>
+          <optgroup label="Medición">
+            <option>Nivel de burbuja</option>
+            <option>Nivel láser</option>
+            <option>Cinta métrica</option>
+            <option>Flexómetro</option>
+            <option>Escuadra de carpintero</option>
+            <option>Escuadra de aluminio</option>
+            <option>Compás de puntas</option>
+          </optgroup>
+          <optgroup label="Corte">
+            <option>Sierra para metales</option>
+            <option>Segueta</option>
+            <option>Navaja y cúter</option>
+            <option>Cortavidrio</option>
+          </optgroup>
+          <optgroup label="Excavación y Carga">
+            <option>Cincel plano</option>
+            <option>Cincel de punta</option>
+            <option>Pala cuadrada</option>
+            <option>Pala redonda</option>
+            <option>Azadón</option>
+            <option>Carretilla</option>
+          </optgroup>
+          <optgroup label="Acabados">
+            <option>Llana dentada</option>
+            <option>Llana lisa</option>
+            <option>Espátula</option>
+            <option>Brocha</option>
+            <option>Rodillo de pintura</option>
+            <option>Pistola de silicón</option>
+            <option>Pistola de calor</option>
+            <option>Cepillo de alambre</option>
+          </optgroup>
+          <optgroup label="Limas y Especiales">
+            <option>Lima plana</option>
+            <option>Lima redonda</option>
+            <option>Tarraja de tubería</option>
+            <option>Alicate de electricista</option>
+          </optgroup>
+          <optgroup label="Taladros">
+            <option>Taladro percutor</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Marca <em>*</em></label>
+        <select name="marca" required>
+          <option value="">— Seleccionar —</option>
+          <option>Atlas Copco</option><option>Bahco</option><option>Bosch</option>
+          <option>Craftsman</option><option>Cushman</option><option>DeWalt</option>
+          <option>Fiskars</option><option>Hilti</option><option>Honda</option>
+          <option>Husqvarna</option><option>Irwin</option><option>Karcher</option>
+          <option>Klein Tools</option><option>Knipex</option><option>Lincoln Electric</option>
+          <option>Makita</option><option>Miller</option><option>Milwaukee</option>
+          <option>Pretul</option><option>Stanley</option><option>Surtek</option>
+          <option>Truper</option><option>Urrea</option><option>Wacker Neuson</option>
+          <option>Sin marca</option>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Modelo / SKU</label>
+        <input type="text" name="modelo" maxlength="80" placeholder="Ej: FMHT51000"/>
+      </div>
+      <div class="afield">
+        <label>Unidad de medida <em>*</em></label>
+        <select name="unidad_medida" required>
+          <option value="pieza">pieza</option><option value="par">par</option>
+          <option value="juego">juego</option><option value="caja">caja</option>
+          <option value="rollo">rollo</option><option value="bolsa">bolsa</option>
+          <option value="kg">kg</option><option value="m">m</option>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Precio MXN <em>*</em></label>
+        <input type="number" name="precio" min="0" step="0.01" required placeholder="0.00"/>
+      </div>
+      <div class="afield">
+        <label>Proveedor <em>*</em></label>
+        <select name="proveedor_nombre" required>
+          <option value="">— Seleccionar —</option>
+          <option>Ferremax del Norte</option>
+          <option>Aceros y Perfiles Juárez</option>
+          <option>Distribuidora Montoya S.A.</option>
+          <option>Materiales Frontera</option>
+        </select>
+      </div>
+      <div class="afield span2">
+        <label>Descripción</label>
+        <textarea name="descripcion" maxlength="1000" rows="3"
+                  placeholder="Especificaciones técnicas (máx. 1000 caracteres)"></textarea>
+      </div>
+      <div class="afield span2 afield-toggle-row">
+        <label>Estado</label>
+        <div class="atoggle active" onclick="adminToggle(this)">
+          <div class="atoggle-dot"></div><span>Activo</span>
+          <input type="hidden" name="activo" value="true"/>
+        </div>
+      </div>
+      <div class="aform-actions">
+        <button type="submit" class="abtn-primary">Registrar herramienta</button>
+        <button type="button" class="abtn-secondary" onclick="adminReset(this.closest('form'))">Limpiar</button>
+        <button type="button" class="abtn-copy"      onclick="adminCopyJSON(this.closest('form'))">Copiar JSON</button>
+      </div>
+    </form>
+
+    <!-- ── FORM: MAQUINARIA ─────────────────────────── -->
+    <form class="aform" id="aform-maquinaria"
+          onsubmit="adminSubmit(event,'maquinaria'); return false;">
+
+      <div class="afield span2">
+        <label>Nombre <em>*</em></label>
+        <input type="text" name="nombre" minlength="3" maxlength="150" required
+               placeholder="Ej: Mezcladora de concreto 1/2 HP · DeWalt"/>
+      </div>
+      <div class="afield">
+        <label>Tipo <em>*</em></label>
+        <select name="tipo" required>
+          <option value="">— Seleccionar —</option>
+          <optgroup label="Concreto y Mezcla">
+            <option>Mezcladora de concreto</option>
+            <option>Revolvedora de tambor</option>
+          </optgroup>
+          <optgroup label="Corte">
+            <option>Cortadora de piso</option>
+            <option>Cortadora de plasma</option>
+            <option>Cortadora de varilla</option>
+            <option>Sierra circular</option>
+            <option>Sierra de mesa</option>
+            <option>Sierra de cinta</option>
+            <option>Sierra caladora</option>
+          </optgroup>
+          <optgroup label="Esmerilado y Lijado">
+            <option>Esmeriladora angular</option>
+            <option>Esmeriladora recta</option>
+            <option>Lijadora orbital</option>
+            <option>Lijadora de banda</option>
+          </optgroup>
+          <optgroup label="Taladros">
+            <option>Taladro percutor</option>
+            <option>Taladro de banco</option>
+            <option>Rotomartillo</option>
+          </optgroup>
+          <optgroup label="Tornillería y Clavado">
+            <option>Pistola de tornillos</option>
+            <option>Pistola neumática de clavos</option>
+          </optgroup>
+          <optgroup label="Aire y Agua">
+            <option>Compresor de aire</option>
+            <option>Hidrolavadora</option>
+            <option>Bomba de agua centrífuga</option>
+            <option>Bomba sumergible</option>
+          </optgroup>
+          <optgroup label="Energía">
+            <option>Generador eléctrico</option>
+          </optgroup>
+          <optgroup label="Soldadura">
+            <option>Soldadora MIG</option>
+            <option>Soldadora TIG</option>
+          </optgroup>
+          <optgroup label="Doblado y Prensado">
+            <option>Dobladora de varilla</option>
+            <option>Prensa hidráulica</option>
+            <option>Gato hidráulico</option>
+          </optgroup>
+          <optgroup label="Elevación y Acceso">
+            <option>Polipasto eléctrico</option>
+            <option>Andamio de ruedas</option>
+            <option>Plataforma de trabajo</option>
+            <option>Malacate eléctrico</option>
+            <option>Montacargas manual</option>
+            <option>Escalera de extensión</option>
+            <option>Escalera tijera</option>
+          </optgroup>
+          <optgroup label="Compactación y Movimiento">
+            <option>Mini excavadora</option>
+            <option>Compactadora de plato vibratorio</option>
+            <option>Rodillo compactador</option>
+          </optgroup>
+          <optgroup label="Limpieza">
+            <option>Aspiradora industrial</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Marca <em>*</em></label>
+        <select name="marca" required>
+          <option value="">— Seleccionar —</option>
+          <option>Atlas Copco</option><option>Bosch</option><option>DeWalt</option>
+          <option>Hilti</option><option>Honda</option><option>Husqvarna</option>
+          <option>Karcher</option><option>Lincoln Electric</option><option>Makita</option>
+          <option>Miller</option><option>Milwaukee</option><option>Pretul</option>
+          <option>Surtek</option><option>Truper</option><option>Wacker Neuson</option>
+          <option>Sin marca</option>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Modelo / SKU</label>
+        <input type="text" name="modelo" maxlength="80" placeholder="Ej: DW660"/>
+      </div>
+      <div class="afield">
+        <label>Unidad de medida <em>*</em></label>
+        <select name="unidad_medida" required>
+          <option value="pieza">pieza</option>
+          <option value="juego">juego</option>
+          <option value="caja">caja</option>
+        </select>
+      </div>
+      <div class="afield">
+        <label>Precio MXN <em>*</em></label>
+        <input type="number" name="precio" min="0" step="0.01" required placeholder="0.00"/>
+      </div>
+      <div class="afield">
+        <label>Proveedor <em>*</em></label>
+        <select name="proveedor_nombre" required>
+          <option value="">— Seleccionar —</option>
+          <option>Ferremax del Norte</option>
+          <option>Aceros y Perfiles Juárez</option>
+          <option>Distribuidora Montoya S.A.</option>
+          <option>Materiales Frontera</option>
+        </select>
+      </div>
+      <div class="afield span2">
+        <label>Descripción</label>
+        <textarea name="descripcion" maxlength="1000" rows="3"
+                  placeholder="Potencia, capacidad, voltaje, etc. (máx. 1000 caracteres)"></textarea>
+      </div>
+      <div class="afield span2 afield-toggle-row">
+        <label>Estado</label>
+        <div class="atoggle active" onclick="adminToggle(this)">
+          <div class="atoggle-dot"></div><span>Activo</span>
+          <input type="hidden" name="activo" value="true"/>
+        </div>
+      </div>
+      <div class="aform-actions">
+        <button type="submit" class="abtn-primary">Registrar maquinaria</button>
+        <button type="button" class="abtn-secondary" onclick="adminReset(this.closest('form'))">Limpiar</button>
+        <button type="button" class="abtn-copy"      onclick="adminCopyJSON(this.closest('form'))">Copiar JSON</button>
+      </div>
+    </form>
+
+    <!-- ── FORM: PROVEEDORES ────────────────────────── -->
+    <form class="aform" id="aform-proveedores"
+          onsubmit="adminSubmit(event,'proveedores'); return false;">
+
+      <div class="afield span2">
+        <label>Nombre <em>*</em></label>
+        <select name="nombre" required>
+          <option value="">— Seleccionar proveedor —</option>
+          <option>Ferremax del Norte</option>
+          <option>Aceros y Perfiles Juárez</option>
+          <option>Distribuidora Montoya S.A.</option>
+          <option>Materiales Frontera</option>
+        </select>
+      </div>
+      <div class="afield span2">
+        <label>Contacto</label>
+        <input type="text" name="contacto" maxlength="100"
+               placeholder="Nombre o teléfono de contacto"/>
+      </div>
+      <div class="afield span2">
+        <label>Notas</label>
+        <textarea name="notas" maxlength="500" rows="3"
+                  placeholder="Condiciones de pago, horarios, etc. (máx. 500 caracteres)"></textarea>
+      </div>
+      <div class="afield span2 afield-toggle-row">
+        <label>Estado</label>
+        <div class="atoggle active" onclick="adminToggle(this)">
+          <div class="atoggle-dot"></div><span>Activo</span>
+          <input type="hidden" name="activo" value="true"/>
+        </div>
+      </div>
+      <div class="aform-actions">
+        <button type="submit" class="abtn-primary">Registrar proveedor</button>
+        <button type="button" class="abtn-secondary" onclick="adminReset(this.closest('form'))">Limpiar</button>
+        <button type="button" class="abtn-copy"      onclick="adminCopyJSON(this.closest('form'))">Copiar JSON</button>
+      </div>
+    </form>
+
+  </div><!-- /admin-body -->
+</aside>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="brand">ConstructStore</div>
+  <div>© 2026 Industria Constructora</div>
+  <div>Precios en MXN · IVA no incluido</div>
+</footer>
+
+<script src="../scripts/store.js"></script>
+</body>
+</html>
