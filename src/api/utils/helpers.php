@@ -96,7 +96,7 @@ function curlGet(string $url): array {
  * @return never Redirige al usuario a la página de error con un mensaje específico.
  */
 function redirectWithError(string $msg): never {
-    header('Location: http://localhost/ConstructIndustry/?auth_error=' . urlencode($msg));
+    header('Location: https://constructsys-production.up.railway.app?auth_error=' . urlencode($msg));
     exit;
 }
 
