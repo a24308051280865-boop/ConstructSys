@@ -877,13 +877,13 @@ const TENANT_COLLECTION_SCHEMA = [
  * Bases de Datos Globales usadas para la plataforma interna.
  * @var array<string, array<string, mixed>>
  */
-const DATABASES_GLOBAL = [
-    'platform' => [
+function getDatabasesGlobal(): array { 
+   return [ 'platform' => [
         'driver' => 'mysql',
-        'host' => 'localhost',
-        'name' => 'intern_platform',
-        'user' => 'root',
-        'password' => '',
+        'host'     => INTERNAL_DB_HOST,  // ya viene del .env
+        'name'     => INTERNAL_DB_NAME,  // ya viene del .env
+        'user'     => INTERNAL_DB_USER,  // ya viene del .env
+        'password' => INTERNAL_DB_PASS,  // ya viene del .env
         'tables' => [
             'users' => [
                 'select' => 'SELECT id_usuario, nombre, apellido, email, activo, created_at FROM usuarios ORDER BY id_usuario DESC',
@@ -900,6 +900,8 @@ const DATABASES_GLOBAL = [
         ],
         'options' => DEFAULT_PDO_OPTIONS,
     ],
-];
+   ];
+}
+
 
 ?>
