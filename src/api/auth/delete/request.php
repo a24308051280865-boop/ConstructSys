@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../settings/constants.php';
 require_once __DIR__ . '/../../settings/middleware.php';
 require_once __DIR__ . '/../../settings/internal_controllers.php';
 require_once __DIR__ . '/../../utils/helpers.php';
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 // Limitar a 3 intentos por hora para evitar abusos
 rateLimitByIp(maxAttempts: 3, windowSeconds: 3600); 
