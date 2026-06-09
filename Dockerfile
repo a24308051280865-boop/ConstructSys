@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install mongodb-1.19.0 && docker-php-ext-enable mongodb
 
-# Configurar nginx
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copiar archivos
@@ -24,11 +24,11 @@ WORKDIR /var/www/html
 RUN composer install --no-interaction --optimize-autoloader --ignore-platform-req=ext-mongodb
 RUN chown -R www-data:www-data /var/www/html
 
-# Configurar nginx
+# Configurar nginx — root apunta a /src donde están todos los archivos
 RUN echo 'server { \n\
     listen 80; \n\
-    root /var/www/html; \n\
-    index index.php index.html; \n\
+    root /var/www/html/src; \n\
+    index index.html index.php; \n\
     location / { try_files $uri $uri/ =404; } \n\
     location ~ \.php$ { \n\
         fastcgi_pass 127.0.0.1:9000; \n\
