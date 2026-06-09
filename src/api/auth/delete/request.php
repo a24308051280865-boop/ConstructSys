@@ -78,8 +78,8 @@ $t = DELETION_EMAIL_MSSG[$lang];
 // Definir nombres de BDs originales y de respaldo 
 $originalDb  = $company['db_name'];
 $originalMdb = $company['mongo_db_name'];
-$archivedDb  = 'archived_' . $originalDb  . '_' . date('Ymd_His');
-$archivedMdb = 'archived_' . $originalMdb . '_' . date('Ymd_His');
+$archivedDb  = 'archived_' . $originalDb  . '_' . gmdate('Ymd_His');
+$archivedMdb = 'archived_' . $originalMdb . '_' . gmdate('Ymd_His');
 
 // Verificar si la BD ORIGINAL de MySQL tiene datos 
 $emptyMySQL = true;
@@ -172,8 +172,8 @@ $haveBackup = ($archivedDb !== null || $archivedMdb !== null);
 // Generar token de recuperación solo si hay respaldo
 $recoveryToken  = $haveBackup ? bin2hex(random_bytes(32)) : null;
 $recoveryTokenHash = $recoveryToken ? hash('sha256', $recoveryToken) : null;
-$scheduledAt = date('Y-m-d H:i:s', strtotime('+30 days'));
-$scheduledHuman = date('d/m/Y', strtotime('+30 days'));
+$scheduledAt = gmdate('Y-m-d H:i:s', strtotime('+30 days'));
+$scheduledHuman = gmdate('d/m/Y', strtotime('+30 days'));
 $idCompany  = $company['id_empresa'];
 $maskedEmail  = 'deleted_' . time() . '_' . $company['email'];
 
