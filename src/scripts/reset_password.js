@@ -7,7 +7,7 @@
 /* Autor: Magallanes López Carlos Gabriel                                                                                                                                    */
 /* Versión del Proyecto: 1.0                                                                                                                                                 */
 /* Correo: cgmagallanes23@gmail.com                                                                                                                                          */
-/* Ultima Modificación: 06/06/2026                                                                                                                                           */
+/* Ultima Modificación: 09/06/2026                                                                                                                                           */
 /*                                                                                                                                                                           */
 /*****************************************************************************************************************************************************************************/
 
@@ -182,7 +182,7 @@ async function handleReset() {
         if (data.success) {
             formSection.style.display = 'none';
             successBanner.classList.add('show');
-            setTimeout(() => window.location.href = '../index.html', 2500);
+            setTimeout(() => window.location.href = '../views/login.html', 2500);
         } else {
             showError(data.error || t.errUpdate);
             btnSubmit.classList.remove('loading');
