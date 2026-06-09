@@ -14,7 +14,7 @@ require_once __DIR__ . '/../auth/service.php';
 // Configuración de la base de datos global (intern_platform)
 $PLATFORM_DB = new Database(
     name: INTERNAL_DB_NAME,
-    tables: DATABASES_GLOBAL['platform']['tables'],
+    tables: getDatabasesGlobal['platform']['tables'],
     host: INTERNAL_DB_HOST,
     user: INTERNAL_DB_USER,
     password: INTERNAL_DB_PASS,
