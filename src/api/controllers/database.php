@@ -131,19 +131,21 @@ class Database {
      * @return void
      */
     private function connect(): void {
-        try {
-            
-            // Construir la cadena de nombre de origen de datos para la conexión de objeto de datos PHP
-            $dsn = "mysql:host={$this->host};dbname={$this->name};charset=utf8mb4";
-        
-            // Crear una nueva instancia de PDO para establecer la conexión a la base de datos
-            $this->pdo = new PDO($dsn, $this->user, $this->password, $this->options);
-        
-        } catch (PDOException $error) {            
-            http_response_code(500);            
-            echo json_encode(["error" => "Conexión fallida: " . $error->getMessage()]);            
-            exit();
-        }
+     try {
+         
+         // Leer el puerto del entorno, default 3306 si no existe
+         $port = getenv('DB_PORT') ?: '3306';
+         
+         // ✅ Con puerto incluido
+         $dsn = "mysql:host={$this->host};port={$port};dbname={$this->name};charset=utf8mb4";
+     
+         $this->pdo = new PDO($dsn, $this->user, $this->password, $this->options);
+     
+     } catch (PDOException $error) {            
+         http_response_code(500);            
+         echo json_encode(["error" => "Conexión fallida: " . $error->getMessage()]);            
+         exit();
+     }
     }
 
     /**
