@@ -25,6 +25,7 @@ define('BREVO_API_KEY', getEnvValue('BREVO_API_KEY'));
 define('BREVO_FROM_EMAIL', getEnvValue('BREVO_FROM_EMAIL'));
 define('BREVO_FROM_NAME', getEnvValue('BREVO_FROM_NAME'));
 define('APP_URL', getEnvValue('APP_URL'));
+define('INTERNAL_DB_PORT', getEnvValue('DB_PORT'));
 
 /**
  * Traducciones para los correos de eliminación de cuenta.
