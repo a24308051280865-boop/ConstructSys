@@ -17,24 +17,16 @@ declare(strict_types = 1);
  */
 function loadEnv(string $path): void {
     
-    // Verificar que el archivo .env existe en la ruta especificada
-    if (!file_exists($path)) throw new RuntimeException("Archivo .env no encontrado en: $path");
+    // En producción (Railway) no existe .env — las vars vienen del sistema
+    if (!file_exists($path)) return; // ← cambiar throw por return
 
-    // Leer el archivo .env línea por línea, ignorando líneas vacías y comentarios
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-    // Procesar cada línea del archivo .env
     foreach ($lines as $line) {
-        
-        // Ignorar comentarios
         if (str_starts_with(trim($line), '#')) continue;
-
-        // Dividir la línea en clave y valor usando el primer signo '=' como separador
         [$key, $value] = explode('=', $line, 2);
         $key = trim($key);
         $value = trim($value);
-
-        // Solo establecer si no existe ya (las del sistema tienen prioridad)
         if (!array_key_exists($key, $_ENV)) {
             $_ENV[$key] = $value;
             putenv("$key=$value");
