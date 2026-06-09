@@ -16,17 +16,8 @@ declare(strict_types = 1);
  * @throws RuntimeException Si la variable de entorno no está definida o es una cadena vacía.
  */
 function getEnvValue(string $key): string {
-    
-    // Primero intenta obtener la variable de entorno desde $_ENV, luego desde getenv()
-    $value = $_ENV[$key] ?? getenv($key);
-    
-    // Si el valor es false o una cadena vacía, lanzamos una excepción
-    if ($value === false) {
-        throw new RuntimeException("Missing required environment variable: $key");
-    }
-    
-    // Devolvemos el valor como cadena
-    return (string) $value;
+    // Primero $_ENV, luego getenv() — Railway usa getenv()
+    return $_ENV[$key] ?? getenv($key) ?: '';
 }
 
 /**
