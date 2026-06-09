@@ -7,7 +7,7 @@
 /* Autor: Magallanes López Carlos Gabriel                                                                                                                                    */
 /* Versión del Proyecto: 1.0                                                                                                                                                 */
 /* Correo: cgmagallanes23@gmail.com                                                                                                                                          */
-/* Ultima Modificación: 05/06/2026                                                                                                                                           */
+/* Ultima Modificación: 09/06/2026                                                                                                                                           */
 /*                                                                                                                                                                           */
 /*****************************************************************************************************************************************************************************/
 
@@ -15,7 +15,7 @@
 const cs_user  = JSON.parse(localStorage.getItem('cs_user') || '{}');
 const cs_token = localStorage.getItem('cs_token');
 const DB       = cs_user.db_name;
-if (!cs_token || !DB) window.location.href = '../index.html';
+if (!cs_token || !DB) window.location.href = '../views/login.html';
 
 // Estado del idioma actual (por defecto: español)
 let currentLang = 'es';
@@ -1038,7 +1038,7 @@ async function requestElimination() {
                     : 'Cuenta eliminada. Revisa tu correo para recuperarla en los próximos 30 días.',
                 'success'
             );
-            setTimeout(() => { window.location.href = '../index.html'; }, 3500);
+            setTimeout(() => { window.location.href = '../views/login.html'; }, 3500);
         } else {
             toast(data.error || 'Error.', 'error');
             btn.disabled = false;
