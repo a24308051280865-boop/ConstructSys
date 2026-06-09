@@ -24,10 +24,10 @@ WORKDIR /var/www/html
 RUN composer install --no-interaction --optimize-autoloader --ignore-platform-req=ext-mongodb
 RUN chown -R www-data:www-data /var/www/html
 
-# Configurar nginx — root apunta a /src donde están todos los archivos
+# Configurar nginx — root apunta a /var/www/html donde está index.html
 RUN echo 'server { \n\
     listen 80; \n\
-    root /var/www/html/src; \n\
+    root /var/www/html; \n\
     index index.html index.php; \n\
     location / { try_files $uri $uri/ =404; } \n\
     location ~ \.php$ { \n\
