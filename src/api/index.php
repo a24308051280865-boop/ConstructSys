@@ -4,7 +4,7 @@
 declare(strict_types = 1);
 
 // Dpendencias Internas y Externas
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once  __DIR__ . '/settings/headers.php';    
 require_once __DIR__ . '/controllers/router.php';
 require_once __DIR__ . '/settings/middleware.php';
