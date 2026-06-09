@@ -79,7 +79,7 @@ class DBRecord {
     private function build(): void {
 
         // Bases de datos globales (platform MySQL siempre presente)
-        $this->databases = DATABASES_GLOBAL;
+        $this->databases = getDatabasesGlobal();
 
         // Leer tenants activos
         $statement = $this->pdo->query(
