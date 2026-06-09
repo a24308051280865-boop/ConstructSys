@@ -4,7 +4,7 @@
 declare(strict_types = 1);
 
 // Dependencias Externas
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 
 // Cliente de MongoDB e ID de BSON
