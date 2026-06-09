@@ -1,0 +1,1622 @@
+/*****************************************************************************************************************************************************************************/
+/*                                                                                                                                                                           */
+/*                                                                  Estilos para el Proyecto ConstructSys                                                                    */
+/*                                                                                                                                                                           */
+/*****************************************************************************************************************************************************************************/
+/*                                                                                                                                                                           */
+/* Autor: Magallanes López Carlos Gabriel                                                                                                                                    */
+/* Versión del Proyecto: 1.0                                                                                                                                                 */
+/* Correo: cgmagallanes23@gmail.com                                                                                                                                          */
+/* Ultima Modificación: 07/06/2026                                                                                                                                           */
+/*                                                                                                                                                                           */
+/*****************************************************************************************************************************************************************************/
+ 
+/* Variables */
+:root {
+	--bg: #080808;
+	--surface: #101010;
+	--surface2: #161616;
+	--surface3: #1e1e1e;
+	--border: #242424;
+	--border2: #2e2e2e;
+	--gold: #c9a84c;
+	--gold-dim: #8a6e2e;
+	--gold-glow: rgba(201, 168, 76, 0.12);
+	--red: #c0392b;
+	--green: #27ae60;
+	--text: #f0ede8;
+	--text2: #9e9890;
+	--text3: #5a5650;
+	--sidebar-w: 272px;
+	--radius: 6px;
+	--tr: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	--store: #22c55e;
+	--store-dark: #16a34a;
+	--store-glow: rgba(34, 197, 94, 0.20);
+	--store-dim: rgba(34, 197, 94, 0.10);
+}
+
+/* Reset Global */
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+/* Aplicar Scroll Suave */
+html {scroll-behavior: smooth;}
+
+/* Cuerpo del Documento */
+body {
+	font-family: 'Barlow', sans-serif;
+	background: var(--bg);
+	color: var(--text);
+	min-height: 100vh;
+	display: flex;
+	overflow-x: hidden;
+}
+
+/* Estilos del Scrollbar */
+::-webkit-scrollbar {                                                                              /* Scrollbar*/
+	width: 5px;
+	height: 5px;
+}
+::-webkit-scrollbar-track {background: var(--surface);}                                            /* Pista del Scrollbar */
+::-webkit-scrollbar-thumb {                                                                        /* Pulgar del Scrollbar */
+	background: var(--border2);
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {background: var(--gold-dim);}                                     /* Hover del Pulgar del Scrollbar */
+
+/* Sidebar */
+.sidebar {
+	width: var(--sidebar-w);
+	height: 100vh;
+	background: var(--surface);
+	border-right: 1px solid var(--border);
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	transition: transform var(--tr);
+	overflow: hidden;
+}
+
+/* Logo del Sidebar */
+.sidebar-logo {
+	padding: 26px 22px 20px;                                                                       /* Espacio Interno (TRBL) */
+	border-bottom: 1px solid var(--border);
+}
+
+/* Icono del Logo */
+.logo-icon {
+	width: 40px;
+	height: 40px;
+	background: var(--gold);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 12px;
+	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);                      /* Dibujar un Polígono (X, Y) */
+}
+
+/* Span del Icono del Logo */
+.logo-icon span {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 700;
+	font-size: 17px;
+	color: var(--bg);
+}
+
+/* Nombre de la Compañía */
+.company-name {
+	font-family: 'Playfair Display', serif;
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--gold);
+	letter-spacing: 0.05em;
+	line-height: 1.3;
+}
+
+/* Subtítulo de la Compañía */
+.company-sub {
+	font-size: 10px;
+	color: var(--text3);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin-top: 3px;
+}
+
+/* Contenido del Danger Zone */
+.danger-zone-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Encabezado del Danger Zone */
+.danger-zone-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.45);
+}
+
+/* Icono del Danger Zone */
+.danger-zone-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    background: rgba(239, 68, 68, 0.18);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+}
+
+/* SVG del Icono del Danger Zone */
+.danger-zone-icon svg { width: 26px; height: 26px; }
+
+/* Encabezado de Nivel 2 del Danger Zone */
+.danger-zone-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ef4444;
+    margin: 0 0 4px;
+    letter-spacing: 0.03em;
+}
+
+/* Parráfo del Encabezado del Danger Zone */
+.danger-zone-header p {
+    font-size: 0.82rem;
+    color: var(--text-muted, #9e9890);
+    margin: 0;
+}
+
+/* Carta del Danger Zone */
+.danger-card {
+    background: rgba(239, 68, 68, 0.06);
+    border: 1px solid rgba(239, 68, 68, 0.38);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Encabezado de la Carta del Danger Zone */
+.danger-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.5rem;
+    background: rgba(239, 68, 68, 0.12);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ef4444;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* SVG del Encabezado de la Carta del Danger Zone */
+.danger-card-header svg { width: 18px; height: 18px; }
+
+/* Nav Item de peligro */
+.nav-item-danger {color: #ef4444 !important;}
+.nav-item-danger:hover {background: rgba(239,68,68,.10) !important; color: #ef4444 !important;}
+.nav-item-danger .nav-icon {opacity: 1;}
+.nav-item-danger.active {
+	color: #ef4444 !important; 
+	background: rgba(239,68,68,.18) !important; 
+	border-left-color: #ef4444 !important; 
+	box-shadow: inset 0 0 20px rgba(239,68,68,.08);
+}
+
+/* Etapas */
+.danger-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.danger-stage {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.danger-stage-badge {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.18);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.danger-stage-badge--red  { background: rgba(220,38,38,0.25);  border-color: rgba(220,38,38,0.5);  color: #ef4444; }
+.danger-stage-badge--gold { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.35); color: #c9a84c; }
+
+.danger-stage-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary, #f0ede8);
+    margin: 0 0 4px;
+}
+
+.danger-stage-body {
+    font-size: 0.80rem;
+    color: var(--text-muted, #9e9890);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.danger-stage-body strong { color: var(--text-primary, #f0ede8); }
+
+/* Separador */
+.danger-divider {
+    height: 1px;
+    background: rgba(239, 68, 68, 0.28);
+    margin: 0 1.5rem;
+}
+
+/* Zona de confirmación */
+.danger-confirm-zone {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.danger-confirm-label {
+    font-size: 0.82rem;
+    color: var(--text-muted, #9e9890);
+    margin: 0;
+}
+
+.danger-input-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.danger-input {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 8px;
+    color: var(--text-primary, #f0ede8);
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.danger-input:focus {
+    border-color: rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.danger-input-hint {
+    font-size: 0.75rem;
+    min-height: 1rem;
+    margin: 0;
+    color: #dc2626;
+    transition: opacity 0.2s;
+}
+
+/* Botón eliminar */
+.btn-danger-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s, transform 0.15s;
+    margin-top: 0.25rem;
+    box-shadow: 0 4px 18px rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger-delete:hover:not(:disabled) {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.55);
+}
+
+.btn-danger-delete:active:not(:disabled) { transform: translateY(0); }
+
+.btn-danger-delete:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-danger-delete svg { width: 16px; height: 16px; }
+
+.btn-danger-delete .spinner { display: none; }
+.btn-danger-delete.loading .spinner { display: block; }
+.btn-danger-delete.loading .btn-delete-text,
+.btn-danger-delete.loading svg { display: none; }
+
+/* Barra de Navegación */
+nav {
+	flex: 1;                                                                                       /* Ocupar el Espacio Restante */
+	padding: 10px 0;                                                                               /* Espacio Interno (TRBL) */
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/* Título de la Barra de Navegación */
+.nav-section-title {
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	color: var(--text3);
+	padding: 14px 22px 6px;                                                                        /* Espacio Interno (TRBL) */
+}
+
+/* Elemento de la Barra de Navegación */
+.nav-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 22px;
+	cursor: pointer;
+	transition: all var(--tr);
+	border-left: 2px solid transparent;
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--text2);
+	text-decoration: none;
+	position: relative;
+}
+
+/* Hover de un Elemento de la Barra de Navegación */
+.nav-item:hover {
+	color: var(--text);
+	background: var(--surface2);
+}
+
+/* Estado Activo de un Elemento de la Barra de Navegación */
+.nav-item.active {
+	color: var(--gold);
+	background: var(--gold-glow);
+	border-left-color: var(--gold);
+	font-weight: 500;
+}
+
+/* Estado Activo de un Elemento de la Sección Tienda de la Barra de Navegación */
+.nav-item[data-page="tienda"].active {
+	color: var(--store);
+	background: var(--store-dim);
+	border-left-color: var(--store);
+}
+
+/* Icono de la Barra de Navegación */
+.nav-icon {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	opacity: 0.65;
+}
+
+/* Opacidad del Elemento Activo y el Icono de la Barra de Navegación */
+.nav-item.active .nav-icon {opacity: 1;}
+
+/* Insignia de la Barra de Navegación */
+.nav-badge {
+	margin-left: auto;
+	background: var(--gold);
+	color: var(--bg);
+	font-size: 10px;
+	font-weight: 700;
+	padding: 2px 6px;                                                                              /* Espacio Interno (TRBL) */
+	border-radius: 10px;
+	min-width: 20px;
+	text-align: center;
+}
+
+/* Footer del Sidebar */
+.sidebar-footer {
+	padding: 16px 22px;                                                                            /* Espacio Interno (TRBL) */
+	border-top: 1px solid var(--border);
+	font-size: 11px;
+	color: var(--text3);
+}
+
+/* Main */
+.main {
+	margin-left: var(--sidebar-w);
+	flex: 1;                                                                                       /* Ocupar el Espacio Restante */
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+	height: 62px;
+	background: var(--surface);
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	align-items: center;
+	padding: 0 28px 0 12px;
+	gap: 14px;
+	position: sticky;
+	top: 0;
+	z-index: 50;
+}
+
+/* Título del Topbar */
+.topbar-title {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 19px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	color: var(--text);
+	flex: 1;                                                                                        /* Ocupar el Espacio Restante */
+}
+
+/* Nota del Topbar */
+.topbar-breadcrumb {
+	font-size: 11px;
+	color: var(--text3);
+	margin-top: 2px;
+}
+
+/* Fecha del Topbar */
+.topbar-date {
+	font-size: 12px;
+	color: var(--text2);
+	background: var(--surface2);
+	padding: 5px 12px;                                                                             /* Espacio Interno (TRBL) */
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+}
+
+/* Icono de la Hamburguesa */
+.hamburger {
+	display: flex;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	flex-direction: column;
+	gap: 5px;
+}
+
+/* Span del Icono de la Hamburguesa */
+.hamburger span {
+	display: block;
+	width: 22px;
+	height: 2px;
+	background: var(--text);
+	border-radius: 2px;
+}
+
+/* Overlay */
+.overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 90;
+}
+/* Pages */
+.page {                                                                                            /* Página Individual */
+	display: none;
+	padding: 32px 28px 60px;
+}
+.page.active {display: block;}                                                                     /* Estado Activo */
+
+/* Elementos Fade-In */
+.fade-in {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Elementos Visibles Fade-In */
+.fade-in.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Encabezado de la Página */
+.page-header {margin-bottom: 28px;}
+
+/* Encabezado 1 de la Página */
+.page-header h1 {
+	font-family: 'Playfair Display', serif;
+	font-size: 28px;
+	font-weight: 600;
+	color: var(--text);
+	line-height: 1.2;
+}
+
+/* Parráfo del Encabezado de la Página */
+.page-header p {
+  font-size: 13.5px;
+  color: var(--text2);
+  margin-top: 6px;
+}
+
+/* Línea Dorada */
+.gold-line {
+	width: 44px;
+	height: 2px;
+	background: var(--gold);
+	margin: 10px 0 0;                                                                              /* Margen (TRBL) */
+}
+
+/* Cuadrícula de Stats */
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 14px;
+	margin-bottom: 28px;
+}
+
+/* Carta de Stat */
+.stat-card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 20px 18px;                                                                            /* Espacio Interno (TRBL) */
+	position: relative;
+	overflow: hidden;
+	transition: border-color var(--tr), transform var(--tr);
+}
+
+/* Hover de la Carta del Stat */
+.stat-card:hover {
+	border-color: var(--gold-dim);
+	transform: translateY(-2px);
+}
+
+/* PseudoElemento de la Carta del Stat */
+.stat-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--gold);
+	opacity: 0;
+	transition: opacity var(--tr);
+}
+
+/* pseudoElemento del Hover de la Carta del Stat */
+.stat-card:hover::before {opacity: 1;}
+
+/* Etiqueta del Stat */
+.stat-label {
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--text3);
+	margin-bottom: 10px;
+}
+
+/* Valor del Stat */
+.stat-value {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 34px;
+	font-weight: 700;
+	color: var(--gold);
+	line-height: 1;
+}
+
+/* Icono del Stat */
+.stat-icon {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	font-size: 20px;
+	opacity: 0.18;
+}
+
+/* Carta */
+.card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+/* Header de la Carta */
+.card-header {
+	padding: 16px 22px;                                                                            /* Espacio Interno (TRBL) */
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;                                                                               /* Permitir que los Elementos se Envuelvan en Pantallas Pequeñas */
+}
+
+/* Encabazedo de la Carta */
+.card-header h2 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	color: var(--text);
+}
+
+/* Subtítulo de la Carta */
+.card-subtitle {
+	font-size: 11px;
+	color: var(--text3);
+	font-family: 'Barlow', sans-serif;
+	font-weight: 400;
+	margin-top: 2px;
+}
+
+/* Cuerpo de la Carta */
+.card-body {padding: 24px 22px;}
+
+/* Cuadrícula del Formulario */
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: 18px 22px; 
+}
+
+/* Grupo Normal del Formulario */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+/* Grupo Ampliado del Formulario */
+.form-group.full {grid-column: 1 / -1;}
+
+/* Etiqueta */
+label {
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--text3);
+}
+
+/* Elementos del Formulario */
+input, select, textarea {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 9px 13px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  transition: border-color var(--tr), box-shadow var(--tr);
+  width: 100%;
+  outline: none;
+  appearance: none;                                                                                /* Deshabilitar el Estilo Nativo */
+}
+
+/* Focus de los Elementos del Formulario */
+input:focus, select:focus, textarea:focus {
+	border-color: var(--gold);
+	box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+/* Placeholder del Input y del Area de Texto del Formulario */
+input::placeholder, textarea::placeholder {color: var(--text3);}
+
+/* Opción del Select */
+select option {background: var(--surface2);}
+
+/* Area del Texto */
+textarea {
+	resize: vertical;
+	min-height: 86px;
+}
+
+/* Acciones del Formulario */
+.form-actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px solid var(--border);
+}
+
+/* Botón */
+.btn {
+	display: inline-flex;                                                                          /* Permitir que el Botón se Ajuste al Contenido */
+	align-items: center;
+	gap: 7px;
+	padding: 9px 20px;                                                                             /* Espacio Interno (TRBL) */
+	border-radius: var(--radius);
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all var(--tr);
+	border: none;
+	white-space: nowrap;                                                                           /* Evitar que el Texto se Rompa */
+	text-decoration: none;
+}
+
+/* Botón Dorado */
+.btn-gold {
+	background: var(--gold);
+	color: var(--bg);
+}
+
+/* Hover del Botón Dorado*/
+.btn-gold:hover {
+	background: #d9b85c;
+	box-shadow: 0 4px 18px rgba(201, 168, 76, .3);
+}
+
+/* Outline del Botón */
+.btn-outline {
+	background: transparent;
+	border: 1px solid var(--border2);
+	color: var(--text2);
+}
+
+/* Hover del Outline del Botón */
+.btn-outline:hover {
+	border-color: var(--gold);
+	color: var(--gold);
+}
+
+/* Outline del Botón de la Tienda */
+.btn-store-outline {
+	background: transparent;
+	border: 1px solid rgba(34, 197, 94, .3);
+	color: var(--store);
+}
+
+/* Hover Outline del Botón de la Tienda */
+.btn-store-outline:hover {
+	background: var(--store-dim);
+	border-color: var(--store);
+}
+
+/* Zona Danger del Botón */
+.btn-danger {
+	background: transparent;
+	border: 1px solid #c0392b44;
+	color: var(--red);
+	padding: 5px 11px;
+	font-size: 11px;
+}
+
+/* Hover de la Zona Danger del Botón */
+.btn-danger:hover {background: #c0392b22;}
+
+/* Botón Pequeño */
+.btn-sm {
+	padding: 5px 12px;                                                                             /* Espacio Interno (TRBL) */
+	font-size: 11px;
+}
+
+/* Contenido de las Tablas */
+.table-wrap {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;                                                     /* Suavizar el Scroll en Dispositivos Táctiles */
+}
+
+/* Tabla */
+table {
+	width: 100%;
+	border-collapse: collapse;                                                                     /* Eliminar el Espacio entre Bordes */
+	font-size: 12.5px;
+	min-width: 700px;
+}
+
+/* Encabezado de la Tabla */
+thead th {
+	background: var(--surface2);
+	padding: 10px 14px;
+	text-align: left;
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--text3);
+	border-bottom: 1px solid var(--border);
+	white-space: nowrap;                                                                           /* Evitar que el Texto se Rompa */
+}
+
+/* Filas de la Tabla */
+tbody tr {
+	border-bottom: 1px solid var(--border);
+	transition: background var(--tr);
+}
+
+/* Hover de las Filas de la Tabla */
+tbody tr:hover {background: var(--surface2);}
+
+/* Celdas de la Tabla */
+tbody td {
+  padding: 11px 14px;                                                                              /* Espacio Interno (TRBL) */
+  color: var(--text2);
+  white-space: nowrap;                                                                             /* Evitar que el Texto se Rompa */
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;                                                                         /* Agregar Puntos Suspensivos al Texto que se Desborda */
+}
+
+/* Primer Celda de Cada Fila de la Tabla */
+tbody td:first-child {
+	color: var(--text);
+	font-weight: 500;
+}
+
+/* Insignia */
+.badge {
+	display: inline-block;                                                                         /* Permitir que el Badge se Ajuste al Contenido */
+	padding: 2px 9px;                                                                              /* Espacio Interno (TRBL) */
+	border-radius: 20px;
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;                                                                           /* Evitar que el Texto se Rompa */
+}
+
+/* Insignia Verde */
+.badge-green {
+	background: rgba(39, 174, 96, .15);
+	color: #2ecc71;
+}
+
+/* Insignia Roja */
+.badge-red {
+	background: rgba(192, 57, 43, .15);
+	color: #e74c3c;
+}
+
+/* Insignia Dorada */
+.badge-gold {
+	background: rgba(201, 168, 76, .15);
+	color: var(--gold);
+}
+
+/* Insignia Gris */
+.badge-gray {
+	background: rgba(90, 86, 80, .3);
+	color: var(--text3);
+}
+
+/* Insignia Azul */
+.badge-blue {
+	background: rgba(52, 152, 219, .15);
+	color: #5dade2;
+}
+
+/* Estado Vacío */
+.empty-state {
+	text-align: center;
+	padding: 44px 24px;
+	color: var(--text3);
+}
+
+/* Parráfo del Estado Vacío */
+.empty-state p {
+	margin-top: 6px;
+	font-size: 12.5px;
+}
+
+/* Barra de Búsqueda */
+.search-bar {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+/* Input de la Barra de Búsqueda */
+.search-bar input {
+	width: 210px;
+	padding: 7px 12px;                                                                             /* Espacio Interno (TRBL) */
+	font-size: 12.5px;
+}
+
+/* Contenedor de Notificaciones */
+#toast-container {
+	position: fixed;
+	top: 76px;
+	right: 22px;
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+/* Notificación */
+.toast {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-left: 3px solid var(--gold);
+	padding: 12px 16px;                                                                              /* Espacio Interno (TRBL) */
+	border-radius: var(--radius);
+	font-size: 12.5px;
+	color: var(--text);
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);                                                     /* Sombra para Dar Profundidad */
+	animation: slideIn 0.3s ease forwards;
+	max-width: 290px;
+}
+
+/* Cerrar la Notificación */
+.toast.error {border-left-color: var(--red);}
+
+/* Animación de Entrada de la Notificación */
+@keyframes slideIn {
+	from {
+		transform: translateX(100%);                                                               /* Iniciar Fuera de la Pantalla a la Derecha */
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);                                                                  /* Terminar en su Posición Original */
+		opacity: 1;
+	}
+}
+ 
+/* Animación de Salida de la Notificación */
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Quick grid */
+.quick-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 10px;
+}
+
+/* Hero del Store */
+.store-hero {
+	position: relative;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 52px 44px 48px;                                                                       /* Espacio Interno (TRBL) */
+	margin-bottom: 32px;
+	overflow: hidden;
+}
+
+/* Bg del Hero del Store */
+.store-hero-bg {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: 
+		repeating-linear-gradient(-45deg, transparent, transparent 28px, rgba(34, 197, 94, .03) 28px, rgba(34, 197, 94, .03) 29px);
+}
+
+/* PseudoElemento del Hero del Store */
+.store-hero::after {
+	content: '';
+	position: absolute;
+	top: -80px;
+	right: -80px;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(34, 197, 94, .12) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+/* Contenido del Hero del Store */
+.store-hero-content {
+	position: relative;
+	z-index: 1;
+	max-width: 600px;
+}
+
+/* Eyebrow del Store */
+.store-eyebrow {
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--store);
+	margin-bottom: 14px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* Línea del Eyebrow del Store */
+.store-eyebrow::before {
+	content: '';
+	display: inline-block;                                                                         /* Permitir que la Línea se Ajuste al Contenido del Eyebrow */
+	width: 18px;
+	height: 2px;
+	background: var(--store);
+}
+
+/* Título del Hero del Store */
+.store-hero-title {
+	font-family: 'Playfair Display', serif;
+	font-size: 38px;
+	font-weight: 700;
+	color: var(--text);
+	line-height: 1.12;
+	margin-bottom: 16px;
+}
+
+/* Acento del Título del Hero del Store */
+.store-hero-accent {color: var(--store);}
+
+/* Descripción del Hero del Store */
+.store-hero-desc {
+	font-size: 13.5px;
+	line-height: 1.7;
+	color: var(--text2);
+	margin-bottom: 28px;
+	max-width: 460px;
+}
+
+/* Insignia del Hero del Store */
+.store-hero-badge {
+	position: absolute;
+	top: 36px;
+	right: 44px;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 68px;
+	height: 68px;
+	background: var(--surface2);
+	border: 1px solid rgba(34, 197, 94, .3);
+	border-radius: var(--radius);
+}
+
+/* Contenido de la Insignia del Hero del Store */
+.store-hero-badge span {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 30px;
+	font-weight: 700;
+	color: var(--store);
+	line-height: 1;
+}
+
+/* Subtítulo de la Insignia del Hero del Store */
+.store-hero-badge small {
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: var(--text3);
+	margin-top: 2px;
+}
+
+/* Botón de la Tienda */
+.btn-constructstore {
+	display: inline-flex;                                                                          /* Permitir que el Botón se Ajuste al Contenido */
+	align-items: center;
+	gap: 11px;
+	padding: 13px 26px;
+	background: var(--store);
+	color: #fff;
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	border-radius: var(--radius);
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: transform .2s ease, box-shadow .3s ease, background .2s ease;
+	box-shadow:                                                                                    /* Sombra de Brillo ( h-offset v-offset blur spread color ) */
+		0 0 0 0 rgba(34, 197, 94, .5), 0 4px 22px rgba(34, 197, 94, .35), 0 1px 0 rgba(255, 255, 255, .15) inset;
+	animation: storeGlow 2.8s ease-in-out infinite;
+}
+
+/* PseudoElemento del Botón de la Tienda para el Efecto de Brillo */
+.btn-constructstore::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -75%;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .22), transparent);
+	transform: skewX(-20deg);                                                                      /* Inclinar el Gradiente para un Efecto de Brillo Más Dinámico */
+	animation: storeSheen 3s ease-in-out infinite;
+}
+
+/* Hover del Botón de la Tienda */
+.btn-constructstore:hover {
+	background: var(--store-dark);
+	transform: translateY(-2px);
+	box-shadow: 0 0 0 4px rgba(34, 197, 94, .2), 0 8px 28px rgba(34, 197, 94, .45);                /* Sombra de Brillo ( h-offset v-offset blur spread color ) */
+}
+
+/* Variantes del Botón de la Tienda */
+.btn-constructstore-lg {
+	padding: 16px 32px;                                                                            /* Espacio Interno (TRBL) */
+	font-size: 15px;
+}
+
+/* Icono del Botón de la Tienda */
+.btn-constructstore-icon {
+	display: flex;
+	align-items: center;
+}
+
+/* Flecha del Botón de la Tienda */
+.btn-constructstore-arrow {
+	font-size: 17px;
+	transition: transform .2s ease;
+	display: inline-block;                                                                         /* Permitir que la Flecha se Ajuste al Contenido del Botón */
+}
+
+/* Hover de la Flecha del Botón de la Tienda */
+.btn-constructstore:hover .btn-constructstore-arrow {transform: translateX(4px);}
+
+/* Animación de Sombra de Brillo ( h-offset v-offset blur spread color ) */
+@keyframes storeGlow {
+  0%, 100% {box-shadow: 0 0 0 0 rgba(34, 197, 94, .5), 0 4px 22px rgba(34, 197, 94, .35);}
+  50% {box-shadow: 0 0 0 6px rgba(34, 197, 94, .12), 0 6px 28px rgba(34, 197, 94, .5);}
+
+}
+
+/* Animación del Efecto de Brillo */
+@keyframes storeSheen {
+  0% {left: -75%;}
+  60% {left: 125%;}
+  100% {left: 125%;}
+}
+
+/* Sección de la Tienda */
+.store-section-label {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--text3);
+	margin-bottom: 20px;
+}
+
+/* Línea de la Sección de la Tienda */
+.store-section-line {
+	flex: 1;                                                                                         /* Ocupar el Espacio Restante para Crear una Línea que se Extienda hasta el Final del Contenedor */
+	height: 1px;
+	background: var(--border);
+}
+
+/* Cuadrícula de Productos */
+.products-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 14px;
+	margin-bottom: 36px;
+}
+
+/* Carta de Producto */
+.product-card {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 26px 22px 22px;                                                                       /* Espacio Interno (TRBL) */
+	position: relative;
+	overflow: hidden;
+	transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+	cursor: default;
+}
+
+/* Hover de la Carta de Producto */
+.product-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--pc, var(--gold));
+	opacity: 0;
+	transition: opacity .25s ease;
+}
+
+/* Hover de la Carta de Producto */
+.product-card:hover {
+  border-color:  /* Color Mix es una Función CSS que Permite Mezclar Colores. En este Caso, Mezclamos el Color Principal (var(--pc) o var(--gold)) con Transparencia para Crear un Efecto de Resplandor Sutil en el Borde al Hoverear la Carta del Producto. */
+	color-mix(in srgb, var(--pc, var(--gold)) 60%, transparent);                       
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .3);                                                        /* Sombra de Brillo ( h-offset v-offset blur spread color ) */
+}
+
+/* Hover del PseudoElemento de la Carta de Producto */
+.product-card:hover::before {opacity: 1;}
+
+/* Contenedor del Icono del Producto */
+.product-icon-wrap {
+	width: 52px;
+	height: 52px;
+	border-radius: var(--radius);
+	background: color-mix(in srgb, var(--pc, var(--gold)) 12%, transparent);                         /* SRGB: Es el Espacio de Color Estándar para la Web. Mezclamos el Color Principal (var(--pc) o var(--gold)) con Transparencia para Crear un Fondo Sutilmente Teñido que Refleje el Color del Producto. */                            
+	border: 1px solid color-mix(in srgb, var(--pc, var(--gold)) 25%, transparent);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 14px;
+	color: var(--pc, var(--gold));
+	transition: background .25s ease;
+}
+
+/* Hover del Contenedor del Icono del Producto */
+.product-category {
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.25em;
+	text-transform: uppercase;
+	color: var(--text3);
+	margin-bottom: 5px;
+}
+
+/* Nombre del Producto */
+.product-name {
+	font-family: 'Playfair Display', serif;
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: 9px;
+	line-height: 1.2;
+}
+
+/* Descripción del Producto */
+.product-desc {
+	font-size: 12px;
+	line-height: 1.65;
+	color: var(--text2);
+	margin-bottom: 14px;
+}
+
+/* Etiquetas del Producto */
+.product-tags {
+	display: flex;
+	flex-wrap: wrap;                                                                               /* Permitir que las Etiquetas se Envuelvan a la Siguiente Línea si No Caben en una Sola Línea */
+	gap: 5px;
+}
+
+/* Etiqueta del Producto */
+.ptag {
+	font-size: 9px;
+	font-weight: 700;
+	font-family: 'Barlow Condensed', sans-serif;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	padding: 3px 7px;                                                                              /* Espacio Interno (TRBL) */
+	border-radius: 3px;
+	background: var(--surface2);
+	border: 1px solid var(--border2);
+	color: var(--text3);
+}
+
+/* Hover de la Etiqueta del Producto */
+.store-cta-wrap {
+	background: var(--surface);
+	border: 1px solid rgba(34, 197, 94, .2);
+	border-radius: var(--radius);
+	padding: 36px 44px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 28px;
+	flex-wrap: wrap;                                                                               /* Permitir que los Elementos se Envuelvan en Pantallas Pequeñas */
+	position: relative;
+	overflow: hidden;
+}
+
+/* PseudoElemento del CTA de la Tienda */
+.store-cta-wrap::before {
+	content: '';
+	position: absolute;
+	bottom: -60px;
+	left: -60px;
+	width: 240px;
+	height: 240px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(34, 197, 94, .08) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+/* Contenido del CTA de la Tienda */
+.store-cta-text h2 {
+	font-family: 'Playfair Display', serif;
+	font-size: 21px;
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: 7px;
+}
+
+/* Descripción del CTA de la Tienda */
+.store-cta-text p {
+	font-size: 13px;
+	line-height: 1.65;
+	color: var(--text2);
+	max-width: 440px;
+}
+
+/* Modal */
+.modal-overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	background: rgba(0, 0, 0, .75);
+	overflow-y: auto;
+}
+
+/* Mostrar el Modal */
+.modal-overlay.open {display: block;}
+
+/* Caja del Modal */
+.modal-box {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	max-width: 860px;
+	margin: 40px auto 60px;
+	overflow: hidden;
+}
+
+/* Header del Modal */
+.modal-header {
+	padding: 16px 22px;
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+/* Título del Modal */
+.modal-header h2 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	color: var(--text);
+}
+
+/* Botón de Cerrar el Modal */
+.modal-close {
+	background: none;
+	border: none;
+	color: var(--text2);
+	font-size: 22px;
+	cursor: pointer;
+	line-height: 1;
+	transition: color var(--tr);
+}
+
+/* Hover del Botón de Cerrar el Modal */
+.modal-close:hover {color: var(--text);}
+
+/* Cuerpo del Modal */
+.modal-body {padding: 24px 22px;}
+
+/* Acciones del Modal */
+.modal-actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px solid var(--border);
+}
+
+/* Botón de Editar */
+.btn-edit {
+	background: transparent;
+	border: 1px solid var(--border2);
+	color: var(--text2);
+	padding: 5px 9px;
+	font-size: 13px;
+	line-height: 1;
+	border-radius: var(--radius);
+	cursor: pointer;
+	transition: all var(--tr);
+	display: inline-flex;                                                                          /* Permitir que el Botón se Ajuste al Contenido */
+	align-items: center;
+	justify-content: center;
+}
+
+/* Hover del Botón de Editar */
+.btn-edit:hover {
+	border-color: var(--gold);
+	color: var(--gold);
+	background: var(--gold-glow);
+}
+
+/* Celda de acciones */
+.td-actions {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+/* Dashboard search */
+.dashboard-search-wrap {margin-top: 18px;}
+
+/* Input de búsqueda del Dashboard */
+.dashboard-search-input {
+	width: 320px;
+	max-width: 100%;
+	padding: 9px 16px;
+	font-size: 13px;
+	background: var(--surface2);
+	border: 1px solid var(--border2);
+	border-radius: var(--radius);
+	color: var(--text);
+	transition: border-color var(--tr), box-shadow var(--tr);
+}
+
+/* Focus del Input de búsqueda del Dashboard */
+.dashboard-search-input:focus {
+	border-color: var(--gold);
+	box-shadow: 0 0 0 3px var(--gold-glow);
+	outline: none;
+}
+
+/* Placeholder del Input de búsqueda del Dashboard */
+.dashboard-search-input::placeholder {color: var(--text3);}
+
+/* Ocultar tarjeta/botón que no coincide */
+.stat-card.hidden, .quick-grid .btn.hidden {display: none;}
+
+/* Sidebar colapsable */
+.sidebar.collapsed {transform: translateX(-100%);}
+
+/* Main expandida cuando el sidebar está colapsado */
+.main.expanded {margin-left: 0;}
+
+
+/* Toggle de Idioma */
+.lang-toggle {
+	position: fixed;
+	top: 1.2rem;
+	right: 1.5rem;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #1a1a1a;
+	border: 1.5px solid #333;
+	border-radius: 999px;
+	padding: 5px 10px 5px 6px;
+	cursor: pointer;
+	user-select: none;                                                                     /* Evita que el texto del toggle sea seleccionable */
+	transition: border-color 0.2s;
+}
+
+/* Estado Hover para el Toggle de Idioma */
+.lang-toggle:hover {border-color: var(--gold);}
+
+/* Interruptor del Toggle de Idioma */
+.lang-toggle .lang-switch {
+	width: 34px;
+	height: 18px;
+	background: #333;
+	border-radius: 999px;
+	position: relative;
+	transition: background 0.25s;
+	flex-shrink: 0;       
+	box-sizing: border-box;                                                           
+}
+
+/* PseudoElemento del Interruptor para crear el círculo deslizante */
+.lang-toggle .lang-switch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background: #888;
+    border-radius: 50%;
+    transition: transform 0.25s, background 0.25s;
+}
+
+/* Estado Activo para el Toggle de Idioma */
+.lang-toggle.active .lang-switch { 
+	background: #1a1a1a; 
+	border: 1.5px solid var(--gold); 
+}
+
+/* Mueve el círculo del interruptor y cambia su color cuando el toggle está activo */
+.lang-toggle.active .lang-switch::after { 
+	transform: translateY(-50%) translateX(16px);  
+	background: var(--gold); 
+}
+
+/* Etiqueta del idioma al lado del interruptor */
+.lang-toggle .lang-label {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	color: #888;
+	transition: color 0.25s;
+	min-width: 20px;
+	text-align: center;
+}
+
+/* Cambia el color de la etiqueta del idioma activo */
+.lang-toggle.active .lang-label {color: var(--gold);}
+
+/* Transición suave para el colapso del sidebar y la expansión del main */
+.main {transition: margin-left var(--tr);}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar {transform: translateX(-100%);}
+  .sidebar.open {transform: translateX(0);}
+  .main {margin-left: 0;}
+  .topbar {padding: 0 14px;}
+  .page {padding: 20px 14px 44px;}
+  .hamburger {display: flex;}
+  .overlay.open {display: block;}
+  .stats-grid {grid-template-columns: repeat(2, 1fr);}
+  .form-grid {grid-template-columns: 1fr;}
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-bar input {width: 100%;}
+  .store-hero {padding: 36px 20px 32px;}
+  .store-hero-title {font-size: 26px;}
+  .products-grid {grid-template-columns: 1fr;}
+  .store-cta-wrap {
+    padding: 24px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/*****************************************************************************************************************************************************************************/
