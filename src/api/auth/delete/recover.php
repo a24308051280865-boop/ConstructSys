@@ -12,7 +12,7 @@ require_once __DIR__ . '/../../settings/headers.php';
 require_once __DIR__ . '/../../settings/constants.php';
 require_once __DIR__ . '/../../settings/internal_controllers.php';
 require_once __DIR__ . '/../../utils/helpers.php';
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 // Rate limit estricto — máx 5 intentos cada 15 minutos por IP para evitar abuso del endpoint
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
