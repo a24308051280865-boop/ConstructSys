@@ -46,7 +46,7 @@ $INTERN_PDO = $PLATFORM_DB->getConnection();
 
 // Master PDO
 $MASTER_PDO = new PDO(
-    'mysql:host=' . INTERNAL_DB_HOST . ';charset=utf8mb4',
+    'mysql:host=' . INTERNAL_DB_HOST . ';port=' . INTERNAL_DB_PORT . ';charset=utf8mb4',
     INTERNAL_DB_USER,
     INTERNAL_DB_PASS,
     DEFAULT_PDO_OPTIONS
