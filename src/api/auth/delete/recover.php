@@ -136,10 +136,11 @@ try {
         foreach (TENANT_COLLECTION_SCHEMA as $config) {
             $colName = $config['collection'];
             try {
-                $docs = $mongoSrc->selectCollection($colName)->find()->toArray();
+                $docs = $mongoSrc->selectCollection($colName)->find(
+                    [],
+                    ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']]
+                )->toArray();
                 if (!empty($docs)) {
-
-                    // Crear colección destino si no existe y volcar datos
                     $mongoDest->selectCollection($colName)->insertMany($docs);
                 
                 } else {
