@@ -143,7 +143,10 @@ if (!$emptyMongo) {
                 $docs = $mongoClient
                     ->selectDatabase($originalMdb)
                     ->selectCollection($config['collection'])
-                    ->find()
+                    ->find(
+                        [],
+                        ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']]
+                    )
                     ->toArray();
                 if (!empty($docs)) {
                     $mongoClient
