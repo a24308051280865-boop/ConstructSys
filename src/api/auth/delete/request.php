@@ -93,6 +93,7 @@ foreach (SQL_TABLES as $tabla) {
 }
 
 // Verificar si la BD ORIGINAL de MongoDB tiene datos 
+// Verificar si la BD ORIGINAL de MongoDB tiene datos 
 $emptyMongo = true;
 try {
     $mongoClient = new MongoDB\Client(MONGO_URI);
@@ -106,7 +107,7 @@ try {
         } catch (\Exception) {}
     }
 } catch (\Exception) {
-    $emptyMongo = true;
+    $emptyMongo = false; // ← Si falla la conexión, intentar archivar de todas formas
 }
 
 // Archivar solo si tiene datos, luego eliminar original 
@@ -134,7 +135,8 @@ try {
     $MASTER_PDO->exec("DROP DATABASE IF EXISTS `{$originalDb}`");
 } catch (\PDOException) {}
 
-// MongoDB
+/
+// MongoDB — archivar si tiene datos
 if (!$emptyMongo) {
     try {
         $mongoClient = $mongoClient ?? new MongoDB\Client(MONGO_URI);
@@ -148,11 +150,10 @@ if (!$emptyMongo) {
                         ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']]
                     )
                     ->toArray();
-                error_log("Colección: {$config['collection']} — docs encontrados: " . count($docs));
                 $docs = array_map(function($doc) {
-                        unset($doc['_id']);
-                        return $doc;
-                    }, $docs);
+                    unset($doc['_id']);
+                    return $doc;
+                }, $docs);
                 if (!empty($docs)) {
                     $mongoClient
                         ->selectDatabase($archivedMdb)
@@ -162,17 +163,18 @@ if (!$emptyMongo) {
             } catch (\Exception) {}
         }
     } catch (\Exception) {
-        $archivedMdb = null;
+        // No anular $archivedMdb — puede haberse archivado parcialmente
     }
 } else {
     $archivedMdb = null;
 }
 
+
 // Eliminar BD original MongoDB a toda costa
 try {
     $mongoClient = $mongoClient ?? new MongoDB\Client(MONGO_URI);
     $mongoClient->selectDatabase($originalMdb)->drop();
-} catch (\Exception) {}
+}  catch (\Exception $e) {}
 
 // Determinar si hay respaldo para enviar correo
 $haveBackup = ($archivedDb !== null || $archivedMdb !== null);
