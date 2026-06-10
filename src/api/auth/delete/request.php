@@ -148,6 +148,7 @@ if (!$emptyMongo) {
                         ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']]
                     )
                     ->toArray();
+                error_log("Colección: {$config['collection']} — docs encontrados: " . count($docs));
                 $docs = array_map(function($doc) {
                         unset($doc['_id']);
                         return $doc;
