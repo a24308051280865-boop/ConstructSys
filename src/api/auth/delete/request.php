@@ -137,36 +137,53 @@ try {
 
 
 // MongoDB — archivar si tiene datos
+$archivedMdb = null; 
 if (!$emptyMongo) {
     try {
         $mongoClient = $mongoClient ?? new MongoDB\Client(MONGO_URI);
+        $archivedMdb = 'archived_' . $originalMdb . '_' . gmdate('Ymd_His');
+        $docsArchivados = 0;
+
         foreach (TENANT_COLLECTION_SCHEMA as $config) {
             try {
                 $docs = $mongoClient
                     ->selectDatabase($originalMdb)
                     ->selectCollection($config['collection'])
-                    ->find(
-                        [],
-                        ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']]
-                    )
+                    ->find([], ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']])
                     ->toArray();
-                $docs = array_map(function($doc) {
-                    unset($doc['_id']);
-                    return $doc;
-                }, $docs);
+                $docs = array_map(fn($doc) => (unset($doc['_id']), $doc), $docs);
                 if (!empty($docs)) {
                     $mongoClient
                         ->selectDatabase($archivedMdb)
                         ->selectCollection($config['collection'])
                         ->insertMany($docs);
+                    $docsArchivados += count($docs);
                 }
             } catch (\Exception) {}
         }
+
+        // ✅ Solo eliminar original si se archivó algo
+        if ($docsArchivados > 0) {
+            $mongoClient->selectDatabase($originalMdb)->drop();
+        } else {
+            $archivedMdb = null; // No se archivó nada, no hay respaldo
+            $mongoClient->selectDatabase($originalMdb)->drop(); // Eliminar igual
+        }
+
     } catch (\Exception) {
-        // No anular $archivedMdb — puede haberse archivado parcialmente
+        $archivedMdb = null;
+        // Intentar eliminar original de todas formas
+        try {
+            $mongoClient = $mongoClient ?? new MongoDB\Client(MONGO_URI);
+            $mongoClient->selectDatabase($originalMdb)->drop();
+        } catch (\Exception) {}
     }
 } else {
-    $archivedMdb = null;
+    // BD vacía — solo eliminar
+    try {
+        $mongoClient = $mongoClient ?? new MongoDB\Client(MONGO_URI);
+        $mongoClient->selectDatabase($originalMdb)->drop();
+    } catch (\Exception) {}
 }
 
 
