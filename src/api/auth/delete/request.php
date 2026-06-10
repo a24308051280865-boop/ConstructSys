@@ -135,7 +135,7 @@ try {
     $MASTER_PDO->exec("DROP DATABASE IF EXISTS `{$originalDb}`");
 } catch (\PDOException) {}
 
-/
+
 // MongoDB — archivar si tiene datos
 if (!$emptyMongo) {
     try {
