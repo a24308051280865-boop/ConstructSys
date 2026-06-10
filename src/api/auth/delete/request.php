@@ -151,7 +151,10 @@ if (!$emptyMongo) {
                     ->selectCollection($config['collection'])
                     ->find([], ['typeMap' => ['root' => 'array', 'document' => 'array', 'array' => 'array']])
                     ->toArray();
-                $docs = array_map(fn($doc) => (unset($doc['_id']), $doc), $docs);
+                $docs = array_map(function($doc) {
+                    unset($doc['_id']);
+                    return $doc;
+                }, $docs);
                 if (!empty($docs)) {
                     $mongoClient
                         ->selectDatabase($archivedMdb)
