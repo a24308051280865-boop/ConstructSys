@@ -154,7 +154,7 @@ async function handleLogin() {
     try {
 
 		// Enviar solicitud al servidor
-		const response = await fetch('api/auth/login.php', {              // Endpoint de autenticación
+		const response = await fetch('../api/auth/login.php', {              // Endpoint de autenticación
 			method: 'POST',                                                 // Método HTTP de Request
 			headers: {
         'Content-Type': 'application/json', 
@@ -177,7 +177,7 @@ async function handleLogin() {
 			
 			// Redirigir al dashboard después de un breve retraso para mostrar el toast
 			setTimeout(
-				() => window.location.href = 'views/dashboard.html', 
+				() => window.location.href = '../views/dashboard.html', 
 				1200
 			);
 		} 
@@ -259,7 +259,7 @@ if (googleToken) {
 	showToast('success', `Bienvenido, ${payload.name}`);
 
 	// Redirigir al usuario a la página correspondiente según su rol 
-	setTimeout(() => window.location.href = 'views/dashboard.html', 1200);
+	setTimeout(() => window.location.href = '../views/dashboard.html', 1200);
 }
 
 /*****************************************************************************************************************************************************************************/
