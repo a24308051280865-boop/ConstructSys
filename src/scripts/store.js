@@ -1,7 +1,15 @@
-// ═══════════════════════════════════════════════════════════════════════════════
-//  ConstructStore — store.js
-//  Autor: Magallanes López Carlos Gabriel · v1.3 · 2026
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+/*                                                                                                                                                                           */
+/*                                                                  Scripts para el Proyecto ConstrucSys                                                                     */
+/*                                                                                                                                                                           */
+/*****************************************************************************************************************************************************************************/
+/*                                                                                                                                                                           */
+/* Autor: Magallanes López Carlos Gabriel                                                                                                                                    */
+/* Versión del Proyecto: 1.3                                                                                                                                                 */
+/* Correo: cgmagallanes23@gmail.com                                                                                                                                          */
+/* Ultima Modificación: 22/05/2026                                                                                                                                           */
+/*                                                                                                                                                                           */
+/*****************************************************************************************************************************************************************************/
 
 const cs_user  = JSON.parse(localStorage.getItem('cs_user') || '{}');
 const cs_token = localStorage.getItem('cs_token') || '';
@@ -14,13 +22,13 @@ const AUTH_HEADERS = {
     'X-Internal-Key': 'ConstructSys_Internal_2026_!xK9',
 };
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
+/* Estado de la aplicación */
 let PRODUCTS   = [];
 let cart       = {};
 let quantities = {};
 let currentCat = 'Todos';
 
-// ─── BOOT ─────────────────────────────────────────────────────────────────────
+/* Inicialización del módulo al cargar el DOM */
 document.addEventListener('DOMContentLoaded', () => {
     if (!DB || !cs_token) {
         renderError(new Error('Inicia sesión para ver el catálogo de productos.'));
@@ -31,10 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAll();
 });
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  IMAGE HELPERS
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
 
+/* Helpers visuales para imágenes y placeholders por categoría */
 const CAT_VISUAL = {
     'Cementantes':        { bg: '#1a1506', accent: '#c9a84c', emoji: '🏗️' },
     'Áridos y Gravas':    { bg: '#141208', accent: '#d4a844', emoji: '⛏️' },
@@ -87,9 +94,9 @@ function marcaUrl(marca) {
     return `../assets/imgs/mongo/marcas/${key}.jpg`;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  DATA LAYER
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Capa de datos — fetch y normalización de productos */
 async function fetchAll() {
     renderSkeletons();
     try {
@@ -130,15 +137,14 @@ async function apiFetch(module) {
     return data;
 }
 
-// ─── NORMALIZERS ──────────────────────────────────────────────────────────────
+/* Normalización de materiales, herramientas y maquinaria */
 function mapCategoriaMaterial(tipo) {
     const CEMENTANTES = ['Cemento Portland gris','Cemento blanco','Cal hidratada','Yeso en polvo'];
-    const ARIDOS      = ['Arena fina','Arena gruesa','Grava','Tepetate'];
-    const BLOQUES     = ['Tabique rojo recocido','Block de concreto','Block pómex','Ladrillo de barro'];
-    const MUROS_SECOS = ['Tablaroca','Panel W','Placa de fibrocemento'];
-    const ACERO       = ['Varilla 3/8"','Varilla 1/2"','Varilla 3/4"','Alambre recocido',
-                         'Malla electrosoldada','Perfil de acero en L','Canal de acero en U',
-                         'Tubo estructural cuadrado','Tubo estructural redondo','Placa de acero'];
+const ARIDOS = ['Arena gruesa'];
+const BLOQUES = ['Block pómex'];
+const MUROS_SECOS = ['Panel W', 'Placa de fibrocemento'];
+const ACERO = ['Malla electrosoldada', 'Perfil de acero en L', 'Canal de acero en U',
+               'Tubo estructural redondo', 'Placa de acero'];
     if (CEMENTANTES.includes(tipo)) return 'Cementantes';
     if (ARIDOS.includes(tipo))      return 'Áridos y Gravas';
     if (BLOQUES.includes(tipo))     return 'Bloques y Tabiques';
@@ -184,7 +190,7 @@ function normalizeMaquinaria(items) {
     }));
 }
 
-// ─── HERO STATS ───────────────────────────────────────────────────────────────
+/* Actualización de estadísticas en el hero */
 function updateHeroStats() {
     const total = PRODUCTS.length;
     const cats  = new Set(PRODUCTS.map(p => p.categoria)).size;
@@ -193,9 +199,9 @@ function updateHeroStats() {
     document.getElementById('badge-total').textContent = total;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  STOCK OVERVIEW
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Stock Overview — tarjetas de resumen por grupo de categoría */
 const STOCK_GROUPS = [
     {
         key: 'Herramientas', label: 'Herramientas', filterKey: 'Herramientas',
@@ -282,9 +288,9 @@ function renderStockOverview() {
     }).join('');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  RENDER — SKELETONS / ERROR
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Renderizado — Skeletons y estados de error */
 function renderSkeletons(count = 8) {
     document.getElementById('grid').innerHTML = Array.from({ length: count }, () => `
         <div class="skel-card">
@@ -318,9 +324,9 @@ function renderError(err) {
         </div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  RENDER — GRID
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Renderizado — Grid de productos */
 function getFiltered() {
     let list = currentCat === 'Todos' ? [...PRODUCTS]
         : PRODUCTS.filter(p => p.categoria === currentCat);
@@ -417,18 +423,18 @@ function setCategoria(cat, scroll = true) {
     }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  QUANTITY SELECTOR
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Selector de cantidad por producto */
 function changeQty(id, delta) {
     quantities[id] = Math.max(1, (quantities[id] ?? 1) + delta);
     const el = document.getElementById('qty-' + id);
     if (el) el.textContent = quantities[id];
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  CART
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Carrito — agregar, eliminar, modificar y sincronizar UI */
 function addToCart(id) {
     const p = PRODUCTS.find(x => x.id === id);
     if (!p || p.stock <= 0) return;
@@ -564,12 +570,9 @@ function cotizar() {
     alert('Cotización:\n\n' + lineas + '\n\nEsta función se conecta con tu sistema de cotizaciones.');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  ORDER CONFIRMATION MODAL
-//  — Muestra resumen del pedido y genera un número de orden interno.
-//  — Sin tarjeta de crédito, sin simulación de pago.
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
 
+/* Modal de confirmación de pedido */
 function injectOrderModal() {
     /* ── Estilos ── */
     const style = document.createElement('style');
@@ -901,7 +904,7 @@ function injectOrderModal() {
     });
 }
 
-/* ── Abrir modal y poblar resumen ── */
+/* Abrir modal y poblar resumen */
 function checkout() {
     if (!Object.keys(cart).length) { toast('Tu carrito está vacío', 'err'); return; }
 
@@ -938,7 +941,7 @@ function closeOrderModal() {
     document.body.style.overflow = '';
 }
 
-/* ── Confirmar: genera número de orden y muestra pantalla de éxito ── */
+/* Confirmar: genera número de orden y muestra pantalla de éxito */
 function confirmOrder() {
     const orderNum = 'CS-' + new Date().getFullYear()
         + '-' + Date.now().toString(36).toUpperCase().slice(-5)
@@ -949,7 +952,7 @@ function confirmOrder() {
     document.getElementById('om-view-confirmed').classList.add('show');
 }
 
-/* ── Finalizar: vacía carrito, cierra modal ── */
+/* Finalizar: vacía carrito, cierra modal */
 function finishOrder() {
     cart = {};
     syncCartUI();
@@ -958,9 +961,9 @@ function finishOrder() {
     toast('Pedido registrado correctamente', 'ok');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════════════════════════════════
+/*****************************************************************************************************************************************************************************/
+
+/* Utilidades generales */
 function fmtMXN(n) {
     return new Intl.NumberFormat('es-MX', {
         style: 'currency', currency: 'MXN', minimumFractionDigits: 2,
@@ -989,7 +992,9 @@ function escHtml(str) {
         .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;');
 }
 
-// ─── ADMIN ────────────────────────────────────────────────────────────────────
+/*****************************************************************************************************************************************************************************/
+
+/* Panel de administración */
 function openAdmin() {
     document.getElementById('admin-sidebar').classList.add('open');
     document.getElementById('admin-overlay').classList.add('open');
@@ -1065,3 +1070,5 @@ document.addEventListener('keydown', e => {
     closeCart();
     closeAdmin();
 });
+
+/*****************************************************************************************************************************************************************************/
