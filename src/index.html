@@ -1,7 +1,7 @@
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-- DOCUMENTACIÓN -->
 <!-- Landing Page / Index view -->
-<!-- Ultima Modificación: 05/06/2026 -->
+<!-- Ultima Modificación: 10/06/2026 -->
 <!-- Autor: Magallanes López Carlos Gabriel -->
 <!-- Email: cgmagallanes23@gmail.com -->
 <!-- Versión del Proyecto: 1.0 -->
@@ -20,10 +20,69 @@
 
 		<link rel="stylesheet" href="styles/index.css">
 		<link rel="icon" href="assets/icons/constructsys.ico">
+
+		<!-- Estilos del Toggle de Idioma -->
+		<style>
+			/* Toggle de Idioma */
+			.lang-toggle {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				background: #1a1a1a;
+				border: 1.5px solid #333;
+				border-radius: 999px;
+				padding: 5px 10px 5px 6px;
+				cursor: pointer;
+				user-select: none;
+				transition: border-color 0.2s;
+				flex-shrink: 0;
+			}
+			.lang-toggle:hover { border-color: var(--gold); }
+			.lang-toggle .lang-switch {
+				width: 34px;
+				height: 18px;
+				background: #333;
+				border-radius: 999px;
+				position: relative;
+				transition: background 0.25s;
+				flex-shrink: 0;
+				box-sizing: border-box;
+			}
+			.lang-toggle .lang-switch::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 3px;
+				transform: translateY(-50%);
+				width: 14px;
+				height: 14px;
+				background: #888;
+				border-radius: 50%;
+				transition: transform 0.25s, background 0.25s;
+			}
+			.lang-toggle.active .lang-switch {
+				background: #1a1a1a;
+				border: 1.5px solid var(--gold);
+			}
+			.lang-toggle.active .lang-switch::after {
+				transform: translateY(-50%) translateX(16px);
+				background: var(--gold);
+			}
+			.lang-toggle .lang-label {
+				font-size: 13px;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				color: #888;
+				transition: color 0.25s;
+				min-width: 20px;
+				text-align: center;
+			}
+			.lang-toggle.active .lang-label { color: var(--gold); }
+		</style>
 	</head>
 	<body>
 
-		<!-- NAVBAR -->
+		<!-- Barra de Navegación -->
 		<nav>
 
 			<!-- Logo -->
@@ -34,16 +93,29 @@
 				<span class="nav-brand">ConstructSys</span>
 			</a>
 
-			<!-- Botones de Acción -->
+			<!-- Links de Sección -->
+			<div class="nav-links">
+				<a href="#features" class="nav-link" data-i18n="nav_features">Módulos</a>
+				<a href="#about" class="nav-link" data-i18n="nav_about">Nosotros</a>
+				<a href="#store" class="nav-link" data-i18n="nav_store">ConstructStore</a>
+			</div>
+
+			<!-- Botones de Acción + Toggle -->
 			<div class="nav-cta">
-				<a href="views/login.html" class="nav-link">Iniciar Sesión</a>
-				<a href="views/register.html" class="btn-nav">Comenzar Ahora</a>
+				<!-- Toggle de Idioma -->
+				<button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">
+					<div class="lang-switch"></div>
+					<span id="lang-label" class="lang-label">ES</span>
+				</button>
+
+				<a href="views/login.html" class="nav-link" data-i18n="nav_login">Iniciar Sesión</a>
+				<a href="views/register.html" class="btn-nav" data-i18n="nav_register">Comenzar Ahora</a>
 			</div>
 
 		</nav>
 
 		<!-- HERO -->
-		<section class="hero">
+		<section id="hero" class="hero">
 
 			<!-- Fondos Decorativos -->
 			<div class="hero-bg">
@@ -63,19 +135,20 @@
 				<!-- Etiqueta Superior -->
 				<div class="hero-eyebrow">
 					<span class="hero-eyebrow-dot"></span>
-					Sistema de Gestión de Obras · Plataforma en la Nube
+					<span data-i18n="hero_eyebrow">Sistema de Gestión de Obras · Plataforma en la Nube</span>
 				</div>
 
 				<!-- Título Principal -->
 				<h1 class="hero-title">
-					Tu constructora,<br><em>sin fricciones.</em>
+					<span data-i18n="hero_title_1">Tu constructora,</span><br>
+					<em data-i18n="hero_title_2">sin límites.</em>
 				</h1>
 
 				<!-- Subtítulo -->
-				<p class="hero-tagline">De la licitación al cierre de obra — todo en un solo lugar</p>
+				<p class="hero-tagline" data-i18n="hero_tagline">Desde la licitación hasta el cierre de obra — todo en un solo lugar</p>
 
 				<!-- Descripción -->
-				<p class="hero-desc">
+				<p class="hero-desc" data-i18n="hero_desc">
 					ConstructSys es la plataforma todo-en-uno diseñada para constructoras que quieren dejar atrás las hojas de cálculo y los procesos desconectados. Control total desde cualquier dispositivo, desde el primer día.
 				</p>
 
@@ -84,7 +157,7 @@
 
 					<!-- Botón Primario -->
 					<a href="views/register.html" class="btn-primary">
-						Comenzar Ahora
+						<span data-i18n="hero_btn_primary">Registrarse</span>
 						<!-- Flecha hacia la derecha -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
 							<line x1="5" y1="12" x2="19" y2="12"/>
@@ -93,7 +166,7 @@
 					</a>
 
 					<!-- Botón Secundario -->
-					<a href="views/login.html" class="btn-outline">Iniciar Sesión</a>
+					<a href="views/login.html" class="btn-outline" data-i18n="hero_btn_outline">Iniciar Sesión</a>
 
 				</div>
 
@@ -101,46 +174,41 @@
 
 			<!-- Indicador de Scroll -->
 			<div class="scroll-hint">
-				<span>Explorar</span>
+				<span data-i18n="scroll_hint">Explorar</span>
 				<div class="scroll-arrow"></div>
 			</div>
 
 		</section>
 
-		<!-- ESTADÍSTICAS -->
+		<!-- Estadísticas -->
 		<div class="stats-strip">
 			<div class="stats-inner">
 
 				<div class="stat-item">
-					<div class="stat-number">100%</div>
-					<div class="stat-label">En la Nube</div>
+					<div class="stat-number" data-i18n="stat_cloud_num">100%</div>
+					<div class="stat-label" data-i18n="stat_cloud_lbl">En la Nube</div>
 				</div>
 
 				<div class="stat-item">
-					<div class="stat-number">0</div>
-					<div class="stat-label">Instalaciones Requeridas</div>
+					<div class="stat-number" data-i18n="stat_inst_num">0</div>
+					<div class="stat-label" data-i18n="stat_inst_lbl">Instalaciones Requeridas</div>
 				</div>
 
 				<div class="stat-item">
-					<div class="stat-number">1</div>
-					<div class="stat-label">Sola Plataforma</div>
-				</div>
-
-				<div class="stat-item">
-					<div class="stat-number">∞</div>
-					<div class="stat-label">Dispositivos Compatibles</div>
+					<div class="stat-number" data-i18n="stat_plat_num">1</div>
+					<div class="stat-label" data-i18n="stat_plat_lbl">Sola Plataforma</div>
 				</div>
 
 			</div>
 		</div>
 
-		<!-- FUNCIONALIDADES -->
-		<section class="features">
+		<!-- Funcionalidades -->
+		<section id="features" class="features">
 
 			<!-- Encabezado de la Sección -->
-			<div class="section-eyebrow">Módulos del Sistema</div>
-			<h2 class="section-title">Todo lo que necesita<br>tu constructora</h2>
-			<p class="section-sub">Un ecosistema completo de herramientas integradas para que tu empresa opere sin fricciones.</p>
+			<div class="section-eyebrow" data-i18n="feat_eyebrow">Módulos del Sistema</div>
+			<h2 class="section-title" data-i18n="feat_title" data-i18n-html>Todo lo que necesita<br>tu constructora</h2>
+			<p class="section-sub" data-i18n="feat_sub">Un ecosistema completo de herramientas integradas para que tu empresa opere sin límites.</p>
 
 			<!-- Cuadrícula de Tarjetas -->
 			<div class="features-grid">
@@ -148,7 +216,6 @@
 				<!-- Tarjeta: Gestión de Proyectos -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Cuatro cuadros (cuadrícula) -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<rect x="3" y="3" width="7" height="7"/>
 							<rect x="14" y="3" width="7" height="7"/>
@@ -156,14 +223,15 @@
 							<rect x="14" y="14" width="7" height="7"/>
 						</svg>
 					</div>
-					<div class="feature-title">Gestión de Proyectos</div>
-					<div class="feature-desc">Controla cada obra en tiempo real: avances, plazos, recursos y documentos, todo centralizado y accesible desde cualquier lugar.</div>
+					<div class="feature-title" data-i18n="feat_proj_title">Gestión de Proyectos</div>
+					<div class="feature-desc" data-i18n="feat_proj_desc">
+						Controla cada obra en tiempo real: avances, plazos, recursos y documentos, todo centralizado y accesible desde cualquier lugar.
+					</div>
 				</div>
 
 				<!-- Tarjeta: Administración de Equipo -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Grupo de personas -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
 							<circle cx="9" cy="7" r="4"/>
@@ -171,39 +239,42 @@
 							<path d="M16 3.13a4 4 0 0 1 0 7.75"/>
 						</svg>
 					</div>
-					<div class="feature-title">Administración de Equipo</div>
-					<div class="feature-desc">Gestiona tu personal, asignaciones por obra y roles. Lleva la nómina integrada con control de asistencia y deducciones.</div>
+					<div class="feature-title" data-i18n="feat_team_title">Administración de Equipo</div>
+					<div class="feature-desc" data-i18n="feat_team_desc">
+						Gestiona tu personal, asignaciones por obra y roles. Lleva la nómina integrada con control de asistencia y deducciones.
+					</div>
 				</div>
 
 				<!-- Tarjeta: Control Financiero -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Símbolo de dólar -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<line x1="12" y1="1" x2="12" y2="23"/>
 							<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
 						</svg>
 					</div>
-					<div class="feature-title">Control Financiero</div>
-					<div class="feature-desc">Facturas, pagos y retenciones en un solo módulo. Visibilidad completa del flujo de caja por proyecto y por empresa.</div>
+					<div class="feature-title" data-i18n="feat_fin_title">Control Financiero</div>
+					<div class="feature-desc" data-i18n="feat_fin_desc">
+						Facturas, pagos y retenciones en un solo módulo. Visibilidad completa del flujo de caja por proyecto y por empresa.
+					</div>
 				</div>
 
 				<!-- Tarjeta: Proveedores y Subcontratistas -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Caja / paquete -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
 						</svg>
 					</div>
-					<div class="feature-title">Proveedores y Subcontratistas</div>
-					<div class="feature-desc">Directorio centralizado, contratos, órdenes de compra y seguimiento de entregas. Nunca pierdas de vista a tus proveedores estratégicos.</div>
+					<div class="feature-title" data-i18n="feat_sup_title">Proveedores y Subcontratistas</div>
+					<div class="feature-desc" data-i18n="feat_sup_desc">
+						Directorio centralizado, contratos, órdenes de compra y seguimiento de entregas. Nunca pierdas de vista a tus proveedores estratégicos.
+					</div>
 				</div>
 
 				<!-- Tarjeta: Espacio Privado -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Documento con líneas -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
 							<polyline points="14 2 14 8 20 8"/>
@@ -212,54 +283,55 @@
 							<polyline points="10 9 9 9 8 9"/>
 						</svg>
 					</div>
-					<div class="feature-title">Espacio Privado</div>
-					<div class="feature-desc">Cada constructora tiene su propio entorno aislado. Tus datos son exclusivamente tuyos, completamente separados de cualquier otro cliente.</div>
+					<div class="feature-title" data-i18n="feat_priv_title">Espacio Privado</div>
+					<div class="feature-desc" data-i18n="feat_priv_desc">
+						Cada constructora tiene su propio entorno aislado. Tus datos son exclusivamente tuyos, completamente separados de cualquier otro cliente.
+					</div>
 				</div>
 
 				<!-- Tarjeta: Acceso Universal -->
 				<div class="feature-card">
 					<div class="feature-icon">
-						<!-- Globo / internet -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 							<circle cx="12" cy="12" r="10"/>
 							<line x1="2" y1="12" x2="22" y2="12"/>
 							<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
 						</svg>
 					</div>
-					<div class="feature-title">Acceso Universal</div>
-					<div class="feature-desc">Sin instalaciones, sin licencias por dispositivo. Accede desde computadora, tablet o celular con solo una conexión a internet.</div>
+					<div class="feature-title" data-i18n="feat_acc_title">Acceso Universal</div>
+					<div class="feature-desc" data-i18n="feat_acc_desc">Sin instalaciones, sin licencias por dispositivo. Accede desde computadora, tablet o celular con solo una conexión a internet.</div>
 				</div>
 
 			</div>
 
 		</section>
 
-		<!-- POR QUÉ CONSTRUCTSYS -->
-		<section class="copy-section">
+		<!-- ConstructSys / Nosotros -->
+		<section id="about" class="copy-section">
 			<div class="copy-inner">
 
 				<!-- Encabezado de la Sección -->
-				<div class="section-eyebrow">Por qué ConstructSys</div>
-				<h2 class="section-title">La operación de tu constructora,<br>funcionando sin fricciones</h2>
+				<div class="section-eyebrow" data-i18n="copy_eyebrow">ConstructSys</div>
+				<h2 class="section-title" data-i18n="copy_title" data-i18n-html>La operación de tu constructora,<br>funcionando sin límites</h2>
 
 				<!-- Cuerpo del Texto -->
 				<div class="copy-body">
 					<p>
-						ConstructSys es la <span class="copy-highlight">plataforma de gestión todo-en-uno</span> diseñada para constructoras que quieren dejar atrás las hojas de Excel y los procesos desconectados. Desde el primer día, tu empresa tiene un sistema completo en la nube: controla tus proyectos, administra a tu equipo, lleva la nómina, gestiona proveedores y subcontratistas, y mantén el control financiero con facturas, pagos y retenciones — <span class="copy-highlight">todo desde un solo lugar y sin instalar nada.</span>
+						<span data-i18n="copy_p1_a">ConstructSys es la </span><span class="copy-highlight" data-i18n="copy_p1_hl1">plataforma de gestión todo-en-uno</span><span data-i18n="copy_p1_b"> diseñada para constructoras que quieren dejar atrás las hojas de Excel y los procesos desconectados. Desde el primer día, tu empresa tiene un sistema completo en la nube: controla tus proyectos, administra a tu equipo, lleva la nómina, gestiona proveedores y subcontratistas, y mantén el control financiero con facturas, pagos y retenciones — </span><span class="copy-highlight" data-i18n="copy_p1_hl2">todo desde un solo lugar y sin instalar nada.</span>
 					</p>
 					<p>
-						Cada constructora que entra a ConstructSys obtiene su propio espacio privado. <span class="copy-highlight">Tus datos son exclusivamente tuyos</span>, completamente separados de cualquier otro cliente de la plataforma. El acceso es seguro, rápido y disponible desde cualquier dispositivo con internet.
+						<span data-i18n="copy_p2_a">Cada constructora que entra a ConstructSys obtiene su propio espacio privado. </span><span class="copy-highlight" data-i18n="copy_p2_hl">Tus datos son exclusivamente tuyos</span><span data-i18n="copy_p2_b">, completamente separados de cualquier otro cliente de la plataforma. El acceso es seguro, rápido y disponible desde cualquier dispositivo con internet.</span>
 					</p>
 					<p>
-						ConstructSys no es solo un software — es la operación de tu constructora funcionando sin fricciones, <span class="copy-highlight">desde la licitación hasta el cierre de obra.</span>
+						<span data-i18n="copy_p3_a">ConstructSys no es solo una plataforma — es la operación de tu constructora funcionando sin límites, </span><span class="copy-highlight" data-i18n="copy_p3_hl">desde la licitación hasta el cierre de obra.</span>
 					</p>
 				</div>
 
 			</div>
 		</section>
 
-		<!-- CONSTRUCTSTORE -->
-		<section class="store-callout">
+		<!-- ConstructStore -->
+		<section id="store" class="store-callout">
 			<div class="store-card">
 
 				<!-- Fondo Decorativo -->
@@ -270,26 +342,23 @@
 
 					<!-- Insignia de Módulo -->
 					<div class="store-badge">
-
-						<!-- Estrella -->
 						<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
 							<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
 						</svg>
-						Integrado en tu Dashboard
-
+						<span data-i18n="store_badge">Integrado en tu Dashboard</span>
 					</div>
 
 					<!-- Título y Descripción -->
-					<h3 class="store-title">ConstructStore — Materiales<br>al precio del proveedor directo</h3>
-					<p class="store-desc">Cuando tu obra necesita materiales, ConstructStore está integrado directamente en tu dashboard: cemento, acero, block, tubería y más, con precios de proveedor directo y pedido en minutos. Sin intermediarios, sin salir del sistema.</p>
+					<h3 class="store-title" data-i18n="store_title" data-i18n-html>ConstructStore — Materiales<br>al precio del proveedor directo</h3>
+					<p class="store-desc" data-i18n="store_desc">Tu propia tienda en línea, ConstructStore está integrado directamente en tu dashboard: cemento, acero, block, tubería y más. Sin intermediarios, sin salir del sistema.</p>
 
 					<!-- Etiquetas de Materiales -->
 					<div class="store-items">
-						<span class="store-tag">Cemento</span>
-						<span class="store-tag">Acero</span>
-						<span class="store-tag">Block</span>
-						<span class="store-tag">Tubería</span>
-						<span class="store-tag">Y más...</span>
+						<span class="store-tag" data-i18n="store_tag1">Cemento</span>
+						<span class="store-tag" data-i18n="store_tag2">Acero</span>
+						<span class="store-tag" data-i18n="store_tag3">Block</span>
+						<span class="store-tag" data-i18n="store_tag4">Tubería</span>
+						<span class="store-tag" data-i18n="store_tag5">Y más...</span>
 					</div>
 
 				</div>
@@ -297,7 +366,6 @@
 				<!-- Ícono Lateral -->
 				<div class="store-action">
 					<div class="store-icon-wrap">
-						<!-- Bolsa de compras -->
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
 							<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
 							<line x1="3" y1="6" x2="21" y2="6"/>
@@ -309,8 +377,8 @@
 			</div>
 		</section>
 
-		<!-- CTA FINAL -->
-		<section class="final-cta">
+		<!-- Final CTA -->
+		<section id="cta" class="final-cta">
 
 			<!-- Fondos Decorativos -->
 			<div class="final-cta-bg"></div>
@@ -320,14 +388,16 @@
 			<div class="final-cta-content">
 
 				<!-- Encabezado -->
-				<div class="section-eyebrow">Empieza Hoy</div>
-				<h2 class="section-title">¿Listo para operar<br><em style="font-style:italic; color:var(--gold)">sin fricciones?</em></h2>
-				<p class="final-cta-desc">Únete a ConstructSys y lleva la gestión de tu constructora al siguiente nivel. Sin instalaciones, sin complicaciones — tu sistema listo desde el primer día.</p>
+				<div class="section-eyebrow" data-i18n="final_eyebrow">Empieza Hoy</div>
+				<h2 class="section-title">
+					<span data-i18n="final_title">¿Listo para operar</span><br>
+					<em style="font-style:italic; color:var(--gold)" data-i18n="final_title_em">sin Límites?</em>
+				</h2>
+				<p class="final-cta-desc" data-i18n="final_desc">Únete a ConstructSys y lleva la gestión de tu constructora al siguiente nivel. Sin instalaciones, sin complicaciones — tu sistema listo desde el primer día.</p>
 
 				<!-- Botón Primario -->
 				<a href="views/register.html" class="btn-primary" style="display:inline-flex; font-size:17px; padding:18px 48px;">
-					Comenzar Ahora
-					<!-- Flecha hacia la derecha -->
+					<span data-i18n="final_btn">Registrarse</span>
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
 						<line x1="5" y1="12" x2="19" y2="12"/>
 						<polyline points="12 5 19 12 12 19"/>
@@ -352,13 +422,13 @@
 						</div>
 						<div class="footer-brand-info">
 							<div class="footer-brand-name">ConstructSys</div>
-							<div class="footer-brand-sub">Sistema de Gestión de Obras</div>
+							<div class="footer-brand-sub" data-i18n="footer_sub">Sistema de Gestión de Obras</div>
 						</div>
 					</a>
 
 					<!-- Datos del Desarrollador -->
 					<div class="footer-dev">
-						<div class="footer-dev-label">Desarrollado por</div>
+						<div class="footer-dev-label" data-i18n="footer_dev_lbl">Desarrollado por</div>
 						<div class="footer-dev-name">Magallanes López Carlos Gabriel</div>
 						<div class="footer-dev-meta">
 							<strong>24308051280865</strong> &nbsp;·&nbsp; 4°J &nbsp;·&nbsp; CBTIS 128<br>
@@ -371,15 +441,17 @@
 				<!-- Sección Inferior del Footer -->
 				<div class="footer-bottom">
 					<div class="footer-copy">
-						&copy; 2026 <strong>ConstructSys</strong> — Todos los derechos reservados.
+						&copy; 2026 <strong>ConstructSys</strong> — <span data-i18n="footer_copy">Todos los derechos reservados.</span>
 					</div>
-					<div class="footer-tagline">De la licitación al cierre de obra</div>
+					<div class="footer-tagline" data-i18n="footer_tagline">Desde la licitación hasta al cierre de obra</div>
 				</div>
 
 			</div>
 		</footer>
 
+		<!-- Scripts -->
+		<script src="scripts/index.js"></script>
+		<script src="scripts/translations.js"></script>
+
 	</body>
 </html>
-
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
