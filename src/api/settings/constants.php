@@ -96,6 +96,93 @@ const DELETION_EMAIL_MSSG = [
     ],
 ];
 
+const MONGO_COLLECTION_VALIDATORS = [
+    'proveedores' => [
+        'validator' => [
+            '$jsonSchema' => [
+                'bsonType' => 'object',
+                'required' => ['nombre', 'activo'],
+                'additionalProperties' => false,
+                'properties' => [
+                    '_id'      => ['bsonType' => 'objectId'],
+                    'nombre'   => ['enum' => ['Ferremax del Norte','Aceros y Perfiles Juárez','Distribuidora Montoya S.A.','Materiales Frontera']],
+                    'contacto' => ['bsonType' => 'string', 'maxLength' => 100],
+                    'activo'   => ['bsonType' => 'bool'],
+                    'notas'    => ['bsonType' => 'string', 'maxLength' => 500],
+                ]
+            ]
+        ],
+        'validationAction' => 'error',
+    ],
+    'materiales' => [
+        'validator' => [
+            '$jsonSchema' => [
+                'bsonType' => 'object',
+                'required' => ['nombre','tipo','precio_unitario','unidad_medida','proveedor_id','activo'],
+                'additionalProperties' => false,
+                'properties' => [
+                    '_id'            => ['bsonType' => 'objectId'],
+                    'nombre'         => ['bsonType' => 'string', 'minLength' => 3, 'maxLength' => 150],
+                    'tipo'           => ['enum' => ['Cemento Portland gris','Cemento blanco','Cal hidratada','Yeso en polvo','Arena gruesa','Block pómex','Panel W','Placa de fibrocemento','Malla electrosoldada','Perfil de acero en L','Canal de acero en U','Tubo estructural redondo','Placa de acero','Triplay marino','MDF','Tabla de cedro','Impermeabilizante elastomérico','Impermeabilizante acrílico','Pintura vinílica','Pintura esmalte','Sellador acrílico','Pegamento para azulejo','Tubo PVC hidráulico','Tubo PVC sanitario','Codo PVC','Tee de PVC','Reducción PVC','Cable eléctrico THW','Conduit metálico']],
+                    'descripcion'    => ['bsonType' => 'string', 'maxLength' => 1000],
+                    'precio_unitario'=> ['bsonType' => 'double', 'minimum' => 0],
+                    'unidad_medida'  => ['enum' => ['pieza','par','juego','caja','rollo','bolsa','kg','ton','lt','galon','m','m2','m3']],
+                    'proveedor_id'   => ['bsonType' => 'objectId'],
+                    'imagen_clave'   => ['bsonType' => 'string', 'maxLength' => 60],
+                    'activo'         => ['bsonType' => 'bool'],
+                ]
+            ]
+        ],
+        'validationAction' => 'error',
+    ],
+    'herramientas' => [
+        'validator' => [
+            '$jsonSchema' => [
+                'bsonType' => 'object',
+                'required' => ['nombre','tipo','marca','precio','unidad_medida','proveedor_id','activo'],
+                'additionalProperties' => false,
+                'properties' => [
+                    '_id'          => ['bsonType' => 'objectId'],
+                    'nombre'       => ['bsonType' => 'string', 'minLength' => 3, 'maxLength' => 150],
+                    'tipo'         => ['enum' => ['Martillo de uña','Martillo de bola','Martillo de goma','Llave inglesa ajustable','Llave de tubo','Llave de dados','Llave Allen','Llave de boca fija','Llave Torx','Desarmador plano','Desarmador Phillips','Desarmador de impacto','Pinza de presión','Pinza de corte diagonal','Pinza de punta','Pinza multiusos','Nivel de burbuja','Nivel láser','Cinta métrica','Flexómetro','Escuadra de carpintero','Escuadra de aluminio','Sierra para metales','Segueta','Navaja y cúter','Cincel plano','Cincel de punta','Pala cuadrada','Pala redonda','Azadón','Carretilla','Llana dentada','Llana lisa','Espátula','Brocha','Rodillo de pintura','Pistola de silicón','Pistola de calor','Cepillo de alambre','Lima plana','Lima redonda','Tarraja de tubería','Cortavidrio','Compás de puntas','Alicate de electricista']],
+                    'marca'        => ['enum' => ['Stanley','DeWalt','Milwaukee','Makita','Truper','Urrea','Irwin','Pretul','Cushman','Craftsman','Bosch','Bahco','Knipex','Klein Tools','Fiskars','Sin marca']],
+                    'modelo'       => ['bsonType' => 'string', 'maxLength' => 80],
+                    'descripcion'  => ['bsonType' => 'string', 'maxLength' => 1000],
+                    'precio'       => ['bsonType' => 'double', 'minimum' => 0],
+                    'unidad_medida'=> ['enum' => ['pieza','par','juego','caja','rollo','bolsa','kg','ton','lt','galon','m','m2','m3']],
+                    'proveedor_id' => ['bsonType' => 'objectId'],
+                    'imagen_clave' => ['bsonType' => 'string', 'maxLength' => 60],
+                    'activo'       => ['bsonType' => 'bool'],
+                ]
+            ]
+        ],
+        'validationAction' => 'error',
+    ],
+    'maquinaria' => [
+        'validator' => [
+            '$jsonSchema' => [
+                'bsonType' => 'object',
+                'required' => ['nombre','tipo','marca','precio','unidad_medida','proveedor_id','activo'],
+                'additionalProperties' => false,
+                'properties' => [
+                    '_id'          => ['bsonType' => 'objectId'],
+                    'nombre'       => ['bsonType' => 'string', 'minLength' => 3, 'maxLength' => 150],
+                    'tipo'         => ['enum' => ['Mezcladora de concreto','Revolvedora de tambor','Cortadora de piso','Esmeriladora angular','Esmeriladora recta','Taladro percutor','Taladro de banco','Rotomartillo','Sierra circular','Sierra de mesa','Sierra de cinta','Sierra caladora','Lijadora orbital','Lijadora de banda','Pistola de tornillos','Pistola neumática de clavos','Compresor de aire','Hidrolavadora','Bomba de agua centrífuga','Bomba sumergible','Generador eléctrico','Soldadora MIG','Soldadora TIG','Cortadora de plasma','Dobladora de varilla','Cortadora de varilla','Prensa hidráulica','Gato hidráulico','Polipasto eléctrico','Andamio de ruedas','Plataforma de trabajo','Malacate eléctrico','Mini excavadora','Compactadora de plato vibratorio','Rodillo compactador','Montacargas manual','Escalera de extensión','Escalera tijera','Aspiradora industrial']],
+                    'marca'        => ['enum' => ['DeWalt','Makita','Bosch','Milwaukee','Hilti','Atlas Copco','Honda','Husqvarna','Wacker Neuson','Karcher','Lincoln Electric','Miller','Truper','Surtek','Pretul','Sin marca']],
+                    'modelo'       => ['bsonType' => 'string', 'maxLength' => 80],
+                    'descripcion'  => ['bsonType' => 'string', 'maxLength' => 1000],
+                    'precio'       => ['bsonType' => 'double', 'minimum' => 0],
+                    'unidad_medida'=> ['enum' => ['pieza','par','juego','caja','rollo','bolsa','kg','ton','lt','galon','m','m2','m3']],
+                    'proveedor_id' => ['bsonType' => 'objectId'],
+                    'imagen_clave' => ['bsonType' => 'string', 'maxLength' => 60],
+                    'activo'       => ['bsonType' => 'bool'],
+                ]
+            ]
+        ],
+        'validationAction' => 'error',
+    ],
+];
+
 /**
  * Textos para correos electrónicos de restablecimiento de contraseña y cuentas vinculadas a Google, con soporte para múltiples idiomas. 
  * @var array<string, array<string, string>>
