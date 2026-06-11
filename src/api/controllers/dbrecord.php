@@ -181,8 +181,10 @@ class DBRecord {
             $mongoDatabase = $this->mongo->selectDatabase($mongoDb);
 
             // Crear colecciones según el esquema definido
-            foreach ($this->collectionSchema as $config) {
-                try {$mongoDatabase->createCollection($config['collection']);} catch (\Exception) {}
+            foreach (MONGO_COLLECTION_VALIDATORS as $colName => $validator) {
+                try {
+                    $mongoDatabase->createCollection($colName, $validator);
+                } catch (\Exception) {}
             }
 
             // Registrar la empresa en intern_platform
