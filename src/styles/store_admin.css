@@ -893,6 +893,19 @@ body {
 
 /*****************************************************************************************************************************************************************************/
 
+.abtn-edit {
+    background:transparent;border:1px solid #2e2e2e;color:#9e9890;
+    padding:5px 9px;font-size:13px;border-radius:6px;cursor:pointer;
+    transition:all .18s;
+}
+.abtn-edit:hover {border-color:#c9a84c;color:#c9a84c;background:rgba(201,168,76,.08);}
+.abtn-del {
+    background:transparent;border:1px solid rgba(192,57,43,.4);color:#e74c3c;
+    padding:5px 12px;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;
+    border-radius:6px;cursor:pointer;transition:all .18s;
+}
+.abtn-del:hover {background:rgba(192,57,43,.15);}
+
 /* ══════════════════════════════════════════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════════════════════════════════════════ */
