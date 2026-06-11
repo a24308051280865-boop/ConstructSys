@@ -1028,31 +1028,51 @@ function adminReset(form) {
 async function adminSubmit(e, coleccion) {
     e.preventDefault();
     const form = e.target;
+    const btn  = form.querySelector('.abtn-primary');
     const data = Object.fromEntries(new FormData(form).entries());
+
+    // Convertir tipos
     if (data.precio_unitario !== undefined) data.precio_unitario = parseFloat(data.precio_unitario);
     if (data.precio          !== undefined) data.precio          = parseFloat(data.precio);
     data.activo = data.activo === 'true';
-    ['descripcion','imagen_clave','modelo','contacto','notas','proveedor_nombre'].forEach(k => {
+
+    // Limpiar campos vacíos opcionales
+    ['descripcion', 'imagen_clave', 'modelo', 'contacto', 'notas'].forEach(k => {
         if (data[k] === '' || data[k] === undefined) delete data[k];
     });
+
+    const originalText = btn?.textContent ?? '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Registrando…'; }
+
     try {
-        const prefixedModule = `${DB}_${coleccion}`;
-        const res = await fetch(`${API_BASE}?module=${encodeURIComponent(prefixedModule)}&action=insert`, {
-            method: 'POST',
-            headers: { ...AUTH_HEADERS, 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+        // ← Ahora apunta al endpoint dedicado que resuelve proveedor_id
+        const res = await fetch('../api/store/admin-insert.php', {
+            method:  'POST',
+            headers: {
+                'Content-Type':  'application/json',
+                'Authorization': `Bearer ${cs_token}`,
+                'X-Internal-Key': 'ConstructSys_Internal_2026_!xK9',
+            },
+            body: JSON.stringify({ coleccion, data }),
         });
-        if (!res.ok) {
-            const b = await res.json().catch(() => ({}));
-            throw new Error(b.error ?? `HTTP ${res.status}`);
+
+        const result = await res.json();
+
+        if (result.success) {
+            toast('Producto registrado correctamente', 'ok');
+            adminReset(form);
+            // Recargar catálogo si aplica
+            if (['materiales', 'herramientas', 'maquinaria'].includes(coleccion)) fetchAll();
+        } else {
+            toast(`Error: ${result.error ?? 'Error desconocido'}`, 'err');
         }
-        toast('Producto registrado correctamente');
-        adminReset(form);
-        if (['materiales','herramientas','maquinaria'].includes(coleccion)) fetchAll();
+
     } catch (err) {
-        console.warn('[ADMIN] JSON:', JSON.stringify(data, null, 2));
-        toast(`Error: ${err.message}`, 'err');
+        toast(`Error de conexión: ${err.message}`, 'err');
+    } finally {
+        if (btn) { btn.disabled = false; btn.textContent = originalText; }
     }
+
     return false;
 }
 function adminCopyJSON(form) {
