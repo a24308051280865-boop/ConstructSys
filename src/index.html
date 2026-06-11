@@ -20,65 +20,6 @@
 
 		<link rel="stylesheet" href="styles/index.css">
 		<link rel="icon" href="assets/icons/constructsys.ico">
-
-		<!-- Estilos del Toggle de Idioma -->
-		<style>
-			/* Toggle de Idioma */
-			.lang-toggle {
-				display: flex;
-				align-items: center;
-				gap: 8px;
-				background: #1a1a1a;
-				border: 1.5px solid #333;
-				border-radius: 999px;
-				padding: 5px 10px 5px 6px;
-				cursor: pointer;
-				user-select: none;
-				transition: border-color 0.2s;
-				flex-shrink: 0;
-			}
-			.lang-toggle:hover { border-color: var(--gold); }
-			.lang-toggle .lang-switch {
-				width: 34px;
-				height: 18px;
-				background: #333;
-				border-radius: 999px;
-				position: relative;
-				transition: background 0.25s;
-				flex-shrink: 0;
-				box-sizing: border-box;
-			}
-			.lang-toggle .lang-switch::after {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 3px;
-				transform: translateY(-50%);
-				width: 14px;
-				height: 14px;
-				background: #888;
-				border-radius: 50%;
-				transition: transform 0.25s, background 0.25s;
-			}
-			.lang-toggle.active .lang-switch {
-				background: #1a1a1a;
-				border: 1.5px solid var(--gold);
-			}
-			.lang-toggle.active .lang-switch::after {
-				transform: translateY(-50%) translateX(16px);
-				background: var(--gold);
-			}
-			.lang-toggle .lang-label {
-				font-size: 13px;
-				font-weight: 600;
-				letter-spacing: 0.08em;
-				color: #888;
-				transition: color 0.25s;
-				min-width: 20px;
-				text-align: center;
-			}
-			.lang-toggle.active .lang-label { color: var(--gold); }
-		</style>
 	</head>
 	<body>
 
@@ -102,14 +43,11 @@
 
 			<!-- Botones de Acción + Toggle -->
 			<div class="nav-cta">
-				<!-- Toggle de Idioma -->
-				<button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">
-					<div class="lang-switch"></div>
-					<span id="lang-label" class="lang-label">ES</span>
-				</button>
-
-				<a href="views/login.html" class="nav-link" data-i18n="navLogin">Iniciar Sesión</a>
-				<a href="views/register.html" class="btn-nav" data-i18n="navRegister">Comenzar Ahora</a>
+			    <!-- Toggle de Idioma -->
+			    <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">
+			        <div class="lang-switch"></div>
+			        <span id="lang-label" class="lang-label">ES</span>
+			    </button>
 			</div>
 
 		</nav>
@@ -149,25 +87,24 @@
 
 				<!-- Descripción -->
 				<p class="hero-desc" data-i18n="heroDesc">
-					ConstructSys es la plataforma todo-en-uno diseñada para constructoras que quieren dejar atrás las hojas de cálculo y los procesos desconectados. Control total desde cualquier dispositivo, desde el primer día.
+				    ConstructSys es la plataforma todo-en-uno diseñada para constructoras que quieren dejar atrás las hojas de cálculo y los procesos desconectados. Control total desde cualquier dispositivo, desde el primer día.
 				</p>
-
+				
 				<!-- Botones de Acción -->
 				<div class="hero-actions">
-
-					<!-- Botón Primario -->
-					<a href="views/register.html" class="btn-primary">
-						<span data-i18n="heroBtnPrimary">Registrarse</span>
-						<!-- Flecha hacia la derecha -->
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-							<line x1="5" y1="12" x2="19" y2="12"/>
-							<polyline points="12 5 19 12 12 19"/>
-						</svg>
-					</a>
-
-					<!-- Botón Secundario -->
-					<a href="views/login.html" class="btn-outline" data-i18n="heroBtnOutline">Iniciar Sesión</a>
-
+				
+				    <!-- Botón Primario -->
+				    <a href="views/register.html" class="btn-primary">
+				        <span data-i18n="heroBtnPrimary">Registrarse</span>
+				        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+				            <line x1="5" y1="12" x2="19" y2="12"/>
+				            <polyline points="12 5 19 12 12 19"/>
+				        </svg>
+				    </a>
+				
+				    <!-- Botón Secundario — Login al lado del primario -->
+				    <a href="views/login.html" class="btn-outline" data-i18n="heroBtnOutline">Iniciar Sesión</a>
+				
 				</div>
 
 			</div>
