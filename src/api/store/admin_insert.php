@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
+ini_set('display_errors', '0');
+error_reporting(0);
 
-require_once __DIR__ . '/../../settings/headers.php';
-require_once __DIR__ . '/../../settings/constants.php';
-require_once __DIR__ . '/../../settings/internal_controllers.php';
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../settings/headers.php';
+require_once __DIR__ . '/../settings/constants.php';
+require_once __DIR__ . '/../settings/internal_controllers.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
