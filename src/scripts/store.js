@@ -996,20 +996,7 @@ function escHtml(str) {
 
 /* Panel de administración */
 function openAdmin() {
-    document.getElementById('admin-sidebar').classList.add('open');
-    document.getElementById('admin-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeAdmin() {
-    document.getElementById('admin-sidebar').classList.remove('open');
-    document.getElementById('admin-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-function switchAdminForm(btn) {
-    document.querySelectorAll('.atab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.aform').forEach(f => f.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('aform-' + btn.dataset.form).classList.add('active');
+    window.location.href = 'store_admin.html';
 }
 function adminToggle(el) {
     const isOn = el.classList.toggle('active');
