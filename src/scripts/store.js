@@ -1033,7 +1033,7 @@ async function adminSubmit(e, coleccion) {
 
     try {
         // ← Ahora apunta al endpoint dedicado que resuelve proveedor_id
-        const res = await fetch('../api/store/admin-insert.php', {
+        const res = await fetch('../api/store/admin_insert.php', {
             method:  'POST',
             headers: {
                 'Content-Type':  'application/json',
