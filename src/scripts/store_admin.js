@@ -238,7 +238,7 @@ async function fetchRecords() {
         const catFilter = document.getElementById('records-cat-filter').value;
         const modulos   = catFilter
             ? [catFilter]
-            : ['materiales', 'herramientas', 'maquinaria', 'proveedores'];
+            : ['materiales', 'herramientas', 'maquinaria'];
 
         const results = await Promise.all(modulos.map(async mod => {
             const res = await fetch(
