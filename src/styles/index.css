@@ -970,6 +970,17 @@ footer {
 	color: var(--text3);
 }
 
+/* Scroll suave al navegar por anclas */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Offset para que el nav fijo no tape la sección */
+section[id],
+div[id] {
+    scroll-margin-top: 80px;
+}
+
 /* ─── RESPONSIVE ─── */
 
 /* Pantallas menores a 768px */
