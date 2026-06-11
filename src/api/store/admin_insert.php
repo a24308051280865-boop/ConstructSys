@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../settings/headers.php';
 require_once __DIR__ . '/../settings/constants.php';
 require_once __DIR__ . '/../settings/internal_controllers.php';
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
