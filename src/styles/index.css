@@ -981,6 +981,76 @@ div[id] {
     scroll-margin-top: 80px;
 }
 
+/* Toggle de Idioma */
+.lang-toggle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #1a1a1a;
+	border: 1.5px solid #333;
+	border-radius: 999px;
+	padding: 5px 10px 5px 6px;
+	cursor: pointer;
+	user-select: none;
+	transition: border-color 0.2s;
+	flex-shrink: 0;
+}
+
+/* Estado Hover del Toggle de Idioma */
+.lang-toggle:hover {border-color: var(--gold);}
+
+/* Toggle y Switch de Idioma */
+.lang-toggle .lang-switch {
+	width: 34px;
+	height: 18px;
+	background: #333;
+	border-radius: 999px;
+	position: relative;
+	transition: background 0.25s;
+	flex-shrink: 0;
+	box-sizing: border-box;
+}
+
+/* Toggle y PseudoElementoSwitch de Idioma */
+.lang-toggle .lang-switch::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	transform: translateY(-50%);
+	width: 14px;
+	height: 14px;
+	background: #888;
+	border-radius: 50%;
+	transition: transform 0.25s, background 0.25s;
+}
+
+/* Toggle Activo y Switch de Idioma */
+.lang-toggle.active .lang-switch {			
+	background: #1a1a1a;
+	border: 1.5px solid var(--gold);
+}
+
+/* Toggle Activo y PseudoElemento Switch de Idioma */
+.lang-toggle.active .lang-switch::after {
+	transform: translateY(-50%) translateX(16px);
+	background: var(--gold);
+}
+
+/* Toggle y Etiqueta del Idioma */
+.lang-toggle .lang-label {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	color: #888;
+	transition: color 0.25s;
+	min-width: 20px;
+	text-align: center;
+}
+			
+/* Toggle Activo y Etiqueta del Idioma */
+.lang-toggle.active .lang-label { color: var(--gold); }
+
 /* ─── RESPONSIVE ─── */
 
 /* Pantallas menores a 768px */
