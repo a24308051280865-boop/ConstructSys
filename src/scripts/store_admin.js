@@ -345,6 +345,7 @@ function renderRecordsTable() {
         const activo    = r.activo !== false;
         const marca     = r.marca ?? '—';
 
+        // Reemplaza el return del map con esto:
         return `
         <tr>
             <td class="td-name">${escHtml(r.nombre ?? '—')}</td>
@@ -358,6 +359,12 @@ function renderRecordsTable() {
                 </span>
             </td>
             <td class="td-id">${escHtml(String(r._id ?? '—').slice(-8))}</td>
+            <td>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <button class="abtn-edit" onclick="openEditRecord('${escHtml(String(r._id))}','${escHtml(r._coleccion)}')">🔧</button>
+                    <button class="abtn-del"  onclick="deleteRecord('${escHtml(String(r._id))}','${escHtml(r._coleccion)}')">Eliminar</button>
+                </div>
+            </td>
         </tr>`;
     }).join('');
 
@@ -450,6 +457,114 @@ function escHtml(str) {
     return String(str ?? '')        .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 
         .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;');
+}
+
+let editRecordId  = null;
+let editRecordCol = null;
+let editRecordData = null;
+
+// Campos editables por colección
+const EDIT_FIELDS = {
+    materiales:   ['nombre','tipo','precio_unitario','unidad_medida','descripcion','activo'],
+    herramientas: ['nombre','tipo','marca','modelo','precio','unidad_medida','descripcion','activo'],
+    maquinaria:   ['nombre','tipo','marca','modelo','precio','unidad_medida','descripcion','activo'],
+};
+
+async function openEditRecord(id, coleccion) {
+    const res  = await fetch(`../api/index.php?module=${encodeURIComponent(DB + '_' + coleccion)}`, { headers: AUTH_HEADERS });
+    const data = await res.json().catch(() => []);
+    const record = Array.isArray(data) ? data.find(r => String(r._id) === id) : null;
+    if (!record) { toast('err', 'No se encontró el registro.', 'Error'); return; }
+
+    editRecordId   = id;
+    editRecordCol  = coleccion;
+    editRecordData = record;
+
+    const fields = EDIT_FIELDS[coleccion] ?? [];
+    const container = document.getElementById('edit-fields-container');
+
+    container.innerHTML = fields.map(field => {
+        const val   = record[field] ?? '';
+        const label = field.replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+
+        if (field === 'activo') return `
+            <div style="margin-bottom:14px;">
+                <label style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5a5650;display:block;margin-bottom:5px;">${label}</label>
+                <select name="${field}" style="width:100%;padding:9px 13px;background:#161616;border:1px solid #2e2e2e;border-radius:6px;color:#f0ede8;font-size:13px;outline:none;">
+                    <option value="true"  ${val === true  ? 'selected' : ''}>Activo</option>
+                    <option value="false" ${val === false ? 'selected' : ''}>Inactivo</option>
+                </select>
+            </div>`;
+
+        const isTextarea = field === 'descripcion';
+        const tag = isTextarea
+            ? `<textarea name="${field}" rows="3" style="width:100%;padding:9px 13px;background:#161616;border:1px solid #2e2e2e;border-radius:6px;color:#f0ede8;font-size:13px;outline:none;resize:vertical;">${escHtml(String(val))}</textarea>`
+            : `<input type="${typeof val === 'number' ? 'number' : 'text'}" name="${field}" value="${escHtml(String(val))}" style="width:100%;padding:9px 13px;background:#161616;border:1px solid #2e2e2e;border-radius:6px;color:#f0ede8;font-size:13px;outline:none;" step="0.01" min="0"/>`;
+
+        return `
+            <div style="margin-bottom:14px;">
+                <label style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5a5650;display:block;margin-bottom:5px;">${label}</label>
+                ${tag}
+            </div>`;
+    }).join('');
+
+    document.getElementById('edit-overlay').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEditRecord() {
+    document.getElementById('edit-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+    editRecordId = editRecordCol = editRecordData = null;
+}
+
+async function submitEditRecord() {
+    const container = document.getElementById('edit-fields-container');
+    const updates   = {};
+    container.querySelectorAll('input,select,textarea').forEach(el => {
+        if (!el.name) return;
+        if (el.name === 'activo')                      updates[el.name] = el.value === 'true';
+        else if (el.type === 'number')                 updates[el.name] = parseFloat(el.value);
+        else                                           updates[el.name] = el.value.trim();
+    });
+
+    try {
+        const res    = await fetch('../api/store/admin_update.php', {
+            method:  'POST',
+            headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${cs_token}` },
+            body:    JSON.stringify({ coleccion: editRecordCol, id: editRecordId, data: updates }),
+        });
+        const result = await res.json();
+        if (result.success) {
+            toast('ok', 'Registro actualizado.', 'Guardado');
+            closeEditRecord();
+            fetchRecords();
+        } else {
+            toast('err', result.error ?? 'Error desconocido.', 'Error');
+        }
+    } catch (err) {
+        toast('err', err.message, 'Error de conexión');
+    }
+}
+
+async function deleteRecord(id, coleccion) {
+    if (!confirm('¿Seguro que deseas eliminar este registro?')) return;
+    try {
+        const res    = await fetch('../api/store/admin_delete.php', {
+            method:  'POST',
+            headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${cs_token}` },
+            body:    JSON.stringify({ coleccion, id }),
+        });
+        const result = await res.json();
+        if (result.success) {
+            toast('ok', 'Registro eliminado.', 'Eliminado');
+            fetchRecords();
+        } else {
+            toast('err', result.error ?? 'Error.', 'Error');
+        }
+    } catch (err) {
+        toast('err', err.message, 'Error');
+    }
 }
 
 /*****************************************************************************************************************************************************************************/
