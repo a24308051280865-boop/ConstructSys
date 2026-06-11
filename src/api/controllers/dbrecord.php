@@ -187,6 +187,16 @@ class DBRecord {
                 } catch (\Exception) {}
             }
 
+            $proveedoresDefault = [
+                ['nombre' => 'Ferremax del Norte',        'activo' => true],
+                ['nombre' => 'Aceros y Perfiles Juárez',  'activo' => true],
+                ['nombre' => 'Distribuidora Montoya S.A.','activo' => true],
+                ['nombre' => 'Materiales Frontera',        'activo' => true],
+            ];
+            try {
+                $mongoDatabase->selectCollection('proveedores')->insertMany($proveedoresDefault);
+            } catch (\Exception) {}
+            
             // Registrar la empresa en intern_platform
             $statement = $pdo->prepare(
                 'INSERT INTO empresas (nombre, db_name, mongo_db_name, activo) VALUES (?, ?, ?, 1)'
