@@ -122,6 +122,33 @@ nav {
 /* Hover del enlace de texto de la Navbar */
 .nav-link:hover {color: var(--gold);}
 
+/* Contenedor de links de navegación */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Link de sección con estilo de píldora */
+.nav-links .nav-link {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+/* Hover del link de sección */
+.nav-links .nav-link:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.06);
+}
+
 /* Botón de acción de la Navbar */
 .btn-nav {
 	padding: 8px 20px;
