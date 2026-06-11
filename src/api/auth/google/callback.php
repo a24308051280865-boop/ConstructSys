@@ -102,7 +102,7 @@ if (!$company || empty($db)) {
 $token = $JWT->generate($userId, $email, $name, $db, $companyName);
 
 // Redirigir al frontend con el token en la URL (puede ser manejado por el frontend para iniciar sesión)
-header("Location: " . APP_URL . "/login.html?google_token=" . urlencode($token));
+header("Location: " . APP_URL . "views/login.html?google_token=" . urlencode($token));
 exit;
 
 ?>
